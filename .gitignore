@@ -1,0 +1,35 @@
+
+
+# Expo
+.expo/*
+__generated__
+
+# Node
+node_modules/**/*
+npm-debug.*
+yarn-error.log
+
+*.jks
+*.p12
+*.key
+*.mobileprovision
+
+# Android Studio
+*.iml
+.gradle
+.idea/libraries
+.idea/workspace.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+
+# Android
+*.apk
+/android/**/build
+/android/**/local.properties
+/android/captures
+/android/expoview/libs/ReactAndroid-temp
+/android/versioned-react-native/ReactAndroid
+ReactAndroid-temp.aar
+
