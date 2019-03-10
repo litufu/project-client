@@ -9,7 +9,7 @@ mutation signup(
     signup(
         username: $username
         password: $password
-        deviceId:$deviceId
+        deviceId: $deviceId
     ) {
         token
     }
