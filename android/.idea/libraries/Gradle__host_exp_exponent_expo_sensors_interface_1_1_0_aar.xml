@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: host.exp.exponent:expo-sensors-interface:1.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-sensors-interface-1.1.0.aar/bb36b57f7ef20ab34e9f0da53ede6115/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-sensors-interface-1.1.0.aar/bb36b57f7ef20ab34e9f0da53ede6115/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-sensors-interface-1.1.0.aar/4d7393aa436e4744ff44b1e2f1edd86c/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-sensors-interface-1.1.0.aar/4d7393aa436e4744ff44b1e2f1edd86c/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

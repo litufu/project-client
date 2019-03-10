@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: host.exp.exponent:expo-react-native-adapter:1.2.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-react-native-adapter-1.2.0.aar/c173fe93e6236f21a8adf2ff625713db/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-react-native-adapter-1.2.0.aar/c173fe93e6236f21a8adf2ff625713db/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-react-native-adapter-1.2.0.aar/9b4bf4c4f5a74f8aadd88240375ac5f1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-react-native-adapter-1.2.0.aar/9b4bf4c4f5a74f8aadd88240375ac5f1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

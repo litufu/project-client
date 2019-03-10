@@ -25,7 +25,9 @@ export default class FoundTeam extends Component {
                             <Container>
                                 <Header hasSegment>
                                     <Left>
-                                        <Button transparent>
+                                        <Button
+                                        onPress={() => this.props.navigation.goBack()} 
+                                        transparent>
                                             <Icon name="arrow-back" />
                                         </Button>
                                     </Left>
@@ -36,7 +38,7 @@ export default class FoundTeam extends Component {
                                         <Button
                                             onPress={() => this.props.navigation.navigate('SkillSetting')}
                                             transparent>
-                                            <Text>设置</Text>
+                                            <Icon type="Ionicons" name="settings" />
                                         </Button>
                                     </Right>
                                 </Header>

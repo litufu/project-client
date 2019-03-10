@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: expolib_v1.com.google.android.exoplayer:expolib_v1-extension-okhttp:2.6.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expolib_v1-extension-okhttp-2.6.1.aar/14ab468363196217435604f72d7f1108/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expolib_v1-extension-okhttp-2.6.1.aar/14ab468363196217435604f72d7f1108/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expolib_v1-extension-okhttp-2.6.1.aar/0c53ce488fd22fa3910eef37b674c661/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expolib_v1-extension-okhttp-2.6.1.aar/0c53ce488fd22fa3910eef37b674c661/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

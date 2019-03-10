@@ -90,7 +90,7 @@ class Result extends Component {
                 <Content>
                   {me && me.regStatus && me.regStatus.id
                     ? this._renderApplicationResult(me)
-                    : <View style={{ flex: 1, alignItems: 'center', justifyContent: "center" }}><Text>请先报名然后查看结果</Text></View>
+                    : <View style={{ flex: 1, alignItems: 'center', justifyContent: "center" ,marginTop:30}}><Text>请先报名然后查看结果</Text></View>
                   }
                 </Content>
               )
