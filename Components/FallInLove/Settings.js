@@ -30,16 +30,16 @@ export default class Trade extends Component {
         super(props);
         const me = props.navigation.getParam('me')
         this.state={
-            myHeight: me.loveSetting.myHeight || "",
-            myWeight: me.loveSetting.myWeight ||"",
-            otherHeightMin: me.loveSetting.otherHeightMin ||"",
-            otherHeightMax: me.loveSetting.otherHeightMax ||"",
-            otherWeightMin: me.loveSetting.otherWeightMin ||"",
-            otherWeightMax: me.loveSetting.otherWeightMax ||"",
-            otherAgeMin: me.loveSetting.otherAgeMin ||"",
-            otherAgeMax: me.loveSetting.otherAgeMax ||"",
-            dateTime: me.loveSetting.dateTime ||"",
-            datePlace: me.loveSetting.datePlace ||"",
+            myHeight: me.loveSetting ? `${me.loveSetting.myHeight}` : "",
+            myWeight: me.loveSetting ? `${me.loveSetting.myWeight}` : "",
+            otherHeightMin: me.loveSetting?`${me.loveSetting.otherHeightMin}` :"",
+            otherHeightMax: me.loveSetting?`${me.loveSetting.otherHeightMax}` :"",
+            otherWeightMin: me.loveSetting?`${me.loveSetting.otherWeightMin}` :"",
+            otherWeightMax: me.loveSetting?`${me.loveSetting.otherWeightMax}` :"",
+            otherAgeMin: me.loveSetting?`${me.loveSetting.otherAgeMin}` :"",
+            otherAgeMax: me.loveSetting?`${me.loveSetting.otherAgeMax}` :"",
+            dateTime: me.loveSetting?`${me.loveSetting.dateTime}` :"",
+            datePlace: me.loveSetting?`${me.loveSetting.datePlace}` :"",
             display: "main",
         }
       }
@@ -262,7 +262,7 @@ export default class Trade extends Component {
             <Item stackedLabel>
                 <Label>希望对方的最低身高</Label>
                 <Input
-                    placeholder="请输入你希望对方的最低身高，单位厘米"
+                    placeholder="输入数字，单位厘米"
                     value={this.state.otherHeightMin}
                     onChangeText={text => this.setState({ otherHeightMin: text })}
                 />
@@ -270,7 +270,7 @@ export default class Trade extends Component {
             <Item stackedLabel>
                 <Label>希望对方的最高身高</Label>
                 <Input
-                    placeholder="请输入你希望对方的最高身高，单位厘米"
+                    placeholder="输入数字，单位厘米"
                     value={this.state.otherHeightMax}
                     onChangeText={text => this.setState({ otherHeightMax: text })}
                 />
@@ -303,7 +303,7 @@ export default class Trade extends Component {
             <Item stackedLabel>
                 <Label>希望对方的最小体重</Label>
                 <Input
-                    placeholder="请输入你希望对方的最小体重，单位公斤"
+                    placeholder="输入数字，单位公斤"
                     value={this.state.otherWeightMin}
                     onChangeText={text => this.setState({ otherWeightMin: text })}
                 />
@@ -312,7 +312,7 @@ export default class Trade extends Component {
             <Item stackedLabel>
                 <Label>希望对方的最大体重</Label>
                 <Input
-                    placeholder="请输入你希望对方的最大体重，单位公斤"
+                    placeholder="输入数字，单位公斤"
                     value={this.state.otherWeightMax}
                     onChangeText={text => this.setState({ otherWeightMax: text })}
                 />
@@ -345,7 +345,7 @@ export default class Trade extends Component {
             <Item stackedLabel>
                 <Label>希望对方的最小年龄</Label>
                 <Input
-                    placeholder="请输入你希望对方的最小年龄"
+                    placeholder="输入数字"
                     value={this.state.otherAgeMin}
                     onChangeText={text => this.setState({ otherAgeMin: text })}
                 />
@@ -353,7 +353,7 @@ export default class Trade extends Component {
             <Item stackedLabel>
                 <Label>希望对方的最大年龄</Label>
                 <Input
-                    placeholder="请输入你希望对方的最大年龄"
+                    placeholder="输入数字"
                     value={this.state.otherAgeMax}
                     onChangeText={text => this.setState({ otherAgeMax: text })}
                 />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo'
+import {Alert} from 'react-native'
 import {
     Container,
     Header,
@@ -18,6 +19,7 @@ import {
     Footer,
     Thumbnail,
 } from 'native-base';
+import validator from 'validator';
 
 import GET_ME from '../../graphql/get_me.query'
 import ADD_UPDATE_LOVESIGNUP from '../../graphql/add_loveSignUp.mutation'
@@ -55,6 +57,66 @@ export default class FallInLove extends Component {
         this.state = {
             status
         }
+    }
+
+    checkBasicInfo=(me)=>{
+        if(!me.loveSetting){
+            Alert.alert('请在报名页面右上角，点击设置，填写身高、体重等基本信息')
+            return false
+        }
+        const birthday = new Date(me.birthday)
+        const d = new Date()
+        const age = d.getFullYear()-birthday.getFullYear()-((d.getMonth()<birthday.getMonth()|| d.getMonth()===birthday.getMonth() && d.getDate()<birthday.getDate())?1:0);
+        if(age<18){
+            Alert.alert('未超过18岁不能报名！')
+            return false
+        }
+
+        if(!validator.isInt(`${me.loveSetting.myHeight}`) || me.loveSetting.myHeight===0 ){
+            Alert.alert('请在报名页由上表设置中填写身高信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.myWeight}`)) ||me.loveSetting.myWeight===0 ){
+            Alert.alert('请在报名页由上表设置中填写体重信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.otherHeightMin}`)) || me.loveSetting.otherHeightMin===0 ){
+            Alert.alert('请在报名页由上表设置中填写要求对方最低身高信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.otherHeightMax}`))||me.loveSetting.otherHeightMax===0){
+            Alert.alert('请在报名页由上表设置中填写要求对方最高身高信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.otherWeightMin}`))||me.loveSetting.otherWeightMin===0){
+            Alert.alert('请在报名页由上表设置中填写要求对方最小体重信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.otherWeightMax}`)) ||me.loveSetting.otherWeightMax===0){
+            Alert.alert('请在报名页由上表设置中填写要求对方最大体重信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.otherAgeMin}`))||me.loveSetting.otherAgeMin===0){
+            Alert.alert('请在报名页由上表设置中填写要求对方最小年龄信息')
+            return false
+          }
+          if(!validator.isInt((`${me.loveSetting.otherAgeMax}`))||me.loveSetting.otherAgeMax===0){
+            Alert.alert('请在报名页由上表设置中填写要求对方最大年龄信息')
+            return false
+          }
+          if(me.gender==='female'){
+            if (!/^[A-Za-z0-9\u4e00-\u9fa5]+/.test(me.loveSetting.dateTime) || me.loveSetting.dateTime ===""){
+                Alert.alert('请在报名页由上表设置中填写要求见面时间信息')
+                return false
+            }
+            if (!/^[A-Za-z0-9\u4e00-\u9fa5]+/.test(me.loveSetting.datePlace || me.loveSetting.datePlace==="")){
+                Alert.alert('请在报名页由上表设置中填写要求见面地点信息')
+                return false
+            }
+          }
+
+          return true
+
     }
 
     render() {
@@ -124,21 +186,24 @@ export default class FallInLove extends Component {
                                                             rounded
                                                             style={{ marginHorizontal: 20, marginVertical: 15 }}
                                                             disabled={!signUp || status !== "0"}
-                                                            onPress={() => {
-
-                                                                addOrUpdateLoveSignUp()
-                                                                this.setState({ status: "1" })
-
+                                                            onPress={async() => {
+                                                                if(this.checkBasicInfo(me)){
+                                                                    await addOrUpdateLoveSignUp()
+                                                                    this.setState({ status: "1" })
+                                                                }
                                                             }}
                                                         >
-                                                            <Text>{status === "0" ? "参与报名" : "已报名"}</Text>
+                                                            <Text>{status === "0" 
+                                                            ? "参与报名" 
+                                                            : "已报名,周五公布配对结果"
+                                                            }</Text>
                                                         </Button>
                                                     )
                                                 }
                                             }
                                         </Mutation>
 
-                                        {signUp && (
+                                        {/* {signUp && (
                                             <List>
                                                 <ListItem>
                                                     <Text>见面时间：周五公布结果</Text>
@@ -150,7 +215,7 @@ export default class FallInLove extends Component {
                                                     <Text>本期相亲对象：周五公布结果</Text>
                                                 </ListItem>
                                             </List>
-                                        )}
+                                        )} */}
 
                                         {
                                             (!signUp && week === 5 && hour <= 5) && (

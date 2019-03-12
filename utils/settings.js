@@ -12,7 +12,7 @@ export const PRO_HOST = "http://118.31.21.228:4000/graphql"
 export const DEV_WSS = "ws://192.168.56.1:4000/graphql";
 export const PRO_WSS = "ws://118.31.21.228:4000/graphql"
 export const Production = false
-export const DateStartTime = new Date(2019,1,25,0,0,0,0)
+export const DateStartTime =  new Date(2019,1,28)
 export const defaultAdvertisements=[
     {
         image1:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg",
