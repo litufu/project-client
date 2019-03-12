@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Alert, Dimensions, Image } from 'react-native'
+import { StyleSheet, View, Alert, Dimensions, Image ,NetInfo} from 'react-native'
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, List, ListItem, Spinner } from 'native-base';
 import { Query } from 'react-apollo'
 import Swiper from 'react-native-swiper'
@@ -17,6 +17,29 @@ export default class Home extends React.Component {
     static navigationOptions = {
         header: null,
     };
+
+    state={
+        connectionType: null,
+    }
+
+    async componentDidMount() {
+        this.subscription = NetInfo.addEventListener(
+          'connectionChange',
+          this.handleChange,
+        );
+    
+        const { type } = await NetInfo.getConnectionInfo();
+    
+        this.setState({ connectionType: type });
+      }
+  
+      componentWillUnmount() {
+        this.subscription.remove();
+      }
+  
+      handleChange = connectionType => {
+        this.setState({ connectionType });
+      };
 
     _handleCollegeEntranceExam = (data) => {
         // if (!(data.me.families && data.me.families.length !== 0 && data.me.families.filter(family => family.status === '3').length !== 0)) {
@@ -56,19 +79,9 @@ export default class Home extends React.Component {
         this.props.navigation.navigate('FoundTeam', { data })
     }
 
-    
-
-    render() {
-        return (
-            <Container>
-                <Header style={{ marginTop: statusBarHeight }}>
-                    <Left />
-                    <Body style={{ alignItems: 'flex-end', justifyContent: "center", }}>
-                        <Title>水滴</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <List>
+    _renderContent=()=>(
+        <Content>
+            <List>
                     <Query
                         query={GET_ME}>
                         {
@@ -160,6 +173,33 @@ export default class Home extends React.Component {
                     }
 
                 </Query>
+        </Content>
+    )
+
+    
+
+    render() {
+        const { connectionType } = this.state;
+
+        const isConnected = connectionType !== 'none';
+        return (
+            <Container>
+                <Header style={{ marginTop: statusBarHeight }}>
+                    <Left />
+                    <Body style={{ alignItems: 'flex-end', justifyContent: "center", }}>
+                        <Title>水滴</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                {
+                    isConnected
+                    ?this._renderContent()
+                    :(
+                        <Content>
+                            <Text>网络连接失败</Text>
+                        </Content>
+                    )
+                }
             </Container>
 
         );

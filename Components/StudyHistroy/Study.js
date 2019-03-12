@@ -21,8 +21,7 @@ import { Query, Mutation } from 'react-apollo'
 import { withNavigation } from 'react-navigation'
 
 import Region from '../Region'
-import {display} from '../../utils/tools'
-import { grades, errorMessage, educations } from '../../utils/tools'
+import { grades, errorMessage, educations,display } from '../../utils/tools'
 import ADD_LOCATION from '../../graphql/add_location.mutation'
 import GET_NEWSCHOOL from '../../graphql/get_newSchool.query'
 import GET_NEWGRADEANDCLASSES from '../../graphql/get_newGradeAndClasses.query'
@@ -38,9 +37,8 @@ class Study extends Component {
         location: {},
         hasMajor: false,
         disabled: true,
+        openProvinceCityArea: false,
     }
-
-    componentDidUpdate
 
     onValueChange = (value) => {
         this.setState({
@@ -420,7 +418,11 @@ class Study extends Component {
         >
             {(addLocation, { client }) => {
                 return (<Region
-                    handlePlace={(place) => this._handlePlace(place, addLocation, client)}
+                    openProvinceCityArea={this.state.openProvinceCityArea}
+                    handlePlace={(place) => {
+                        this.setState({location:place})
+                        this._handlePlace(place, addLocation, client)}
+                    }
                     place={this.state.location}
                 />)
             }}
@@ -497,6 +499,7 @@ class Study extends Component {
 
     render() {
         const { selected, startYear, endYear, location, hasMajor } = this.state
+        const displayPlace = display(location)
         return (
             <Container>
                 <Content>
@@ -552,13 +555,15 @@ class Study extends Component {
                             </Right>
                         </ListItem>
 
-                        <ListItem>
+                        <ListItem 
+                         onPress={() => this.setState({ openProvinceCityArea: !this.state.openProvinceCityArea })}>
                             <Left style={styles.left}>
                                 <Text>地点:</Text>
                             </Left>
-                            <Right style={styles.right}>
+                            <View style={styles.place}>
+                                <Text>{displayPlace}</Text>
+                            </View>
                                 {this._renderPlace()}
-                            </Right>
                         </ListItem>
 
                         <ListItem>
@@ -636,6 +641,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
 
     },
+    place: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+      }
 })
 
 

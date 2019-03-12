@@ -36,13 +36,13 @@ class Applicants extends Component {
                 hasPro
                 ?(
                 <Body style={styles.body}>
-                <Left><Text>文化课分数</Text></Left>
-                <Right><Text>专业课分数</Text></Right>
+                <Left><Text>文化分</Text></Left>
+                <Right><Text>专业分</Text></Right>
               </Body>
                 )
                 :(
                   <Body style={styles.body}>
-                     <Text>文化课分数</Text>
+                     <Text>文化分</Text>
                   </Body>
                 )
               }

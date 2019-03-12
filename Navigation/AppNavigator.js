@@ -582,7 +582,6 @@ class AppWithNavigationState extends Component {
             }
 
             if (!this.familyChangeSubscription) {
-                console.log('familychanged')
                 this.familyChangeSubscription = subscribeToMore({
                     document: FAMILY_CHANGED_SUBSCRIPTION,
                     updateQuery: (prev) => {
@@ -603,8 +602,6 @@ class AppWithNavigationState extends Component {
             }
 
 
-            console.log('开始订阅')
-            console.log(nextProps.me.id)
             this.messagesSubscription = nextProps.subscribeToMore({
                 document: MESSAGE_ADDED_SUBSCRIPTION,
                 variables: { userId: nextProps.me.id },
@@ -630,8 +627,6 @@ class AppWithNavigationState extends Component {
                 groupIds.push(nextProps.me.regStatus.id)
             }
 
-            console.log('groupIds', groupIds)
-            console.log('nextProps.me.id', nextProps.me.id)
             if (!this.groupMessagesSubscription && nextProps.me) {
                 this.groupMessagesSubscription = nextProps.subscribeToMore({
                     document: GROUPMESSAGE_ADDED_SUBSCRIPTION,

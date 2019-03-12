@@ -1,12 +1,12 @@
 import { graphql } from 'react-apollo';
 import React, { Component } from 'react';
-import { Avatar } from 'react-native-elements'
-
+import {TouchableWithoutFeedback} from 'react-native'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title, Spinner } from 'native-base';
 
 import { errorMessage } from '../../utils/tools'
 import GET_STUDENTS from '../../graphql/get_students.query'
 import STUDENTS_ADDED_SUBSCRIPTION from '../../graphql/students_added.subscription'
+import { defaultAvatar } from '../../utils/settings';
 
 class QureyStudents extends Component {
     componentDidMount() {
@@ -27,7 +27,7 @@ class QureyStudents extends Component {
 
     render() {
         const { data: { students, loading, error } } = this.props;
-        const {schoolEdu,schoolEduName,me,renderButton,classGroups} = this.props
+        const { schoolEdu, schoolEduName, me, renderButton, classGroups } = this.props
 
         if (loading) return <Spinner />
         if (error) return <Text>{errorMessage(error)}</Text>
@@ -39,13 +39,10 @@ class QureyStudents extends Component {
                         return (
                             <ListItem thumbnail key={student.id}>
                                 <Left>
-                                    <Avatar
-                                        medium
-                                        overlayContainerStyle={{ backgroundColor: "blue" }}
-                                        title="水滴"
-                                        onPress={() => console.log("Works!")}
-                                        activeOpacity={0.7}
-                                    />
+                                    <TouchableWithoutFeedback
+                                    >
+                                        <Thumbnail source={{ uri: student.avatar ? student.avatar.url : defaultAvatar }} />
+                                    </TouchableWithoutFeedback>
                                 </Left>
                                 <Body>
                                     <Text>{student.name}</Text>
@@ -72,6 +69,6 @@ export default graphql(GET_STUDENTS, {
         variables: {
             schoolEduId: props.schoolEdu.id,
         },
-        fetchPolicy:"cache-and-network",
+        fetchPolicy: "cache-and-network",
     }),
 })(QureyStudents)

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Query} from 'react-apollo'
+import {NetInfo} from 'react-native'
 import { Container, Header, Left, Body, Right, Button, Icon, Segment, Content, Text,Spinner } from 'native-base'
 import {headerBackgroundColor,headerFontColor,statusBarHeight,headerButtonColor} from '../../utils/settings'
 
@@ -16,11 +17,34 @@ export default class Group extends React.Component{
   };
 
     state={
-        selected:1
+        selected:1,
+        connectionType: null,
     }
+
+    async componentDidMount() {
+      this.subscription = NetInfo.addEventListener(
+        'connectionChange',
+        this.handleChange,
+      );
+  
+      const { type } = await NetInfo.getConnectionInfo();
+  
+      this.setState({ connectionType: type });
+    }
+
+    componentWillUnmount() {
+      this.subscription.remove();
+    }
+
+    handleChange = connectionType => {
+      this.setState({ connectionType });
+    };
 
 
   render() {
+    const { connectionType } = this.state;
+    const isConnected = connectionType !== 'none';
+
     return (
       <Container>
         <Header hasSegment style={{marginTop:statusBarHeight}}>
@@ -52,29 +76,35 @@ export default class Group extends React.Component{
             </Segment>
           </Body>
           <Right>
-            {/* <Button transparent>
-              <Icon name="search" />
-            </Button> */}
           </Right>
         </Header>
-        <Query 
-        query={GET_ME}>
-              {
-                  ({loading,error,data:{me}})=>{
-                    if(loading) return <Spinner />
-                    if(error) return <Text>{errorMessage(error)}</Text>
-                    
-                      return(
-                        <Content padder>
-                        {this.state.selected===1 &&  <Groups me={me}/>}
-                        {this.state.selected===2 &&  <Contacts me={me}/>}
-                        {this.state.selected===3 &&  <Messages me={me}/>}
-                    </Content>
-                      )
+        {
+          isConnected 
+          ?(
+            <Query 
+              query={GET_ME}>
+                    {
+                        ({loading,error,data:{me}})=>{
+                          if(loading) return <Spinner />
+                          if(error) return <Text>{errorMessage(error)}</Text>
+                          
+                            return(
+                              <Content padder>
+                              {this.state.selected===1 &&  <Groups me={me}/>}
+                              {this.state.selected===2 &&  <Contacts me={me}/>}
+                              {this.state.selected===3 &&  <Messages me={me}/>}
+                          </Content>
+                            )
+                        }
                   }
-              }
-          </Query>
-        
+              </Query>
+          )
+          :(
+           <Content >
+             <Text>网络连接失败</Text>
+           </Content> 
+          )
+        }
       </Container>
     );
   }

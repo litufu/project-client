@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import {TouchableWithoutFeedback} from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title } from 'native-base';
 import { relationCompute, } from './settings'
-import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor } from '../../utils/settings'
+import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor, defaultAvatar } from '../../utils/settings'
 
 export default class FamilyList extends Component {
   render() {
@@ -31,20 +32,20 @@ export default class FamilyList extends Component {
           <List>
             <ListItem thumbnail>
               <Left>
-                <Avatar
-                  medium
-                  title="水滴"
-                  overlayContainerStyle={{ backgroundColor: 'blue' }}
-                  onPress={() => console.log("Works!")}
-                  activeOpacity={0.7}
-                />
-              </Left>
+                <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate('UserProfile', { id: group.creater.id })}
+                >
+                    <Thumbnail source={{ uri: group.creater.avatar ? group.creater.avatar.url : defaultAvatar }} />
+                </TouchableWithoutFeedback>
+            </Left>
               <Body>
                 <Text>{group.creater.name}</Text>
                 <Text note numberOfLines={1}>{createrRelationship}</Text>
               </Body>
               <Right>
-                <Button transparent>
+                <Button 
+                onPress={() => this.props.navigation.navigate('UserProfile', { id: group.creater.id })}
+                transparent>
                   <Text>查看</Text>
                 </Button>
               </Right>
@@ -66,15 +67,12 @@ export default class FamilyList extends Component {
 
                 return (
                   <ListItem thumbnail key={family.id}>
-                    <Left>
-                      <Avatar
-                        medium
-                        overlayContainerStyle={{ backgroundColor: family.to.user ? "blue" : "gray" }}
-                        title={family.to.user ? "水滴" : "空"}
-                        onPress={() => console.log("Works!")}
-                        activeOpacity={0.7}
-                      />
-                    </Left>
+                          <Left>
+                <TouchableWithoutFeedback
+                >
+                    <Thumbnail source={{ uri: family.to.avatar ? family.to.avatar.url : defaultAvatar }} />
+                </TouchableWithoutFeedback>
+            </Left>
                     <Body>
                       <Text>{family.to.name}</Text>
                       <Text note numberOfLines={1}>{familyRelationships[family.id]}</Text>
@@ -82,12 +80,14 @@ export default class FamilyList extends Component {
                     <Right>
                       {
                         family.to.user && (
-                          <Button transparent>
+                          <Button 
+                          transparent
+                          onPress={() => this.props.navigation.navigate('UserProfile', { id: family.to.user.id })}
+                          >
                             <Text>查看</Text>
                           </Button>
                         )
                       }
-
                     </Right>
                   </ListItem>
                 )

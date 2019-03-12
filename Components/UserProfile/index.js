@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
 import { Query,Mutation } from 'react-apollo'
 import dateFormat from 'dateformat';
-import { List, ListItem, Spinner, Left, Right,Button,Text,  } from 'native-base'
+import { List, ListItem, Spinner, Left, Button,Text, Container, Content,Body,Right,Icon  } from 'native-base'
 import { withNavigation } from 'react-navigation';
 
 import ParallaxScrollView from './beta-src/ParallaxScrollView';
@@ -11,6 +11,7 @@ import { errorMessage } from '../../utils/tools'
 import Chat from '../Chat'
 import GET_USERINFO from '../../graphql/get_userInfo.query'
 import GET_ME from '../../graphql/get_me.query'
+import { Header } from 'react-native-elements';
 
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -73,7 +74,27 @@ class UserProfile extends React.Component {
         {
           ({ loading, error, data}) => {
             if (loading) return <Spinner />
-            if (error) return <Text>{errorMessage(error)}</Text>
+            if (error) return (
+            <Container>
+              <Header>
+              <Left>
+                  <Button
+                      onPress={() => this.props.navigation.goBack()}
+                      transparent
+                  >
+                      <Icon name='md-arrow-back' type='Ionicons' />
+                  </Button>
+                 </Left>
+                    <Body>
+                    </Body>
+                    <Right >
+                    </Right>
+              </Header>
+              <Content>
+              <Text>{errorMessage(error)}</Text>
+              </Content>
+            </Container>
+           )
             return (
               <ParallaxScrollView
                 style={{ marginTop: statusBarHeight }}

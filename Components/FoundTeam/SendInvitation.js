@@ -88,11 +88,13 @@ export default class SendInvitation extends Component {
                 <Content>
                     <Item>
                         <SearchBar
+                            style={{flex:0.8}}
                             placeholder="输入技能名称..."
                             onChangeText={(text) => this.setState({ search: text })}
                             value={this.state.search}
                         />
                         <Button
+                        style={{flex:0.2,marginHorizontal:5}}
                             onPress={
                                 async () => {
                                     const search = trim(this.state.search).toLowerCase()

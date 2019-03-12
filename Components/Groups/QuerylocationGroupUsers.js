@@ -1,12 +1,12 @@
 import { graphql } from 'react-apollo';
 import React, { Component } from 'react';
-import { Avatar } from 'react-native-elements'
-
+import { TouchableWithoutFeedback } from 'react-native'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title, Spinner } from 'native-base';
 
 import { errorMessage } from '../../utils/tools'
 import GET_LOCATIONGROUPUSERS from '../../graphql/get_locationGroupUsers.query'
 import LOCATIONGROUPUSERS_CHANGED_SUBSCRIPTION from '../../graphql/locationGroupUsers_changed.subscription'
+import { defaultAvatar } from '../../utils/settings';
 
 class QueryLocationGroupUsers extends Component {
 
@@ -23,13 +23,11 @@ class QueryLocationGroupUsers extends Component {
                         return (
                             <ListItem thumbnail key={user.id}>
                                 <Left>
-                                    <Avatar
-                                        medium
-                                        overlayContainerStyle={{ backgroundColor: "blue" }}
-                                        title="水滴"
-                                        onPress={() => console.log("Works!")}
-                                        activeOpacity={0.7}
-                                    />
+                                    <TouchableWithoutFeedback
+                                    >
+                                        <Thumbnail source={{ uri: user.avatar ? user.avatar.url : defaultAvatar }} />
+                                    </TouchableWithoutFeedback>
+
                                 </Left>
                                 <Body>
                                     <Text>{user.name}</Text>
@@ -52,7 +50,7 @@ export default graphql(
             variables: {
                 locationGroupId: props.locationGroup.id,
             },
-            fetchPolicy:"cache-and-network",
+            fetchPolicy: "cache-and-network",
         }),
     }
 )(QueryLocationGroupUsers)

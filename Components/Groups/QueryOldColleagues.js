@@ -1,12 +1,12 @@
 import { graphql } from 'react-apollo';
 import React, { Component } from 'react';
-import { Avatar } from 'react-native-elements'
-
+import {TouchableWithoutFeedback} from 'react-native'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title, Spinner } from 'native-base';
 
 import { errorMessage } from '../../utils/tools'
 import GET_OLDCOLLEAGUES from '../../graphql/get_oldColleagues.query'
 import COLLEAGUES_ADDED_SUBSCRIPTION from '../../graphql/colleagues_added.subscription'
+import { defaultAvatar } from '../../utils/settings';
 
 class QureyOldColleagues extends Component {
     componentDidMount() {
@@ -38,13 +38,10 @@ class QureyOldColleagues extends Component {
                     oldColleagues.map(colleague=>(
                         <ListItem thumbnail key={colleague.id}>
                         <Left>
-                            <Avatar
-                                medium
-                                overlayContainerStyle={{ backgroundColor: "blue" }}
-                                title="水滴"
-                                onPress={() => console.log("Works!")}
-                                activeOpacity={0.7}
-                            />
+                        <TouchableWithoutFeedback
+                        >
+                            <Thumbnail source={{ uri: colleague.avatar ? colleague.avatar.url : defaultAvatar }} />
+                        </TouchableWithoutFeedback>
                         </Left>
                         <Body>
                             <Text>{colleague.name}</Text>
