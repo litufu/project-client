@@ -420,8 +420,9 @@ class Study extends Component {
                 return (<Region
                     openProvinceCityArea={this.state.openProvinceCityArea}
                     handlePlace={(place) => {
+                        this._handlePlace(place, addLocation, client)
                         this.setState({location:place})
-                        this._handlePlace(place, addLocation, client)}
+                    }
                     }
                     place={this.state.location}
                 />)
