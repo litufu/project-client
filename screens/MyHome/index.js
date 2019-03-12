@@ -76,6 +76,10 @@ export default class Home extends React.Component {
 
 
     _FoundTeam = (data) => {
+        if (!(data.me.residence && data.me.residence.city && data.me.gender)) {
+            Alert.alert('提示', '请在“设置-我的信息”中填写完整基本信息')
+            return
+        }
         this.props.navigation.navigate('FoundTeam', { data })
     }
 

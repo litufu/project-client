@@ -25,7 +25,7 @@ import CREATE_PROJECT from '../../graphql/create_project.muation'
 import { Query,Mutation } from 'react-apollo';
 
 
-export default class SendInvitation extends Component {
+export default class Project extends Component {
 
     state = {
         name: "",
