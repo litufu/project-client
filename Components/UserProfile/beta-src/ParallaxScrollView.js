@@ -22,6 +22,8 @@ import GET_ME from '../../../graphql/get_me.query'
 import GET_USERINFO from '../../../graphql/get_userInfo.query'
 import GET_PHOTO from '../../../graphql/get_photo.query'
 import {defaultAvatar}  from '../../../utils/settings'
+import { Spinner } from 'native-base';
+import { errorMessage } from '../../../utils/tools';
 
 const ScrollViewPropTypes = ScrollView.propTypes;
 
@@ -37,42 +39,75 @@ export default class ParallaxScrollView extends Component {
   }
 
   uploadAvatar = () => (
-    <Mutation
-      mutation={POST_PHOTO}
-    >
-      {
-        (postPhoto, { loading, error, data }) => {
-          if (loading) return <Text>loading</Text>
-          if (error) return <Text>{error.message}</Text>
+    <Query query={GET_ME}>
+    {
+      ({loading,error,data})=>{
+        if(loading) return <Spinner/>
+        if(error) return <Text>{errorMessage(error)}</Text>
+        const me = data.me
+        return(
+          <Mutation
+              mutation={POST_PHOTO}
+              refetchQueries={({ data: { postPhoto } })=>
+                [{
+                  query: GET_PHOTO,
+                  variables: { id: postPhoto.id },
+                }]
+              }
+              update={(cache, { data: { postPhoto } }) => {
+                const { me } = cache.readQuery({ query: GET_ME });
+                cache.writeQuery({
+                  query: GET_ME,
+                  data: { me: {
+                    ...me,
+                    avatar:{
+                      __typename:'Photo',
+                      id:postPhoto.id,
+                      name:postPhoto.name,
+                      url:`https://gewu-avatar.oss-cn-hangzhou.aliyuncs.com/avatars/${postPhoto.name}`
+                    }
+                  } },
+                });
+              }}
+            >
+              {
+                (postPhoto, { loading, error, data }) => {
+                  if (loading) return <Spinner/>
+                  if (error) return <Text>{error.message}</Text>
 
-          if (data) {
-            const xhr = new XMLHttpRequest()
-            xhr.open('PUT', data.postPhoto.url)
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                  console.log('Image successfully uploaded to oss')
-                } else {
-                  console.log('Error while sending the image to oss')
+                  if (data) {
+                    console.log('postdata',data)
+                    const xhr = new XMLHttpRequest()
+                    xhr.open('PUT', data.postPhoto.url)
+                    xhr.onreadystatechange = function () {
+                      if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                          console.log('Image successfully uploaded to oss')
+                        } else {
+                          console.log('Error while sending the image to oss')
+                        }
+                      }
+                    }
+                    xhr.setRequestHeader('Content-Type', 'image/jpeg')
+                    xhr.send({ uri: this.state.image, type: 'image/jpeg', name: data.postPhoto.name })
+                  }
+
+                  return (
+                    <TouchableNativeFeedback
+                      style={styles.avatarView}
+                      onPress={() => this.onPressAvatar(postPhoto,me.avatar)}
+                    >
+                      <Image source={{ uri: (me.avatar ? me.avatar.url : defaultAvatar) }} style={{ height: 120, width: 120, borderRadius: 60 }} />
+                    </TouchableNativeFeedback>
+                  )
                 }
               }
-            }
-            xhr.setRequestHeader('Content-Type', 'image/jpeg')
-            xhr.send({ uri: this.state.image, type: 'image/jpeg', name: data.postPhoto.name })
-
-          }
-
-          return (
-            <TouchableNativeFeedback
-              style={styles.avatarView}
-              onPress={() => this.onPressAvatar(postPhoto,this.props.data.userInfo.avatar)}
-            >
-              <Image source={{ uri: this.props.data.userInfo.avatar ? this.props.data.userInfo.avatar.url : defaultAvatar }} style={{ height: 120, width: 120, borderRadius: 60 }} />
-            </TouchableNativeFeedback>
-          )
-        }
+            </Mutation>
+        )
       }
-    </Mutation>
+    }
+    </Query>
+    
   )
 
   _pickImage = async (postPhoto,photo) => {
@@ -82,35 +117,8 @@ export default class ParallaxScrollView extends Component {
     });
     this.setState({ image: result.uri })
     if (!result.cancelled) {
-      postPhoto({
-        variables: { uri: result.uri },
-        optimisticResponse: {
-          __typename: "Mutation",
-          postPhoto: {
-            id: photo?photo.id:"avatar123",
-            __typename: "Photo",
-            name: photo?photo.name:"avatar",
-            url:result.uri,
-          }
-        },
-        update: (cache, { data: { postPhoto } }) => {
-          // Read the data from our cache for this query.
-          const data = cache.readQuery({ query: GET_USERINFO,variables:{id:this.props.data.userInfo.id} });
-          // Add our comment from the mutation to the end.
-          const newData ={
-            'userInfo':{
-              ...data.userInfo,
-              avatar:{
-                __typename:'Photo',
-                id:postPhoto.id,
-                name:postPhoto.name,
-                url:`https://gewu-avatar.oss-cn-hangzhou.aliyuncs.com/avatars/${postPhoto.name}`
-              }
-            }
-          } 
-          // Write our data back to the cache.
-          cache.writeQuery({ query: GET_USERINFO,variables:{id:this.props.data.userInfo.id} ,data:newData });
-        }
+      postPhoto(
+        {variables: { uri: result.uri },
       })
     }
   };
