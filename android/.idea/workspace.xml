@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="605bedf2-46cd-4864-a10b-c51039045598" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Components/UserProfile/beta-src/ParallaxScrollView.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/UserProfile/beta-src/ParallaxScrollView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navigation/AppNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Navigation/AppNavigator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../utils/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/settings.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,14 +27,15 @@
     <session id="-1836258901">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.121" value="1" />
           <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.70" value="1" />
           <entry key="project.open.time.81" value="1" />
           <entry key="project.open.time.98" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -61,17 +61,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="GenerateSignedApkSettings">
     <option name="KEY_STORE_PATH" value="H:\sdApp\jks\sdapp.jks" />
@@ -101,6 +91,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -130,9 +123,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -233,7 +223,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23458445" />

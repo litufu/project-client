@@ -40,6 +40,8 @@ export default class Trade extends Component {
             otherAgeMax: me.loveSetting?`${me.loveSetting.otherAgeMax}` :"",
             dateTime: me.loveSetting?`${me.loveSetting.dateTime}` :"",
             datePlace: me.loveSetting?`${me.loveSetting.datePlace}` :"",
+            memeberGrade:me.loveSetting?`${me.loveSetting.memeberGrade ? me.loveSetting.memeberGrade:0}` :"0",
+            memeberGradeEndTime:me.loveSetting?`${me.loveSetting.memeberGradeEndTime ? me.loveSetting.memeberGradeEndTime:""}` :"",
             display: "main",
         }
       }
@@ -47,6 +49,7 @@ export default class Trade extends Component {
     _renderMain = (data) => {
         const { myHeight, myWeight, otherAgeMin, otherAgeMax, otherHeightMax,
             otherHeightMin, otherWeightMax, otherWeightMin, dateTime, datePlace,
+            memeberGrade,memeberGradeEndTime,
         } = this.state
         
         return (
@@ -185,12 +188,33 @@ export default class Trade extends Component {
                                         </TouchableHighlight>
                                         )
                                     }
-                                        
                                 </ListItem>
                             </List>
                         )
                     }
-
+                   <ListItem itemDivider>
+                        <Text>会员</Text>
+                    </ListItem>
+                    <ListItem style={{flex:1}} >
+                        <Left>
+                            <Text>等级</Text>
+                        </Left>
+                        <Right style={{flex:0.4}}>
+                                <Text>
+                                    {memeberGrade}
+                                </Text>
+                        </Right>
+                    </ListItem>
+                    <ListItem>
+                        <Left>
+                            <Text>到期时间</Text>
+                        </Left>
+                        <Right>
+                            <Text>
+                                {memeberGradeEndTime ? new Date(memeberGradeEndTime).toLocaleDateString():"永久有效"}
+                            </Text>
+                        </Right>
+                    </ListItem>
                 </List>
             </Content>
         )
@@ -420,7 +444,7 @@ export default class Trade extends Component {
                     value={this.state.datePlace}
                     onChangeText={text => this.setState({ datePlace: text })}
                 />
-                <Text>时间应为周六或周日上午8点到晚上6点之间,如“周六上午10点”</Text>
+                <Text>见面地点建议为广场、公园、体育场等公共场所</Text>
             </Item>
 
             <Button

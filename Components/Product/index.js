@@ -31,7 +31,7 @@ export default class Product extends Component {
                                         <Left>
                                             <Avatar
                                                 size="medium"
-                                                title={`${product.price}元`}
+                                                title={`${product.price}`}
                                                 activeOpacity={0.7}
                                             />
                                         </Left>

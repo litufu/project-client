@@ -607,7 +607,7 @@ class AppWithNavigationState extends Component {
                 variables: { userId: nextProps.me.id },
                 updateQuery: (prev, { subscriptionData }) => {
                     const newMessage = subscriptionData.data.messageAdded;
-
+                    console.log('newMessage',newMessage)
                     prev.me.messages.push(newMessage)
                     storeMessage(`User${newMessage.from.id}`, newMessage)
                     return prev

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo'
-import {NetInfo} from 'react-native'
+import { NetInfo } from 'react-native'
 import {
     Container,
     Header,
@@ -22,6 +22,7 @@ import { Divider } from 'react-native-elements'
 import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor } from '../../utils/settings'
 import { defaultAvatar } from '../../utils/settings'
 import GET_ME from '../../graphql/get_me.query';
+import GET_FEESETTINGS from '../../graphql/get_feeSettings.query'
 
 export default class ProfileScreen extends Component {
 
@@ -29,8 +30,8 @@ export default class ProfileScreen extends Component {
         header: null,
     };
 
-    state={
-        connectionType:null,
+    state = {
+        connectionType: null,
     }
 
     async componentDidMount() {
@@ -53,17 +54,18 @@ export default class ProfileScreen extends Component {
     };
 
     _renderContent = () => (
-        <Query
-            query={GET_ME}>
-            {
-                ({ loading, error, data }) => {
+        <Content>
+            <Query
+                query={GET_ME}>
+                {
+                    ({ loading, error, data }) => {
 
-                    if (loading) return <Spinner />
-                    if (error) return <Text>{errorMessage(error)}</Text>
-                    const me = data.me
-                    if (!me) this.props.navigation.navigate('Login')
-                    return (
-                        <Content>
+                        if (loading) return <Spinner />
+                        if (error) return <Text>{errorMessage(error)}</Text>
+                        const me = data.me
+                        if (!me) this.props.navigation.navigate('Login')
+                        return (
+                            <List>
                             <ListItem
                                 onPress={() => this.props.navigation.navigate('UserProfile', { id: me.id, me })}
                                 thumbnail>
@@ -113,73 +115,109 @@ export default class ProfileScreen extends Component {
                                     <Icon name="arrow-forward" />
                                 </Right>
                             </ListItem>
-                            <ListItem
-                                onPress={() => this.props.navigation.navigate('StudyHistroy')}
-                                icon>
-                                <Left>
-                                    <Button style={{ backgroundColor: "#57DCE7" }}>
-                                        <Icon type="FontAwesome" name="book" />
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Text>学习经历</Text>
-                                </Body>
-                                <Right>
-                                    <Icon active name="arrow-forward" />
-                                </Right>
-                            </ListItem>
-                            <ListItem
-                                onPress={() => this.props.navigation.navigate('Work')}
-                                icon>
-                                <Left>
-                                    <Button style={{ backgroundColor: "#FAD291" }}>
-                                        <Icon type="MaterialCommunityIcons" name="worker" />
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Text>工作经历</Text>
-                                </Body>
-                                <Right>
-                                    <Icon active name="arrow-forward" />
-                                </Right>
-                            </ListItem>
-                            <Divider style={{ height: 15 }} />
-                            <ListItem
-                                onPress={() => this.props.navigation.navigate('Product')}
-                                icon>
-                                <Left>
-                                    <Button style={{ backgroundColor: "#A4C8F0" }}>
-                                        <Icon type="MaterialIcons" name="attach-money" />
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Text>购买</Text>
-                                </Body>
-                                <Right>
-                                    <Icon active name="arrow-forward" />
-                                </Right>
-                            </ListItem>
-                            <ListItem
-                                onPress={() => this.props.navigation.navigate('Settings')}
-                                icon>
-                                <Left>
-                                    <Button style={{ backgroundColor: "#C47EFF" }}>
-                                        <Icon type="Ionicons" name="settings" />
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Text>设置</Text>
-                                </Body>
-                                <Right>
-                                    <Icon active name="arrow-forward" />
-                                </Right>
-                            </ListItem>
-                        </Content>
-
-                    )
+                            </List>
+                        )
+                    }
                 }
-            }
-        </Query>
+            </Query>
+            <ListItem
+                onPress={() => this.props.navigation.navigate('StudyHistroy')}
+                icon>
+                <Left>
+                    <Button style={{ backgroundColor: "#57DCE7" }}>
+                        <Icon type="FontAwesome" name="book" />
+                    </Button>
+                </Left>
+                <Body>
+                    <Text>学习经历</Text>
+                </Body>
+                <Right>
+                    <Icon active name="arrow-forward" />
+                </Right>
+            </ListItem>
+            <ListItem
+                onPress={() => this.props.navigation.navigate('Work')}
+                icon>
+                <Left>
+                    <Button style={{ backgroundColor: "#FAD291" }}>
+                        <Icon type="MaterialCommunityIcons" name="worker" />
+                    </Button>
+                </Left>
+                <Body>
+                    <Text>工作经历</Text>
+                </Body>
+                <Right>
+                    <Icon active name="arrow-forward" />
+                </Right>
+            </ListItem>
+            <Divider style={{ height: 15 }} />
+            {/* <Query
+                query={GET_FEESETTINGS}
+                fetchPolicy="cache-and-network"
+            >
+                {
+                    ({ loading, error, data }) => {
+                        if (loading) return <Text></Text>
+                        if (error) return <Text></Text>
+                        if (data.feeSettings) {
+                            const fees = data.feeSettings.map(setting => setting.fee)
+                            if (fees.length > 0) {
+                                return (
+                                    <ListItem
+                                        onPress={() => this.props.navigation.navigate('Product')}
+                                        icon>
+                                        <Left>
+                                            <Button style={{ backgroundColor: "#A4C8F0" }}>
+                                                <Icon type="MaterialIcons" name="attach-money" />
+                                            </Button>
+                                        </Left>
+                                        <Body>
+                                            <Text>购买</Text>
+                                        </Body>
+                                        <Right>
+                                            <Icon active name="arrow-forward" />
+                                        </Right>
+                                    </ListItem>
+                                )
+                            }
+                        }
+                        return <Text></Text>
+                    }
+                }
+            </Query> */}
+            <ListItem
+                onPress={() => this.props.navigation.navigate('Product')}
+                icon>
+                <Left>
+                    <Button style={{ backgroundColor: "#A4C8F0" }}>
+                        <Icon type="MaterialIcons" name="attach-money" />
+                    </Button>
+                </Left>
+                <Body>
+                    <Text>购买</Text>
+                </Body>
+                <Right>
+                    <Icon active name="arrow-forward" />
+                </Right>
+            </ListItem>
+            <ListItem
+                onPress={() => this.props.navigation.navigate('Settings')}
+                icon>
+                <Left>
+                    <Button style={{ backgroundColor: "#C47EFF" }}>
+                        <Icon type="Ionicons" name="settings" />
+                    </Button>
+                </Left>
+                <Body>
+                    <Text>设置</Text>
+                </Body>
+                <Right>
+                    <Icon active name="arrow-forward" />
+                </Right>
+            </ListItem>
+        </Content>
+
+
     )
 
     render() {
@@ -200,7 +238,7 @@ export default class ProfileScreen extends Component {
                             <Content>
                                 {this._renderContent()}
                             </Content>
-                                )
+                        )
                         : (
                             <Content>
                                 <Text>网络连接失败</Text>

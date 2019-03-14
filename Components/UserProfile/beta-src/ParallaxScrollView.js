@@ -76,7 +76,6 @@ export default class ParallaxScrollView extends Component {
                   if (error) return <Text>{error.message}</Text>
 
                   if (data) {
-                    console.log('postdata',data)
                     const xhr = new XMLHttpRequest()
                     xhr.open('PUT', data.postPhoto.url)
                     xhr.onreadystatechange = function () {
