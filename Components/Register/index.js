@@ -142,6 +142,20 @@ export default class Register extends React.Component{
               </Item>
             {this.renderSignupButton(username,password,password2)}
             </View>
+            <View style={{alignItems:"flex-start",flexDirection:"row"}}>
+              <Text>注册即代表您同意</Text>
+                <TouchableNativeFeedback
+                onPress={()=>this.props.navigation.navigate('UserAgreement')}
+                >
+                  <Text style={styles.blueText}>用户协议</Text>
+                </TouchableNativeFeedback>
+                <Text>和</Text>
+                <TouchableNativeFeedback
+                onPress={()=>this.props.navigation.navigate('Privacy')}
+                >
+                  <Text style={styles.blueText}>隐私条款</Text>
+                </TouchableNativeFeedback>
+            </View>
 
             <View style={styles.bottomStyle}>
                 <TouchableNativeFeedback

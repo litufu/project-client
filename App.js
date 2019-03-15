@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo'
+import Sentry from 'sentry-expo';
 import client from './apollo'
 import { AppLoading, Asset, Font, Icon } from 'expo'
 import Navigation from './Navigation/SwitchNavigator'
+
+// Remove this once Sentry is correctly setup.
+Sentry.enableInExpoDevelopment = true;
+
+Sentry.config('https://7fa79f5a7e1f4c8d807e8cb0446104ab@sentry.io/1416155').install();
 
 class App extends Component {
     state = {

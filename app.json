@@ -42,6 +42,18 @@
     "detach": {
       "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-d1776f37-d524-4fee-872d-6807b0fd83ff.tar.gz"
     },
-    "scheme": "exp37cb0492f93e40eab3387aeaa34fb836"
+    "scheme": "exp37cb0492f93e40eab3387aeaa34fb836",
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "anyanggewu",
+            "project": "shuidi",
+            "authToken": "28f77608ac194c66af6881d5853670588a7722f9c6d7409aa9c8badfa22b61ee"
+          }
+        }
+      ]
+    }
   }
 }

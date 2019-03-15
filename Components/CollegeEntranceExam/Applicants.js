@@ -95,13 +95,13 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   body:{
-    flex:0.6,
+    flex:0.5,
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center'
   },
   right:{
-    flex:0.3,
+    flex:0.4,
     justifyContent:'center',
     alignItems:'center'
   }

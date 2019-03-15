@@ -89,6 +89,7 @@ import FindPassword from '../Components/FindPassword'
 import Product from '../Components/Product'
 import Trade from '../Components/Trade'
 import Pay from '../Components/Pay'
+import Help from '../Components/Help'
 
 import { storeMessage, retrieveMessages } from '../utils/tools'
 
@@ -302,6 +303,9 @@ const ProfileNavigation = createStackNavigator(
         },
         Pay:{
             screen: Pay,
+        },
+        Help:{
+            screen: Help,
         }
     },
     {

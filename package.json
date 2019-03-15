@@ -44,6 +44,7 @@
     "react-native-swiper": "^1.5.14",
     "react-native-timeline-feed": "^0.1.2",
     "react-navigation": "2.18.3",
+    "sentry-expo": "^1.11.2",
     "subscriptions-transport-ws": "^0.9.15",
     "teaset": "^0.5.10",
     "validator": "^10.11.0"

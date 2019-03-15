@@ -54,7 +54,9 @@ class Settings extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
-                        <ListItem>
+                        <ListItem
+                        onPress={() => this.props.navigation.navigate('Help')}
+                        >
                             <Left>
                                 <Text>帮助与反馈</Text>
                             </Left>

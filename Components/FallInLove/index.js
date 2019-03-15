@@ -195,7 +195,7 @@ export default class FallInLove extends Component {
                                                         >
                                                             <Text>{status === "0" 
                                                             ? "参与报名" 
-                                                            : "已报名,周五公布配对结果"
+                                                            : "已报名"
                                                             }</Text>
                                                         </Button>
                                                     )
@@ -203,7 +203,7 @@ export default class FallInLove extends Component {
                                             }
                                         </Mutation>
 
-                                        {/* {signUp && (
+                                        {(signUp && status!=="0") && (
                                             <List>
                                                 <ListItem>
                                                     <Text>见面时间：周五公布结果</Text>
@@ -215,10 +215,10 @@ export default class FallInLove extends Component {
                                                     <Text>本期相亲对象：周五公布结果</Text>
                                                 </ListItem>
                                             </List>
-                                        )} */}
+                                        )}
 
                                         {
-                                            (!signUp && week === 5 && hour <= 5) && (
+                                            (!signUp && week === 5 && hour <= 5 && status!=="0") && (
                                                 <List>
                                                     <ListItem>
                                                         <Text>见面时间：正在统计分配结果，请稍等...</Text>
@@ -234,7 +234,7 @@ export default class FallInLove extends Component {
                                         }
 
                                         {
-                                            (!signUp && !(week === 5 && hour <= 5)) && (
+                                            (!signUp && !(week === 5 && hour <= 5) && status!=="0") && (
                                                 <Query 
                                                 query={GET_LOVEMATCH}
                                                 fetchPolicy="cache-and-network"
@@ -243,45 +243,56 @@ export default class FallInLove extends Component {
                                                         ({ loading, error, data }) => {
                                                             if (loading) return <Spinner />
                                                             if (error) return <Text>{errorMessage(error)}</Text>
-                                                            const url = me.gender === "male" 
-                                                                ? (data.loveMatch.woman.avatar?data.loveMatch.woman.avatar.url:defaultAvatar) 
-                                                                : (data.loveMatch.man.avatar?data.loveMatch.man.avatar.url:defaultAvatar)
-                                                            const name = me.gender === "male" ? data.loveMatch.woman.name : data.loveMatch.man.name
-                                                            const height = me.gender === "male" ? data.loveMatch.woman.loveSetting.myHeight : data.loveMatch.man.loveSetting.myHeight
-                                                            const weight = me.gender === "male" ? data.loveMatch.woman.loveSetting.myWeight : data.loveMatch.man.loveSetting.myWeight
-                                                            const matcherId = me.gender === "male" ? data.loveMatch.woman.id : data.loveMatch.man.id
+                                                            let person
+                                                            if(me.gender === "male"){
+                                                                person = data.loveMatch.woman
+                                                            }else{
+                                                                person = data.loveMatch.man
+                                                            }
+                                                            if(person){
+                                                                const url = person.avatar?person.avatar.url:defaultAvatar
+                                                            const name = person.name
+                                                            const height = person.loveSetting.myHeight
+                                                            const weight = person.loveSetting.myWeight
+                                                            const matcherId = person.id
                                                             return (
-                                                                <List>
+                                                                    <List>
+                                                                        <ListItem>
+                                                                            <Text>见面时间：{data.loveMatch.woman.loveSetting.dateTime}</Text>
+                                                                        </ListItem>
+                                                                        <ListItem>
+                                                                            <Text>见面地点：{data.loveMatch.woman.loveSetting.datePlace}</Text>
+                                                                        </ListItem>
+                                                                        <ListItem 
+                                                                        onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
+                                                                        thumbnail>
+                                                                            <Left>
+                                                                                <Thumbnail square source={{ uri: url }} />
+                                                                            </Left>
+                                                                            <Body>
+                                                                                <Text>{name}</Text>
+                                                                                <Text note numberOfLines={1}>{`身高：${height}cm 体重：${weight}公斤`}</Text>
+                                                                            </Body>
+                                                                            <Right>
+                                                                                <Button 
+                                                                                onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
+                                                                                transparent>
+                                                                                    <Text>查看</Text>
+                                                                                </Button>
+                                                                            </Right>
+                                                                        </ListItem>
+                                                                    </List>
+                                                                )
+                                                            }else{
+                                                                return(
                                                                     <ListItem>
-                                                                        <Text>见面时间：{data.loveMatch.woman.loveSetting.dateTime}</Text>
+                                                                        <Text>本次未能匹配成功！下周一再报名试一下吧。办理会员后可以为你优先匹配，会员等级越高，匹配优先级越高。</Text>
                                                                     </ListItem>
-                                                                    <ListItem>
-                                                                        <Text>见面地点：{data.loveMatch.woman.loveSetting.datePlace}</Text>
-                                                                    </ListItem>
-                                                                    <ListItem 
-                                                                    onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
-                                                                    thumbnail>
-                                                                        <Left>
-                                                                            <Thumbnail square source={{ uri: url }} />
-                                                                        </Left>
-                                                                        <Body>
-                                                                            <Text>{name}</Text>
-                                                                            <Text note numberOfLines={1}>{`身高：${height}cm 体重：${weight}公斤`}</Text>
-                                                                        </Body>
-                                                                        <Right>
-                                                                            <Button 
-                                                                            onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
-                                                                            transparent>
-                                                                                <Text>查看</Text>
-                                                                            </Button>
-                                                                        </Right>
-                                                                    </ListItem>
-
-                                                                </List>
-                                                            )
+                                                                )
+                                                            }
+                                                            
                                                         }
                                                     }
-
                                                 </Query>
                                             )
                                         }
