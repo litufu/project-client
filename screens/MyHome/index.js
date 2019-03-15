@@ -152,7 +152,7 @@ export default class Home extends React.Component {
                             return (
                                 <Swiper style={styles.wrapper} height={480}
                                     autoplay={true}
-                                    autoplayTimeout={3}
+                                    autoplayTimeout={5}
                                     paginationStyle={{
                                         bottom: -23, left: null, right: 10
                                     }} loop>

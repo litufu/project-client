@@ -91,17 +91,17 @@ class Applicants extends Component {
 const styles = StyleSheet.create({
   left:{
     flex:0.3,
-    justifyContent:'center',
+    justifyContent:'flex-start',
     alignItems:'center'
   },
   body:{
-    flex:0.5,
+    flex:0.4,
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center'
   },
   right:{
-    flex:0.4,
+    flex:0.6,
     justifyContent:'center',
     alignItems:'center'
   }

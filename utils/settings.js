@@ -15,11 +15,11 @@ export const Production = true
 export const DateStartTime =  new Date(2019,1,28)
 export const defaultAdvertisements=[
     {
-        image1:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg",
-        image2:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg",
-        image3:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg",
-        image4:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg",
-        image5:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg",
+        image1:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/image5.png",
+        image2:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/image1.png",
+        image3:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/image2.png",
+        image4:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/image3.png",
+        image5:"http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/image4.png",
     }
 ]
 export const provinces = [
