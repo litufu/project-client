@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {TouchableHighlight} from 'react-native'
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Text, Spinner } from 'native-base';
 import { Query } from 'react-apollo'
 
@@ -80,11 +81,11 @@ class Example extends Component {
           <Right>
             {
               (this.state.selected === 1 && nowWork.length > 0 ) &&(
-                <Button
+                <TouchableHighlight
                   onPress={() => this.setState({ modify: true ,selected:2})}
                 >
-                  <Text>修改</Text>
-                </Button>)
+                  <Text style={{color:"white"}}>修改</Text>
+                </TouchableHighlight>)
             }
           </Right>
         </Header>

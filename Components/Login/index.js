@@ -119,7 +119,8 @@ export default class Login extends React.Component{
                 <Thumbnail 
                 style={{height:100,width:100,marginBottom:30}}
                 square
-                source={require('../../assets/icon.png')} /> 
+                resizeMode="contain"
+                source={require('../../assets/sd.png')} /> 
               </View>
 
               <View style={styles.centerSyle}>
@@ -170,6 +171,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 23,
     justifyContent: "space-between",
+    backgroundColor:'white'
   },
   blueText: {
     color: 'blue',

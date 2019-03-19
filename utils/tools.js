@@ -184,5 +184,12 @@ export const display=(place)=>{
 }
 
 
+export const checkBasicInfo=(me)=>{
+  if(!me.name || !me.gender || !me.birthday || !me.residence || !me.birthplace){
+    return false
+  }
+  return true
+}
+
 
 

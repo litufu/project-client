@@ -70,7 +70,7 @@ export default class FamilyList extends Component {
                           <Left>
                 <TouchableWithoutFeedback
                 >
-                    <Thumbnail source={{ uri: family.to.avatar ? family.to.avatar.url : defaultAvatar }} />
+                    <Thumbnail source={{ uri: family.to.user.avatar ? family.to.user.avatar.url : defaultAvatar }} />
                 </TouchableWithoutFeedback>
             </Left>
                     <Body>

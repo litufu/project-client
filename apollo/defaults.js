@@ -33,5 +33,4 @@ export const defaults = {
     familyGroupMessage:[],
     locationGroupMessages:[],
     regStatusMessages:[],
-
   };

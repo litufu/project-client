@@ -33,6 +33,7 @@ export const typeDefs = gql`
     searchNewUniversity:NewSchool
     newGradeAndClasses:[GradeAndClass]
     getMessages:[Message]
+    classGroups:[ClassGroup]
   }
 
   type Photo{
@@ -79,6 +80,7 @@ type ClassGroupMessage{
 type ClassGroup{
   id:String!
 }
+
 
 
 type WorkGroupMessage{

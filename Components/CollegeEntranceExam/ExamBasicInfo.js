@@ -400,8 +400,12 @@ class ExamBasicInfo extends React.Component {
                         }
                     </Form>
                 </Content>
-                <Footer style={{alignItems:"flex-start",backgroundColor:"white"}}>
-                    <Text style={styles.bigText}>提示:高考基本信息仅有二次修改机会</Text>
+                <Footer style={{alignItems:"flex-start",backgroundColor:"white",height:100}}>
+                    <Text style={styles.bigText}>提示:高考基本信息有二次修改机会。
+                    建议首次填写日常模拟平均分，
+                    第一次修改可以在高考完成后填写估算分，
+                    第二次修改机会在高考分数出来后填写。
+                    </Text>
                 </Footer>
             </Container>
         );

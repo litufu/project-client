@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 23,
     justifyContent: "space-between",
+    backgroundColor:'white'
   },
   blueText: {
     color: 'blue',

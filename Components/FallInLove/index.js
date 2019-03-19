@@ -61,7 +61,7 @@ export default class FallInLove extends Component {
 
     checkBasicInfo=(me)=>{
         if(!me.loveSetting){
-            Alert.alert('请在报名页面右上角，点击设置，填写身高、体重等基本信息')
+            Alert.alert('提示','请在报名页面右上角，点击设置，填写身高、体重等基本信息')
             return false
         }
         const birthday = new Date(me.birthday)
