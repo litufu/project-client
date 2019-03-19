@@ -124,7 +124,8 @@ export default class QueryMessages extends Component {
                                             </ListItem>
                                             {
                                                 classGroups.map(group => {
-                                                    const groupName = `${group.study.school.name}${new Date(group.study.startTime).getFullYear() - (group.study.grade - 1)}界${group.study.className === '0' ? "" : `${group.study.className}班`}`
+                                                    const groupName = group.name
+                                                    // const groupName = `${group.study.school.name}${new Date(group.study.startTime).getFullYear() - (group.study.grade - 1)}界${group.study.className === '0' ? "" : `${group.study.className}班`}`
                                                     return (<ListItem
                                                         thumbnail
                                                         key={group.id}
@@ -138,7 +139,7 @@ export default class QueryMessages extends Component {
                                                             <Text note numberOfLines={1}>{`${this.LastMessage(group)}`}</Text>
                                                         </Body>
                                                         <Right>
-                                                            {this.renderBadge(group, type)}
+                                                            {this.renderBadge(group, "ClassMate")}
                                                         </Right>
                                                     </ListItem>)
                                                 })
