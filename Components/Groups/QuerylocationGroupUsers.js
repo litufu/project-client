@@ -31,6 +31,7 @@ class QueryLocationGroupUsers extends Component {
                                 </Left>
                                 <Body>
                                     <Text>{user.name}</Text>
+                                    <Text note numberOfLines={1}>{user.username}</Text>
                                 </Body>
                                 <Right>
                                 </Right>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableNativeFeedback, TextInput, Alert, } from 'react-native'
+import { View, StyleSheet, TouchableNativeFeedback, TextInput, Alert, TouchableOpacity} from 'react-native'
 import { SearchBar } from 'react-native-elements'
 
 import {
@@ -184,26 +184,6 @@ export default class Job extends React.Component {
                 stationId:selectStaionId,
                 updateId:this.props.updateId
             },
-            // optimisticResponse: {
-            //     __typename: "Mutation",
-            //     addOrUpdateWork: {
-            //         __typename: "Work",
-            //         id: '123',
-            //         startTime: startTime,
-            //         endTime: endTime,
-            //         department: department,
-            //         post: {
-            //             __typename:"Station",
-            //             id:'123',
-            //             name:post,
-            //         },
-            //         company: {
-            //             __typename: "Company",
-            //             id: "456",
-            //             name: companyName
-            //         }
-            //     }
-            // },
             update: (cache, { data }) => {
                 const {me} = cache.readQuery({ query: GET_ME });
                 const updates = me.works.filter(work=>work.id===data.addOrUpdateWork.id)
@@ -234,32 +214,67 @@ export default class Job extends React.Component {
     _renderSearchPost = () => (
         <ApolloConsumer>
             {client => (
-                <SearchBar
-                    round
+                	<View style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        borderBottomWidth: 1,
+                        borderBottomColor: '#ccc'
+                    }}>
+                    <View style={{flex:1}}>
+                        <SearchBar
                     lightTheme
+                    containerStyle={{
+                        backgroundColor: 'transparent',
+                        borderBottomWidth: 0
+                    }}
+                    inputStyle={{
+                        backgroundColor: '#fff'
+                    }}
                     onChangeText={(text) => this.setState({ post: text })}
                     onClearText={() => this.setState({ post: "" })}
-                    onSubmitEditing={async () => {
-                        if(trim(this.state.post).length===0){
-                            Alert.alert('请输入关键字')
-                            return
-                        }
-                        if(~['人','员','工','师'].indexOf(trim(this.state.post))){
-                            Alert.alert('关键字太简单，')
-                            return
-                        }
-                        this.setState({ loading: true })
-                        const { data } = await client.query({
-                            query: GET_STATIONS,
-                            variables: { text: trim(this.state.post) }
-                        });
-                        this.setState({ loading: false, stations: data.stations })
-                    }}
+                    onSubmitEditing={async ()=>this.search(client)}
+                    icon={{ type: 'font-awesome', name: 'search' }}
                     placeholder='搜索职位...' />
-                  
+                        </View>
+                        {this.renderSearchButton(client)}
+                    </View>
+                
             )}
+           
         </ApolloConsumer>
     )
+
+    search =async (client) => {
+        if(trim(this.state.post).length===0){
+            Alert.alert('请输入关键字')
+            return
+        }
+        if(~['人','员','工','师'].indexOf(trim(this.state.post))){
+            Alert.alert('关键字太简单，')
+            return
+        }
+        this.setState({ loading: true })
+        const { data } = await client.query({
+            query: GET_STATIONS,
+            variables: { text: trim(this.state.post) }
+        });
+        this.setState({ loading: false, stations: data.stations })
+    }
+
+	renderSearchButton = (client) => {
+		let post = this.state.post.trim()
+		return (
+			<TouchableOpacity
+				activeOpacity={post.length > 0 ? 0.5 : 1}
+				onPress={async ()=>this.search(client)}
+			>
+				<Text style={[
+					styles.sendText,
+					{ color: post.length > 0 ? '#0084ff' : 'gray' }
+				]}>搜索</Text>
+			</TouchableOpacity>
+		)
+	}
 
 
     render() {

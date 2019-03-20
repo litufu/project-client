@@ -57,10 +57,10 @@ export default class BasicInfo extends React.Component {
                   <Title>我的信息</Title>
                 </Body>
                 <Right >
-                  </Right>
+                </Right>
               </Header>
               <Info
-              navigation={this.props.navigation}
+                navigation={this.props.navigation}
                 name={data.me.name ? data.me.name : ""}
                 gender={data.me.gender ? data.me.gender : ""}
                 birthday={{

@@ -277,8 +277,8 @@ class Study extends Component {
             '请确认:',
             `
             学历:${educations[selected]}
-            入学时间:${startYear}
-            毕业时间:${endYear}
+            开始时间:${startYear}
+            结束时间:${endYear}
             所在地点:${display(location)}
             学校名称:${newSchool.name}
             ${hasMajor ? `专业名称:${newMajor.name}` : ""}
@@ -527,7 +527,7 @@ class Study extends Component {
                         <ListItem>
 
                             <Left style={styles.left}>
-                                <Text>入学年份:</Text>
+                                <Text>开学年份:</Text>
                             </Left>
                             <Right style={styles.right}>
                                 <TextInput
@@ -542,7 +542,7 @@ class Study extends Component {
                         </ListItem>
                         <ListItem>
                             <Left style={styles.left}>
-                                <Text>毕业年份:</Text>
+                                <Text>结束年份:</Text>
                             </Left>
                             <Right style={styles.right}>
                                 <TextInput

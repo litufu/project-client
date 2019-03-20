@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {TouchableWithoutFeedback} from 'react-native'
-import { Avatar } from 'react-native-elements'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title } from 'native-base';
 import { relationCompute, } from './settings'
 import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor, defaultAvatar } from '../../utils/settings'
@@ -70,7 +69,7 @@ export default class FamilyList extends Component {
                           <Left>
                 <TouchableWithoutFeedback
                 >
-                    <Thumbnail source={{ uri: family.to.user.avatar ? family.to.user.avatar.url : defaultAvatar }} />
+                    <Thumbnail source={{ uri: family.to.user && family.to.user.avatar ? family.to.user.avatar.url : defaultAvatar }} />
                 </TouchableWithoutFeedback>
             </Left>
                     <Body>

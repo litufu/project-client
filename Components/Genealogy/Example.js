@@ -60,7 +60,7 @@ class Example extends React.Component {
         const spouseIdAndSonDaughter = []
         for(let spouse of spouses){
             let temp
-            temp = sonAndDaughters.filter(sonAndDaughter=>sonAndDaughter.spouse.id===spouse.id)
+            temp = sonAndDaughters.filter(sonAndDaughter=>sonAndDaughter.spouse && sonAndDaughter.spouse.id===spouse.id)
             sortedSonAndDaughters = sortedSonAndDaughters.concat(temp)
             spouseIdAndSonDaughter.push({[spouse.id]:temp})
         }

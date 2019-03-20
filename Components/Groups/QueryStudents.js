@@ -46,6 +46,7 @@ class QureyStudents extends Component {
                                 </Left>
                                 <Body>
                                     <Text>{student.name}</Text>
+                                    <Text note numberOfLines={1}>{student.username}</Text>
                                 </Body>
                                 <Right>
                                     {

@@ -45,6 +45,7 @@ class QureyOldColleagues extends Component {
                         </Left>
                         <Body>
                             <Text>{colleague.name}</Text>
+                            <Text note numberOfLines={1}>{colleague.username}</Text>
                         </Body>
                         <Right>
                               {

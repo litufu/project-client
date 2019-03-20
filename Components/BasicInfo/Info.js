@@ -1,36 +1,22 @@
 import React, { Component } from 'react'
 import {
-  Container,
-  Header,
   Left,
   Body,
   Button,
-  Icon,
-  Title,
   Content,
-  Form,
-  Item,
-  Label,
   Input,
-  Spinner,
-  DatePicker,
   Right,
   ListItem,
   List,
-  Picker,
   Text,
   CheckBox,
 } from 'native-base'
 import { PullPicker } from 'teaset'
 import {
   Alert,
-  TouchableOpacity,
   View,
-  Dimensions,
-  TextInput,
   StyleSheet,
 } from "react-native"
-import dateFormat from 'dateformat';
 import { Mutation } from "react-apollo";
 
 import Region from '../Region'
@@ -77,7 +63,7 @@ export default class Info extends Component {
     }
     const rxName = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/
     if (!rxName.test(name)) {
-      Alert.alert('姓名格式暂不支持')
+      Alert.alert('姓名格式暂不支持',"请使用中文")
       return false
     }
     if (gender !== 'male' && gender !== 'female') {
@@ -89,27 +75,27 @@ export default class Info extends Component {
       return false
     }
     if (isNaN(Date.parse(birthday.date))) {
-      Alert.alert(`生日选择错误 ${birthday.date}`)
+      Alert.alert(`未选择生日`)
       return false
     }
     if (!placeCode.province || !residenceCode.province) {
-      Alert.alert(`未选择所在省`)
+      Alert.alert(`未选择出生地或所在地省份`)
       return false
     }
     if (!placeCode.city || !residenceCode.city) {
-      Alert.alert('未选择所在市')
+      Alert.alert('未选择出生地或所在地城市')
       return false
     }
     if (!placeCode.area || !residenceCode.area) {
-      Alert.alert('未选择所在区')
+      Alert.alert('未选择出生地或所在地区')
       return false
     }
     if (!placeCode.street || !residenceCode.street) {
-      Alert.alert('未选择所在乡镇')
+      Alert.alert('未选择出生地或所在地乡镇')
       return false
     }
     if (!placeCode.village || !residenceCode.village) {
-      Alert.alert('未选择所在村')
+      Alert.alert('未选择出生地或所在地村或居委会',JSON.stringify(placeCode))
       return false
     }
     return true
@@ -175,7 +161,7 @@ export default class Info extends Component {
                   onChangeText={(name) => this.setState({ name: trim(name) })}
                   value={name}
                   placeholder={name === "" ? "请输入你的姓名" : name}
-                  style={{ color: this.state.editable ? 'blue' : 'black' }}
+                  style={{ color: editable ? 'blue' : 'black' }}
                 />
               </ListItem>
               {
@@ -237,7 +223,7 @@ export default class Info extends Component {
                       mode={"date"}
                       showtime={false}
                       handleDate={this.handleDate}
-                      chosenDate={this.state.birthday.date}
+                      chosenDate={birthday.date}
                     />
                   </Right>
                 </ListItem>
@@ -250,7 +236,7 @@ export default class Info extends Component {
                     <Text>{displayPlace}</Text>
                   </View>
                   <Region
-                    openProvinceCityArea={this.state.openProvinceCityArea}
+                    openProvinceCityArea={openProvinceCityArea}
                     handlePlace={this.handlePlace}
                     place={place}
                   />
@@ -275,7 +261,7 @@ export default class Info extends Component {
                     <Text>{displayResidence}</Text>
                   </View>
                   <Region
-                    openProvinceCityArea={this.state.openProvinceCityArea2}
+                    openProvinceCityArea={openProvinceCityArea2}
                     handlePlace={this.handleResidence}
                     place={residence}
                   />

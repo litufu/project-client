@@ -32,7 +32,7 @@ export default class StudyHistroy extends Component {
             <Text>求学列表</Text>
           </Button>
           <Button last active={this.state.selected===2} onPress={()=>this.setState({selected:2})}>
-            <Text>添加</Text>
+            <Text>添加经历</Text>
           </Button>
         </Segment>
 

@@ -3,7 +3,7 @@ import { TouchableNativeFeedback,StyleSheet,View,KeyboardAvoidingView,Alert} fro
 import { Button,Text,Input,Item ,Label,Container,Spinner,Content} from 'native-base';
 import { Mutation } from 'react-apollo'
 
-import {errorMessage} from '../../utils/settings'
+import {errorMessage} from '../../utils/tools'
 
 import SIGNUP from '../../graphql/signup.mutation'
 
@@ -57,7 +57,6 @@ export default class Register extends React.Component{
           );
 
           if (error)  {
-            Alert.alert(errorMessage(error))
             return (
               <Button block primary onPress={async () => {
                 const valid = this.validateRegister(username,password,password2)

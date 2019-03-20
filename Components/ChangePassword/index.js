@@ -17,8 +17,11 @@ import {
   Spinner,
 } from 'native-base'
 import {  Alert,View} from "react-native"
+import { SecureStore } from 'expo'
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
+import { withApollo,Mutation } from 'react-apollo';
+
+import {wsClient} from '../../apollo'
 import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor } from '../../utils/settings'
 
 
@@ -27,11 +30,10 @@ const CHANGE_PASSWORD = gql`
 mutation changePassword($currentPassword: String!, $newPassword: String!) {
     changePassword(currentPassword: $currentPassword, newPassword: $newPassword) {
       id
-      token
     }
 }
 `
-export default class ChangePassword extends Component {
+class ChangePassword extends Component {
 
     constructor(props) {
         super(props);
@@ -41,6 +43,15 @@ export default class ChangePassword extends Component {
             confirmPassword: ""
         };
     }
+
+    _logout=()=>{
+      this.props.navigation.navigate('Login')
+      wsClient.unsubscribeAll(); // unsubscribe from all subscriptions
+      SecureStore.deleteItemAsync('token')
+      this.props.client.resetStore()
+      // 此处应添加持久化数据
+      wsClient.close()
+  }
 
     validateChangepassword = ()=> {
 
@@ -84,12 +95,9 @@ export default class ChangePassword extends Component {
                   if(valid) {
                     try{
                       const result = await changePassword({ variables: { currentPassword,newPassword} })
-                      const { token } = result.data.changePassword
-                      await SecureStore.setItemAsync('token', token)
-                      this.props.navigation.navigate('Profile')
                       Alert.alert('密码修改成功','',
-                        [{text: 'OK', onPress: () =>  this.props.navigation.navigate('Profile')},]
-                      ,{ onDismiss: () => this.props.navigation.navigate('Profile') }
+                        [{text: 'OK', onPress: () =>  this._logout()},]
+                      ,{ onDismiss: () => () =>  this._logout() }
                     )
                     }catch(error){
                       Alert.alert('密码修改失败',error.message.replace(/GraphQL error:/g, ""))
@@ -107,10 +115,9 @@ export default class ChangePassword extends Component {
                 if(valid) {
                   try{
                     const result = await changePassword({ variables: { currentPassword,newPassword} })
-                    this.props.navigation.navigate('Profile')
-                    Alert.alert('密码修改成功','',
-                      [{text: 'OK', onPress: () =>  this.props.navigation.navigate('Profile')},]
-                    ,{ onDismiss: () => this.props.navigation.navigate('Profile') }
+                    Alert.alert('密码修改成功','请重新登陆',
+                      [{text: 'OK', onPress: () =>  this._logout()},]
+                    ,{ onDismiss: () => this._logout() }
                   )
                   }catch(error){
                     Alert.alert('修改密码失败',error.message.replace(/GraphQL error:/g, ""),)
@@ -177,4 +184,7 @@ export default class ChangePassword extends Component {
         );
     }
 }
+
+
+export default withApollo(ChangePassword)
 

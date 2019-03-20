@@ -9,8 +9,8 @@ import {
 } from 'react-native'
 import { SecureStore } from 'expo'
 import { Button,Text,Input,Item ,Label,Container,Spinner,Thumbnail} from 'native-base';
-import {Avatar} from 'react-native-elements'
 import { Mutation } from 'react-apollo'
+import {errorMessage} from '../../utils/tools'
 
 import LOGIN from '../../graphql/login.mutation'
 
@@ -70,7 +70,7 @@ export default class Login extends React.Component{
                       const { token } = result.data.login
                       await SecureStore.setItemAsync('token', token)
                     }catch(error){
-                      Alert.alert('登录失败',error.message.replace(/GraphQL error:/g, ""),
+                      Alert.alert('登录失败',errorMessage(error),
                         [{text: 'OK', onPress: () => this.props.navigation.navigate('Login')},
                       ],{ onDismiss: () => this.props.navigation.navigate('Login') })
                       this.props.navigation.navigate('Login')
@@ -92,7 +92,7 @@ export default class Login extends React.Component{
                       const { token } = result.data.login
                       await SecureStore.setItemAsync('token', token)
                     }catch(error){
-                      Alert.alert('登录失败',error.message.replace(/GraphQL error:/g, ""),
+                      Alert.alert('登录失败',errorMessage(error),
                         [{text: 'OK', onPress: () => this.props.navigation.navigate('Login')},
                       ],{ onDismiss: () => this.props.navigation.navigate('Login') })
                       this.props.navigation.navigate('Login')
@@ -151,7 +151,7 @@ export default class Login extends React.Component{
                 </View>
                 <View style={styles.forgetPassword}>
                   <TouchableNativeFeedback
-                      onPress={() => Alert.alert('密码找回规则',"需要自己的两名家人在其设置页面-设置选项-找回密码选项中帮你找回密码。")}
+                      onPress={() => Alert.alert('密码找回规则',"自己的两名家庭成员在其设置页面-设置-找回密码中帮你找回密码。")}
                   >
                       <Text style={styles.blueText}>忘记密码</Text>
                   </TouchableNativeFeedback>
