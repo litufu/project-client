@@ -347,6 +347,7 @@ export default class Chat extends Component {
                                     placeholder="输入信息..."
                                     renderTime={null}
                                     showAvatarForEveryMessage={true}
+                                    renderUsernameOnMessage={true}
                                     loadEarlier={this.state.loadEarlier}
                                     onLoadEarlier={this.onLoadEarlier}
                                     renderLoadEarlier={(props) => {

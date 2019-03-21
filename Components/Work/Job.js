@@ -140,7 +140,7 @@ export default class Job extends React.Component {
             Alert.alert('太小了，无法上班，请检查出生日期是否设置错误')
             return
         }
-        if (parseInt(startYear) > parseInt(endYear)) {
+        if (new Date(startTime) > new Date(endTime)) {
             Alert.alert('入职年份必须小于离职年份')
             return
         }

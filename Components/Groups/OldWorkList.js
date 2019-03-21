@@ -27,7 +27,6 @@ export default class WorkList extends Component {
     >
       {
         (addOldColleague, { loading, error }) => {
-          if (loading) return <Spinner />
           return (
             <Button
               transparent
@@ -36,7 +35,7 @@ export default class WorkList extends Component {
   
                })}
             >
-              <Text>申请认证</Text>
+              <Text>{`申请${loading ? "...":""}`}</Text>
               {error && Alert.alert(errorMessage(error))}
             </Button>
           )
@@ -51,7 +50,6 @@ export default class WorkList extends Component {
     >
       {
         (confirmOldColleague, { loading, error }) => {
-          if (loading) return <Spinner />
           return (
             <Button
               transparent
@@ -61,7 +59,7 @@ export default class WorkList extends Component {
                  })
               } }
             >
-              <Text>确认</Text>
+              <Text>{`确认${loading ? "...":""}`}</Text>
               {error && Alert.alert(errorMessage(error))}
             </Button>
           )
@@ -125,6 +123,7 @@ export default class WorkList extends Component {
           work={work}
           me={me}
           renderButton={this.renderButton}
+          navigation={this.props.navigation}
           />
         </Content>
       </Container>

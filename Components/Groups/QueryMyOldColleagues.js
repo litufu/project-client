@@ -29,7 +29,7 @@ class QueryMyOldColleagues extends Component {
 
     render() {
         const { data: { myOldColleagues, loading, error } } = this.props;
-        const {work,me,renderButton} = this.props
+        const {work,me,renderButton,navigation} = this.props
 
         if (loading) return <Spinner />
         if (error) return <Text>{errorMessage(error)}</Text>
@@ -40,6 +40,7 @@ class QueryMyOldColleagues extends Component {
             me={me}
             renderButton={renderButton}
             myOldColleagues={myOldColleagues}
+            navigation={navigation}
             />
         )
     }

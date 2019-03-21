@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native'
-import { Mutation} from 'react-apollo'
+import { Query,Mutation} from 'react-apollo'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title, Spinner } from 'native-base';
 import update from 'immutability-helper'
 
@@ -36,7 +36,6 @@ export default class WorkList extends Component {
     >
       {
         (addWorkGroup, { loading, error }) => {
-          if (loading) return <Spinner />
           return (
             <Button
               transparent
@@ -45,7 +44,7 @@ export default class WorkList extends Component {
   
                })}
             >
-              <Text>申请认证</Text>
+              <Text>{`申请${loading ? "...": ""}`}</Text>
               {error && Alert.alert(errorMessage(error))}
             </Button>
           )
@@ -60,7 +59,6 @@ export default class WorkList extends Component {
     >
       {
         (confirmWorkGroup, { loading, error }) => {
-          if (loading) return <Spinner />
           return (
             <Button
               transparent
@@ -83,7 +81,7 @@ export default class WorkList extends Component {
                  })
               } }
             >
-              <Text>确认</Text>
+              <Text>{`确认${loading ? "...":""}`}</Text>
               {error && Alert.alert(errorMessage(error))}
             </Button>
           )
@@ -176,9 +174,7 @@ export default class WorkList extends Component {
   }
 
   render() {
-    const work = this.props.navigation.getParam('work')
-    const me = this.props.navigation.getParam('me', '')
-    const newWorkGroups = this.props.navigation.getParam('newWorkGroups', '')
+    const work = this.props.navigation.getParam('work','')
     return (
       <Container>
         <Header style={{ marginTop: statusBarHeight, backgroundColor: headerBackgroundColor }}>
@@ -197,12 +193,27 @@ export default class WorkList extends Component {
           </Right>
         </Header>
         <Content>
-          <QueryColleagues 
-          work={work}
-          me={me}
-          renderButton={this.renderButton}
-          workGroups={newWorkGroups}
-          />
+          <Query query={GET_ME}>
+          {
+            ({loading,error,data})=>{
+              if(loading) return <Spinner />
+              if(error) return <Text>{errorMessage(error)}</Text>
+              const nowWorks = data.me.works.filter(work => new Date(work.endTime).getFullYear() === 9999)
+              const newWorkGroups = data.me.workGroups.filter(workGroup=>workGroup.company.id===nowWorks[0].company.id)
+        
+              return(
+                <QueryColleagues 
+                  work={nowWorks[0]}
+                  me={data.me}
+                  renderButton={this.renderButton}
+                  workGroups={newWorkGroups}
+                  navigation={this.props.navigation}
+                  />
+              )
+            }
+          }
+          </Query>
+          
         </Content>
       </Container>
     );

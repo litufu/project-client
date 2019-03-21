@@ -21,7 +21,11 @@ class QueryLocationGroupUsers extends Component {
                 {
                     locationGroupUsers.map(user => {
                         return (
-                            <ListItem thumbnail key={user.id}>
+                            <ListItem 
+                            thumbnail 
+                            key={user.id}
+                            // onPress={() => this.props.navigation.navigate('UserProfile', { id: user.id })}
+                            >
                                 <Left>
                                     <TouchableWithoutFeedback
                                     >

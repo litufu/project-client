@@ -1,6 +1,6 @@
 import { graphql } from 'react-apollo';
 import React, { Component } from 'react';
-import {TouchableWithoutFeedback} from 'react-native'
+import { TouchableWithoutFeedback } from 'react-native'
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title, Spinner } from 'native-base';
 
 import { errorMessage } from '../../utils/tools'
@@ -25,6 +25,57 @@ class QureyColleagues extends Component {
         this.unsubscribe();
     }
 
+    _getMyGroups = (workGroups, myId) => {
+        const myGroups = workGroups.filter(workGroup => {
+            for (const colleague of workGroup.colleagues) {
+                if (colleague.worker.id === myId && colleague.status === '1') {
+                    return true
+                }
+            }
+            return false
+        })
+        if (myGroups.length > 0) {
+            return myGroups
+        }
+        return []
+    }
+
+    _getMyWillGroups = (workGroups, myId) => {
+        const myGroups = workGroups.filter(workGroup => {
+            for (const colleague of workGroup.colleagues) {
+                if (colleague.worker.id === myId && colleague.status === '0') {
+                    return true
+                }
+            }
+            return false
+        })
+        if (myGroups.length > 0) {
+            return myGroups
+        }
+        return []
+    }
+
+    _checkWorkerInGroup = (myGroup, workerId) => {
+
+        for (const colleague of myGroup.colleagues) {
+            if (colleague.worker.id === workerId) {
+                return colleague.status
+            }
+        }
+        return '-1'
+    }
+
+    _checkWorkerInWillGroup = (myWillGroups, workerId) => {
+        for (const myWillGroup of myWillGroups) {
+            for (const colleague of myWillGroup.colleagues) {
+                if (colleague.worker.id === workerId && colleague.status === '1') {
+                    return '2'
+                }
+            }
+        }
+        return '-1'
+    }
+
     render() {
         const { data: { colleagues, loading, error } } = this.props;
         const { work, me, renderButton, workGroups } = this.props
@@ -32,11 +83,31 @@ class QureyColleagues extends Component {
         if (loading) return <Spinner />
         if (error) return <Text>{errorMessage(error)}</Text>
 
+        const myGroups = this._getMyGroups(workGroups, me.id)
+        const myWillGroups = this._getMyWillGroups(workGroups, me.id)
+
+
         return (
             <List>
                 {
                     colleagues.map(colleague => (
-                        <ListItem thumbnail key={colleague.id}>
+                        <ListItem
+                            onPress={() => {
+                                let colleagueStatus
+                                if (myGroups.length > 0) {
+                                    colleagueStatus = this._checkWorkerInGroup(myGroups[0], colleague.id)
+                                }
+                                if (!(colleagueStatus === '1' || colleagueStatus === '0')) {
+                                    colleagueStatus = this._checkWorkerInWillGroup(myWillGroups, colleague.id)
+                                }
+
+                                if (colleagueStatus === "1") {
+                                    this.props.navigation.navigate('UserProfile', { id: colleague.id })
+                                }
+                            }
+                            }
+                            thumbnail
+                            key={colleague.id}>
                             <Left>
                                 <TouchableWithoutFeedback
                                 >

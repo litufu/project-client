@@ -35,9 +35,12 @@ class WorkGroup extends Component {
               if(loading) return <Spinner />
               if(error) return <Text>{errorMessage(error)}</Text>
 
-              const newWorkGroups = data.me.workGroups.map(workGroup=>workGroup.company.id===work.company.id)
+              
               const nowWorks = data.me.works.filter(work => new Date(work.endTime).getFullYear() === 9999)
-
+              let newWorkGroups
+              if(nowWorks.length > 0){
+                 newWorkGroups = data.me.workGroups.filter(workGroup=>workGroup.company.id===nowWorks[0].company.id)
+              }
 
               return(
                 <List>

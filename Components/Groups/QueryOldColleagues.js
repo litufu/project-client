@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo';
 import React, { Component } from 'react';
 import {TouchableWithoutFeedback} from 'react-native'
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button, Icon, Title, Spinner } from 'native-base';
+import { List, ListItem, Thumbnail, Text, Left, Body, Right, Spinner } from 'native-base';
 
 import { errorMessage } from '../../utils/tools'
 import GET_OLDCOLLEAGUES from '../../graphql/get_oldColleagues.query'
@@ -29,6 +29,8 @@ class QureyOldColleagues extends Component {
         const { data: { oldColleagues, loading, error } } = this.props;
         const {work,me,renderButton,myOldColleagues} = this.props
 
+        
+
         if (loading) return <Spinner />
         if (error) return <Text>{errorMessage(error)}</Text>
 
@@ -36,7 +38,21 @@ class QureyOldColleagues extends Component {
             <List>
                 {
                     oldColleagues.map(colleague=>(
-                        <ListItem thumbnail key={colleague.id}>
+                        <ListItem 
+                        onPress={()=>{
+                            let oldcolleagueStatus
+                            const workerColleagues = myOldColleagues.filter(myOldColleague=>myOldColleague.to.id===colleague.id)
+                            if(workerColleagues.length===0){
+                                oldcolleagueStatus = '0'
+                            }else{
+                                oldcolleagueStatus = workerColleagues[0].status
+                            }
+                            if (oldcolleagueStatus === "3") {
+                                this.props.navigation.navigate('UserProfile', { id: colleague.id })
+                            }
+                        }}
+                        thumbnail 
+                        key={colleague.id}>
                         <Left>
                         <TouchableWithoutFeedback
                         >

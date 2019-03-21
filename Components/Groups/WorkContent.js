@@ -5,7 +5,7 @@ import { Container, Header, Content, Icon,Text,Item, Button, Left,Right,Body ,Ti
 
 import {headerBackgroundColor,headerFontColor,statusBarHeight,headerButtonColor} from '../../utils/settings'
 
-class ClassContent extends Component {
+class WorkContent extends Component {
 
   _getMyGroups = (workGroups, myId) => {
     const myGroups = workGroups.filter(workGroup => {
@@ -33,6 +33,7 @@ class ClassContent extends Component {
   render() {
     const work = this.props.navigation.getParam('work','')
     const me =  this.props.navigation.getParam('me','')
+    
     const newWorkGroups = this.props.navigation.getParam('newWorkGroups','')
     const myWorkGroups = this._getMyGroups(newWorkGroups,me.id)
     const myWorkGroup = myWorkGroups.length>0 ?myWorkGroups[0]:[]
@@ -87,4 +88,4 @@ class ClassContent extends Component {
   }
 }
 
-export default withNavigation(ClassContent)
+export default withNavigation(WorkContent)

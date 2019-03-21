@@ -25,9 +25,63 @@ class QureyStudents extends Component {
         this.unsubscribe();
     }
 
+    _getMyGroups = (classGroups, myId) => {
+        const myGroups = classGroups.filter(classGroup => {
+          for (const member of classGroup.members) {
+            if (member.student.id === myId && member.status === '1') {
+              return true
+            }
+          }
+          return false
+        })
+        if (myGroups.length > 0) {
+          return myGroups
+        }
+        return []
+      }
+    
+      _getMyWillGroups = (classGroups, myId) => {
+        const myGroups = classGroups.filter(classGroup => {
+          for (const member of classGroup.members) {
+            if (member.student.id === myId && member.status === '0') {
+              return true
+            }
+          }
+          return false
+        })
+        if (myGroups.length > 0) {
+          return myGroups
+        }
+        return []
+      }
+
+      _checkStudentInGroup = (myGroup, studentId) => {
+
+        for (const member of myGroup.members) {
+          if (member.student.id === studentId) {
+            return member.status
+          }
+        }
+        return '-1'
+      }
+    
+      _checkStudentInWillGroup = (myWillGroups, studentId) => {
+        for (const myWillGroup of myWillGroups) {
+          for (const member of myWillGroup.members) {
+            if (member.student.id === studentId && member.status === '1') {
+              return '2'
+            }
+          }
+        }
+        return '-1'
+      }
+
     render() {
         const { data: { students, loading, error } } = this.props;
         const { schoolEdu, schoolEduName, me, renderButton, classGroups } = this.props
+        const myGroups = this._getMyGroups(classGroups, me.id)
+        const myWillGroups = this._getMyWillGroups(classGroups,  me.id)
+    
 
         if (loading) return <Spinner />
         if (error) return <Text>{errorMessage(error)}</Text>
@@ -37,7 +91,23 @@ class QureyStudents extends Component {
                 {
                     students.map(student => {
                         return (
-                            <ListItem thumbnail key={student.id}>
+                            <ListItem 
+                            thumbnail 
+                            key={student.id}
+                            onPress={()=>{
+                                let studentStatus
+                                if (myGroups.length > 0) {
+                                  studentStatus = this._checkStudentInGroup(myGroups[0], student.id)
+                                }
+                                if (!(studentStatus === '1' || studentStatus === '0')) {
+                                  studentStatus = this._checkStudentInWillGroup(myWillGroups, student.id)
+                                }
+                                if(studentStatus==="1"){
+                                    this.props.navigation.navigate('UserProfile', { id: student.id })
+                                }
+                            }
+                            }
+                            >
                                 <Left>
                                     <TouchableWithoutFeedback
                                     >
