@@ -53,7 +53,7 @@ export default class SkillSetting extends Component {
         </Button>
         <ListItem>
             <Left>
-                <Text>技能名称</Text>
+                <Text>我的技能</Text>
             </Left>
         </ListItem>
             {

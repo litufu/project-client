@@ -142,7 +142,7 @@ export default class Trade extends Component {
                                         <Text>时间</Text>
                                     </Left>
                                     {
-                                        !datePlace 
+                                        !dateTime 
                                         ? (<Right>
                                             <TouchableHighlight
                                             onPress={() => this.setState({ display: "dateTime" })}

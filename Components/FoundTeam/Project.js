@@ -162,6 +162,10 @@ export default class Project extends Component {
                                 full
                                 style={{ marginHorizontal: 20, marginVertical: 15 }}
                                 onPress={() => {
+                                    if(this.props.me.skills.length===0){
+                                        Alert.alert('请在右上角设置中填写自己具备的技能。')
+                                        return
+                                    }
                                     this.setState({ display: "project" })
                                 }}
                             >

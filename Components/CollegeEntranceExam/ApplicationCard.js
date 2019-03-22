@@ -81,14 +81,14 @@ export default class ApplicationCard extends Component {
                                     <Button
                                         onPress={this.props.handleToApplicants}
                                     >
-                                        <Text  >报名详情</Text>
+                                        <Text  >本省报考者</Text>
                                     </Button>
                                 </Left>
                                 <Body style={styles.body}>
                                     <Button
                                         onPress={this.props.handleToChat}
                                     >
-                                        <Text  >进入群聊</Text>
+                                        <Text>全国群聊</Text>
                                     </Button>
                                 </Body>
                                 <Right style={styles.right}>

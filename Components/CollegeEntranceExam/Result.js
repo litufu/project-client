@@ -50,9 +50,11 @@ class Result extends Component {
               twoBtn={true}
               handleToChat={() => this.props.navigation.navigate('GroupChat', {
                 group: me.regStatus, me, type: "RegStatus",
-                groupName: `${me.regStatus.university.name}${me.regStatus.major.name}-${me.exam.province.name}${subjects[me.exam.subject]}`
+                groupName: `${me.regStatus.university.name}${me.regStatus.major.name}`
               })}
-              handleToApplicants={() => this.props.navigation.navigate('Applicants', { applicants })}
+              handleToApplicants={() => this.props.navigation.navigate('Applicants', { applicants,
+              provinceName:me.exam.province.name,subjectName:subjects[me.exam.subject]
+              })}
               id={me.regStatus.id}
             />
           )

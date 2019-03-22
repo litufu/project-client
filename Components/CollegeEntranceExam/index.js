@@ -93,6 +93,11 @@ export default class CollegeEntranceExam extends React.Component {
                     </List>
                     
                 </Content>
+                <Footer style={{alignItems:"flex-start",backgroundColor:"white",height:100}}>
+                    <Text style={styles.bigText}>提示:高考报名结果准确度取决于使用人数和使用者的诚信度。
+                    建议填写真实高考信息，并转告身边的同学使用水滴高考报名来进行模拟志愿填报。
+                    </Text>
+                </Footer>
              </Container>
         )
     }

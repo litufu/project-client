@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {TouchableHighlight} from 'react-native'
 import {  
   Content, 
    Spinner, 
@@ -40,11 +41,11 @@ export default class ReceiveInvitation extends Component {
                           <Text>{`邀约项目:${mypartnerCondition.project.name}`}</Text>
                         </Left>
                         <Body>
-                          <Button
+                          <TouchableHighlight
                             onPress={()=>this.props.navigation.navigate('ProjectIntroduce',{mypartnerCondition})}
                           >
-                            <Text>查看详情</Text>
-                          </Button>
+                            <Text style={{color:"blue"}}>查看详情</Text>
+                          </TouchableHighlight>
                         </Body>
                         <Right>
                           <Mutation 
@@ -53,14 +54,14 @@ export default class ReceiveInvitation extends Component {
                           >
                           {
                             (refusePartner,{loading})=>(
-                              <Button 
+                              <TouchableHighlight 
+                              
                               onPress={()=>{
                                 refusePartner({variables:{conditionId:mypartnerCondition.id}})
                               }}
                               >
-                                <Text>拒绝</Text>
-                                {loading && <Spinner/>}
-                              </Button>
+                                <Text style={{color:"blue"}}> {`拒绝${loading ? "..." :""}`}</Text>
+                              </TouchableHighlight>
                             )
                           }
                           </Mutation>

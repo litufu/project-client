@@ -123,8 +123,8 @@ export default class StackedLabelExample extends Component {
                         defaultValue={1}
                         min={1}
                         max={10}
-                        value={this.state.number}
-                        onChange={(value) => this.setState({ number: value })}
+                        value={parseInt(this.state.number)}
+                        onChange={(value) => this.setState({ number: parseInt(value) })}
                     />
                 </Right>
             </Item>
@@ -186,7 +186,7 @@ export default class StackedLabelExample extends Component {
                                     this.setState({
                                         display: "partner",
                                         skillName: "",
-                                        number: "",
+                                        number: 1,
                                         selectedIndex: 0
                                     })
                                 }

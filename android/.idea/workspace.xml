@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="605bedf2-46cd-4864-a10b-c51039045598" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Components/Groups/QuerylocationGroupUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Groups/QuerylocationGroupUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Groups/WorkGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Groups/WorkGroup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Groups/WorkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Groups/WorkList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ExamBasicInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ExamBasicInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +23,7 @@
     <session id="-1836258901">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.106" value="1" />
           <entry key="project.open.time.121" value="1" />
           <entry key="project.open.time.14" value="1" />
@@ -35,8 +34,9 @@
           <entry key="project.open.time.55" value="1" />
           <entry key="project.open.time.70" value="1" />
           <entry key="project.open.time.81" value="1" />
+          <entry key="project.open.time.90" value="1" />
           <entry key="project.open.time.98" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -66,8 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="175">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -102,8 +102,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -133,6 +131,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -234,10 +234,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.16689008" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.11863271" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -251,7 +250,7 @@
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.2851064" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.26524824" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -297,8 +296,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="175">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
         </state>
       </provider>
     </entry>

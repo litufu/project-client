@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo'
-import {Alert} from 'react-native'
+import { Alert } from 'react-native'
 import {
     Container,
     Header,
@@ -24,7 +24,8 @@ import validator from 'validator';
 import GET_ME from '../../graphql/get_me.query'
 import ADD_UPDATE_LOVESIGNUP from '../../graphql/add_loveSignUp.mutation'
 import GET_LOVEMATCH from '../../graphql/get_loveMatching.query'
-import { DateStartTime ,defaultAvatar} from '../../utils/settings'
+import { DateStartTime, defaultAvatar } from '../../utils/settings'
+import { getTimeByTimeZone } from '../../utils/tools'
 import { errorMessage } from '../../utils/tools'
 
 /**
@@ -59,76 +60,78 @@ export default class FallInLove extends Component {
         }
     }
 
-    checkBasicInfo=(me)=>{
-        if(!me.loveSetting){
-            Alert.alert('提示','请在报名页面右上角，点击设置，填写身高、体重等基本信息')
+    checkBasicInfo = (me) => {
+        if (!me.loveSetting) {
+            Alert.alert('提示', '请在报名页面右上角，点击设置，填写身高、体重等基本信息')
             return false
         }
         const birthday = new Date(me.birthday)
         const d = new Date()
-        const age = d.getFullYear()-birthday.getFullYear()-((d.getMonth()<birthday.getMonth()|| d.getMonth()===birthday.getMonth() && d.getDate()<birthday.getDate())?1:0);
-        if(age<18){
+        const age = d.getFullYear() - birthday.getFullYear() - ((d.getMonth() < birthday.getMonth() || d.getMonth() === birthday.getMonth() && d.getDate() < birthday.getDate()) ? 1 : 0);
+        if (age < 18) {
             Alert.alert('未超过18岁不能报名！')
             return false
         }
 
-        if(!validator.isInt(`${me.loveSetting.myHeight}`) || me.loveSetting.myHeight===0 ){
+        if (!validator.isInt(`${me.loveSetting.myHeight}`) || me.loveSetting.myHeight === 0) {
             Alert.alert('请在报名页由上表设置中填写身高信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.myWeight}`)) ||me.loveSetting.myWeight===0 ){
+        }
+        if (!validator.isInt((`${me.loveSetting.myWeight}`)) || me.loveSetting.myWeight === 0) {
             Alert.alert('请在报名页由上表设置中填写体重信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.otherHeightMin}`)) || me.loveSetting.otherHeightMin===0 ){
+        }
+        if (!validator.isInt((`${me.loveSetting.otherHeightMin}`)) || me.loveSetting.otherHeightMin === 0) {
             Alert.alert('请在报名页由上表设置中填写要求对方最低身高信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.otherHeightMax}`))||me.loveSetting.otherHeightMax===0){
+        }
+        if (!validator.isInt((`${me.loveSetting.otherHeightMax}`)) || me.loveSetting.otherHeightMax === 0) {
             Alert.alert('请在报名页由上表设置中填写要求对方最高身高信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.otherWeightMin}`))||me.loveSetting.otherWeightMin===0){
+        }
+        if (!validator.isInt((`${me.loveSetting.otherWeightMin}`)) || me.loveSetting.otherWeightMin === 0) {
             Alert.alert('请在报名页由上表设置中填写要求对方最小体重信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.otherWeightMax}`)) ||me.loveSetting.otherWeightMax===0){
+        }
+        if (!validator.isInt((`${me.loveSetting.otherWeightMax}`)) || me.loveSetting.otherWeightMax === 0) {
             Alert.alert('请在报名页由上表设置中填写要求对方最大体重信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.otherAgeMin}`))||me.loveSetting.otherAgeMin===0){
+        }
+        if (!validator.isInt((`${me.loveSetting.otherAgeMin}`)) || me.loveSetting.otherAgeMin === 0) {
             Alert.alert('请在报名页由上表设置中填写要求对方最小年龄信息')
             return false
-          }
-          if(!validator.isInt((`${me.loveSetting.otherAgeMax}`))||me.loveSetting.otherAgeMax===0){
+        }
+        if (!validator.isInt((`${me.loveSetting.otherAgeMax}`)) || me.loveSetting.otherAgeMax === 0) {
             Alert.alert('请在报名页由上表设置中填写要求对方最大年龄信息')
             return false
-          }
-          if(me.gender==='female'){
-            if (!/^[A-Za-z0-9\u4e00-\u9fa5]+/.test(me.loveSetting.dateTime) || me.loveSetting.dateTime ===""){
+        }
+        if (me.gender === 'female') {
+            if (!/^[A-Za-z0-9\u4e00-\u9fa5]+/.test(me.loveSetting.dateTime) || me.loveSetting.dateTime === "") {
                 Alert.alert('请在报名页由上表设置中填写要求见面时间信息')
                 return false
             }
-            if (!/^[A-Za-z0-9\u4e00-\u9fa5]+/.test(me.loveSetting.datePlace || me.loveSetting.datePlace==="")){
+            if (!/^[A-Za-z0-9\u4e00-\u9fa5]+/.test(me.loveSetting.datePlace || me.loveSetting.datePlace === "")) {
                 Alert.alert('请在报名页由上表设置中填写要求见面地点信息')
                 return false
             }
-          }
+        }
 
-          return true
+        return true
 
     }
 
     render() {
         const { status } = this.state
-        const week = new Date().getDay();
+        const now = getTimeByTimeZone(8)
+        const week = now.getDay();
         let signUp
         if (week == 0 || week == 5 || week == 6) {
             signUp = false
         } else {
             signUp = true
         }
-        const now = new Date()
+        console.log(now)
+        console.log(DateStartTime)
         const phase = parseInt(`${(now.getTime() - DateStartTime.getTime()) / 1000 / 60 / 60 / 24 / 7}`) + 1
         const hour = now.getHours()
         return (
@@ -177,7 +180,7 @@ export default class FallInLove extends Component {
                                             }}
                                         >
                                             {
-                                                addOrUpdateLoveSignUp => {
+                                                (addOrUpdateLoveSignUp, { loading, error }) => {
 
                                                     return (
                                                         <Button
@@ -186,24 +189,30 @@ export default class FallInLove extends Component {
                                                             rounded
                                                             style={{ marginHorizontal: 20, marginVertical: 15 }}
                                                             disabled={!signUp || status !== "0"}
-                                                            onPress={async() => {
-                                                                if(this.checkBasicInfo(me)){
+                                                            onPress={async () => {
+                                                                if (this.checkBasicInfo(me)) {
                                                                     await addOrUpdateLoveSignUp()
                                                                     this.setState({ status: "1" })
                                                                 }
                                                             }}
                                                         >
-                                                            <Text>{status === "0" 
-                                                            ? "参与报名" 
-                                                            : "已报名"
-                                                            }</Text>
+                                                            {loading
+                                                                ? <Text>报名中...</Text>
+                                                                : (
+                                                                    <Text>{status === "0"
+                                                                        ? "参与报名"
+                                                                        : "已报名"
+                                                                    }</Text>
+                                                                )
+                                                            }
+                                                            {error && Alert.alert(errorMessage(error))}
                                                         </Button>
                                                     )
                                                 }
                                             }
                                         </Mutation>
 
-                                        {(signUp && status!=="0") && (
+                                        {(signUp && status !== "0") && (
                                             <List>
                                                 <ListItem>
                                                     <Text>见面时间：周五公布结果</Text>
@@ -218,7 +227,7 @@ export default class FallInLove extends Component {
                                         )}
 
                                         {
-                                            (!signUp && week === 5 && hour <= 5 && status!=="0") && (
+                                            (!signUp && week === 5 && hour <= 5 && status !== "0") && (
                                                 <List>
                                                     <ListItem>
                                                         <Text>见面时间：正在统计分配结果，请稍等...</Text>
@@ -234,28 +243,30 @@ export default class FallInLove extends Component {
                                         }
 
                                         {
-                                            (!signUp && !(week === 5 && hour <= 5) && status!=="0") && (
-                                                <Query 
-                                                query={GET_LOVEMATCH}
-                                                fetchPolicy="cache-and-network"
+                                            (!signUp && !(week === 5 && hour <= 5) && status !== "0") && (
+                                                <Query
+                                                    query={GET_LOVEMATCH}
+                                                    fetchPolicy="cache-and-network"
                                                 >
                                                     {
                                                         ({ loading, error, data }) => {
                                                             if (loading) return <Spinner />
                                                             if (error) return <Text>{errorMessage(error)}</Text>
                                                             let person
-                                                            if(me.gender === "male"){
-                                                                person = data.loveMatch.woman
-                                                            }else{
-                                                                person = data.loveMatch.man
+                                                            if(data.loveMatch){
+                                                                if (me.gender === "male" ) {
+                                                                    person = data.loveMatch.woman
+                                                                } else {
+                                                                    person = data.loveMatch.man
+                                                                }
                                                             }
-                                                            if(person){
-                                                                const url = person.avatar?person.avatar.url:defaultAvatar
-                                                            const name = person.name
-                                                            const height = person.loveSetting.myHeight
-                                                            const weight = person.loveSetting.myWeight
-                                                            const matcherId = person.id
-                                                            return (
+                                                            if (person) {
+                                                                const url = person.avatar ? person.avatar.url : defaultAvatar
+                                                                const name = person.name
+                                                                const height = person.loveSetting.myHeight
+                                                                const weight = person.loveSetting.myWeight
+                                                                const matcherId = person.id
+                                                                return (
                                                                     <List>
                                                                         <ListItem>
                                                                             <Text>见面时间：{data.loveMatch.woman.loveSetting.dateTime}</Text>
@@ -263,9 +274,9 @@ export default class FallInLove extends Component {
                                                                         <ListItem>
                                                                             <Text>见面地点：{data.loveMatch.woman.loveSetting.datePlace}</Text>
                                                                         </ListItem>
-                                                                        <ListItem 
-                                                                        onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
-                                                                        thumbnail>
+                                                                        <ListItem
+                                                                            onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
+                                                                            thumbnail>
                                                                             <Left>
                                                                                 <Thumbnail square source={{ uri: url }} />
                                                                             </Left>
@@ -274,23 +285,24 @@ export default class FallInLove extends Component {
                                                                                 <Text note numberOfLines={1}>{`身高：${height}cm 体重：${weight}公斤`}</Text>
                                                                             </Body>
                                                                             <Right>
-                                                                                <Button 
-                                                                                onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
-                                                                                transparent>
+                                                                                <Button
+                                                                                    onPress={() => this.props.navigation.navigate('UserProfile', { id: matcherId, me })}
+                                                                                    transparent>
                                                                                     <Text>查看</Text>
                                                                                 </Button>
                                                                             </Right>
                                                                         </ListItem>
                                                                     </List>
                                                                 )
-                                                            }else{
-                                                                return(
+                                                            } else {
+                                                                return (
                                                                     <ListItem>
-                                                                        <Text>本次未能匹配成功！下周一再报名试一下吧。办理会员后可以为你优先匹配，会员等级越高，匹配优先级越高。</Text>
+                                                                        <Text>本次未能匹配成功！下周一再报名试一下吧。放宽要求条件或办理会员可以提高匹配成功率。
+                                                                            会员等级越高，匹配成功率越高。</Text>
                                                                     </ListItem>
                                                                 )
                                                             }
-                                                            
+
                                                         }
                                                     }
                                                 </Query>

@@ -8,6 +8,8 @@ import {headerBackgroundColor,headerFontColor,statusBarHeight,headerButtonColor}
 class Applicants extends Component {
   render() {
     const applicants = this.props.navigation.getParam('applicants',[])
+    const provinceName = this.props.navigation.getParam('provinceName',"")
+    const subjectName = this.props.navigation.getParam('subjectName',"")
     const sortedApplicants = applicants.sort((a,b)=>parseFloat(b.exam.culscore)-parseFloat(a.exam.culscore))
     const hasPro = (applicants.filter(applicant=>applicant.exam.proscore!==0)).length>0
     return (
@@ -22,7 +24,7 @@ class Applicants extends Component {
             </Button>
             </Left>
           <Body>
-            <Title >报考者详情</Title>
+            <Title >{`${provinceName}${subjectName}报考者`}</Title>
           </Body>
           <Right />
           </Header>
