@@ -15,6 +15,7 @@
     "apollo-link-context": "^1.0.10",
     "apollo-link-error": "^1.1.2",
     "apollo-link-http": "^1.5.7",
+    "apollo-link-persisted-queries": "^0.2.2",
     "apollo-link-retry": "^2.2.10",
     "apollo-link-state": "^0.4.2",
     "apollo-link-ws": "^1.0.10",

@@ -1,13 +1,13 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache ,IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
+import { HttpLink,createHttpLink } from 'apollo-link-http';
+import { createPersistedQueryLink } from "apollo-link-persisted-queries";
 import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
-import { ApolloLink, Observable  } from 'apollo-link';
+import { ApolloLink, Observable ,split } from 'apollo-link';
 import { RetryLink } from "apollo-link-retry";
 import { ApolloProvider } from 'react-apollo'
 import { SecureStore } from 'expo'
-import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { setContext } from 'apollo-link-context'
@@ -77,10 +77,18 @@ const requestLink = new ApolloLink((operation, forward) =>
 );
 
 // Create an http link:
-const httpLink = new HttpLink({
+// const httpLink = new HttpLink({
+//   uri: host,
+//   credentials: 'include'
+// });
+
+const httpLink = createPersistedQueryLink(
+  {useGETForHashedQueries: true}
+).concat(createHttpLink({ 
   uri: host,
   credentials: 'include'
-});
+}));
+
 
 // Create a WebSocket link:
 export const wsClient = new SubscriptionClient(ws, {

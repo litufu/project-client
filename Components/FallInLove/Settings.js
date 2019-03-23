@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableHighlight, Alert } from 'react-native'
+import { TouchableHighlight, Alert ,StyleSheet} from 'react-native'
 import { Mutation, Query } from 'react-apollo'
 import {
     Container,
@@ -90,10 +90,10 @@ export default class Trade extends Component {
                         <Text>要求对方的条件</Text>
                     </ListItem>
                     <ListItem style={{flex:1}} >
-                        <Left>
+                        <Left style={styles.left}>
                             <Text>身高</Text>
                         </Left>
-                        <Right style={{flex:0.4}}>
+                        <Right style={styles.right}>
                             <TouchableHighlight
                                 onPress={() => this.setState({ display: "otherHeight" })}
                             >
@@ -104,10 +104,10 @@ export default class Trade extends Component {
                         </Right>
                     </ListItem>
                     <ListItem>
-                        <Left>
+                        <Left style={styles.left}>
                             <Text>体重</Text>
                         </Left>
-                        <Right>
+                        <Right style={styles.right}>
                             <TouchableHighlight
                                 onPress={() => this.setState({ display: "otherWeight" })}
                             >
@@ -118,10 +118,10 @@ export default class Trade extends Component {
                         </Right>
                     </ListItem>
                     <ListItem>
-                        <Left>
-                            <Text>年龄</Text>
+                        <Left style={styles.left}>
+                            <Text >年龄</Text>
                         </Left>
-                        <Right>
+                        <Right style={styles.right}>
                             <TouchableHighlight
                                 onPress={() => this.setState({ display: "otherAge" })}
                             >
@@ -206,10 +206,10 @@ export default class Trade extends Component {
                         </Right>
                     </ListItem>
                     <ListItem>
-                        <Left>
+                        <Left style={styles.left}>
                             <Text>到期时间</Text>
                         </Left>
-                        <Right>
+                        <Right style={styles.right}>
                             <Text>
                                 {memeberGradeEndTime ? new Date(memeberGradeEndTime).toLocaleDateString():"永久有效"}
                             </Text>
@@ -605,3 +605,8 @@ export default class Trade extends Component {
     }
 }
 
+
+const styles = StyleSheet.create({
+    left:{flex:0.5},
+    right:{flex:0.5},
+})
