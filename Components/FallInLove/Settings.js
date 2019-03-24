@@ -229,6 +229,7 @@ export default class Trade extends Component {
                         placeholder="请输入你的身高,单位为厘米"
                         value={this.state.myHeight}
                         onChangeText={text => this.setState({ myHeight: text })}
+                        keyboardType="numeric"
                     />
                 </Item>
             </Form>
@@ -260,6 +261,7 @@ export default class Trade extends Component {
                     placeholder="请输入你的体重,单位为公斤"
                     value={this.state.myWeight}
                     onChangeText={text => this.setState({ myWeight: text })}
+                    keyboardType="numeric"
                 />
             </Item>
 
@@ -289,6 +291,7 @@ export default class Trade extends Component {
                     placeholder="输入数字，单位厘米"
                     value={this.state.otherHeightMin}
                     onChangeText={text => this.setState({ otherHeightMin: text })}
+                    keyboardType="numeric"
                 />
             </Item>
             <Item stackedLabel>
@@ -297,6 +300,7 @@ export default class Trade extends Component {
                     placeholder="输入数字，单位厘米"
                     value={this.state.otherHeightMax}
                     onChangeText={text => this.setState({ otherHeightMax: text })}
+                    keyboardType="numeric"
                 />
             </Item>
 
@@ -330,6 +334,7 @@ export default class Trade extends Component {
                     placeholder="输入数字，单位公斤"
                     value={this.state.otherWeightMin}
                     onChangeText={text => this.setState({ otherWeightMin: text })}
+                    keyboardType="numeric"
                 />
             </Item>
 
@@ -339,6 +344,7 @@ export default class Trade extends Component {
                     placeholder="输入数字，单位公斤"
                     value={this.state.otherWeightMax}
                     onChangeText={text => this.setState({ otherWeightMax: text })}
+                    keyboardType="numeric"
                 />
             </Item>
 
@@ -372,6 +378,7 @@ export default class Trade extends Component {
                     placeholder="输入数字"
                     value={this.state.otherAgeMin}
                     onChangeText={text => this.setState({ otherAgeMin: text })}
+                    keyboardType="numeric"
                 />
             </Item>
             <Item stackedLabel>
@@ -380,6 +387,7 @@ export default class Trade extends Component {
                     placeholder="输入数字"
                     value={this.state.otherAgeMax}
                     onChangeText={text => this.setState({ otherAgeMax: text })}
+                    keyboardType="numeric"
                 />
             </Item>
 

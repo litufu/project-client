@@ -95,7 +95,7 @@ export default class Info extends Component {
       return false
     }
     if (!placeCode.village || !residenceCode.village) {
-      Alert.alert('未选择出生地或所在地村或居委会',JSON.stringify(placeCode))
+      Alert.alert('未选择出生地或所在地村或居委会')
       return false
     }
     return true

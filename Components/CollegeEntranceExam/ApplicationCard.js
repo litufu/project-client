@@ -76,6 +76,9 @@ export default class ApplicationCard extends Component {
                         ? (
                             <CardItem
                                 footer
+                                style={{
+                                    flex:1,
+                                }}
                             >
                                 <Left style={styles.left}>
                                     <Button
@@ -143,14 +146,16 @@ export default class ApplicationCard extends Component {
 const styles = StyleSheet.create({
     left: {
         flex: 0.5,
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
     },
     right: {
         flex: 0.5,
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
     },
     body:{
         flex: 0.5,
+        alignItems: 'center',
+        marginLeft:20,
     },
     text: {
         fontWeight: 'bold',

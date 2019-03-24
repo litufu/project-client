@@ -59,7 +59,6 @@ class ExamBasicInfo extends React.Component {
          */
         const regex = /^\d{14}$/
         if(!regex.test(examineeCardNumber)){
-            console.log('准考证号长度错误')
             return false
         }
         // 检查前2位
@@ -68,7 +67,6 @@ class ExamBasicInfo extends React.Component {
         const actualFirstTwo = examineeCardNumber.slice(0,2)
        
         if(firstTwo!==actualFirstTwo){
-            console.log('前两位错误')
             return false
         }
         // 检查3-4位
@@ -77,7 +75,6 @@ class ExamBasicInfo extends React.Component {
         const actualSecondTwo = examineeCardNumber.slice(2,4)
   
         if(secondTwo!==actualSecondTwo){
-            console.log('34位错误')
            return false     
         }
         // 检查5-8位
@@ -86,7 +83,6 @@ class ExamBasicInfo extends React.Component {
             const highschoolAreaCode = data.me.studies.filter(study=>study.school.kind==="HighSchool").sort((a,b)=>new Date(b.startTime) - new Date(a.startTime))[0].school.location.area.code
             if(actualSecondTwo===highschoolAreaCode.slice(0,2)){
                 if(examineeCardNumber.slice(4,8) !== highschoolAreaCode.slice(2,6)){
-                    console.log('58位错误')
                     return false
                 }
             }
@@ -113,7 +109,7 @@ class ExamBasicInfo extends React.Component {
         }
 
         if(!this._checkExamineeCardNumber(examineeCardNumber)){
-            Alert.alert('请检查你输入的准考证号是否正确')
+            Alert.alert('请检查你输入的准考证号是否正确,是否与填写的高中信息相符')
             return
         }
 
@@ -137,6 +133,11 @@ class ExamBasicInfo extends React.Component {
                 cache.writeQuery({
                     query: GET_EXAMBASICINFO,
                     data: { getExamBasicInfo: data.addExamBasicInfo }
+                });
+                const {me} = cache.readQuery({ query:GET_ME });
+                cache.writeQuery({
+                    query: GET_ME,
+                    data: { me: {...me,exam:data.addExamBasicInfo} }
                 });
             }
         })
@@ -173,6 +174,11 @@ class ExamBasicInfo extends React.Component {
                 cache.writeQuery({
                     query: GET_EXAMBASICINFO,
                     data: { getExamBasicInfo: data.updateExamBasicInfo }
+                });
+                const {me} = cache.readQuery({ query:GET_ME });
+                cache.writeQuery({
+                    query: GET_ME,
+                    data: { me: {...me,exam:data.updateExamBasicInfo} }
                 });
             }
         })
