@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 
-import USER_FRAGMENT from './user.fragment'
+import SCHOOLEDU_FRAGMENT from './schooledu.fragment'
+import EXAMBASICINFO_FRAGMENT from './exam_basicInfo.fragment'
 
 const GET_REGSTATUSAPPLICANTS = gql`
 query GetRegStatusApplicants(
@@ -13,10 +14,18 @@ query GetRegStatusApplicants(
         universityId:$universityId,
         majorId:$majorId
         ) {
-      ... UserFragment
+          id
+          name
+          studies{
+            ...SchoolEduFragment
+          }
+          exam{
+            ...ExamBasicInfoFragment
+          }
     }
   }
-  ${USER_FRAGMENT}
+  ${SCHOOLEDU_FRAGMENT}
+  ${EXAMBASICINFO_FRAGMENT}
 `;
 
 export default GET_REGSTATUSAPPLICANTS;
