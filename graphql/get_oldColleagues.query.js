@@ -1,7 +1,5 @@
 import gql from "graphql-tag";
 
-import USER_FRAGMENT from './user.fragment'
-
 const GET_OLDCOLLEAGUES = gql`
 query OldColleagues(
     $startTime: String!,
@@ -13,10 +11,41 @@ oldColleagues(
     endTime: $endTime,
     companyId: $companyId,
         ) {
-      ... UserFragment
+          id
+          name
+          username
+          birthday
+          gender
+          avatar{
+              id
+              name
+              url
+          }
+          birthplace{
+              id
+              name
+          }
+          residence{
+              id
+              name
+          }
+          studies{
+              id
+              school{
+                  id
+                  kind
+                  name
+              }
+          }
+          works{
+              id
+              company{
+                  id
+                  name
+              }
+          }
     }
   }
-  ${USER_FRAGMENT}
 `;
 
 export default GET_OLDCOLLEAGUES;

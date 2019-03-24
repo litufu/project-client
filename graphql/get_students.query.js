@@ -4,10 +4,41 @@ import USER_FRAGMENT from './user.fragment'
 const GET_STUDENTS = gql`
   query Students($schoolEduId: String!) {
     students(schoolEduId: $schoolEduId) {
-      ...UserFragment   
+          id
+          name
+          username
+          birthday
+          gender
+          avatar{
+              id
+              name
+              url
+          }
+          birthplace{
+              id
+              name
+          }
+          residence{
+              id
+              name
+          }
+          studies{
+              id
+              school{
+                  id
+                  kind
+                  name
+              }
+          }
+          works{
+              id
+              company{
+                  id
+                  name
+              }
+          }
       }
   }
-  ${USER_FRAGMENT}
 `;
 
 export default GET_STUDENTS;
