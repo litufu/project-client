@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import  {Query} from 'react-apollo'
 import { 
     Container,
      Header, 
@@ -12,9 +13,12 @@ import {
      Button,
      ListItem, 
      List,
-     
-
+     Spinner,
 } from 'native-base';
+
+import {errorMessage} from '../../utils/tools'
+import GET_ME from '../../graphql/get_me.query'
+import GET_KEFU from '../../graphql/get_kefu.query'
 
 export default class Help extends Component {
     render(){
@@ -42,6 +46,33 @@ export default class Help extends Component {
                         </Left>
                         <Text>kefu@gewu.org.cn</Text>
                     </ListItem>
+                    <Query query={GET_ME}>
+                    {
+                        ({loading,error,data})=>{
+                            if(loading) return <Spinner/>
+                            if(error) return <Text>{errorMessage(error)}</Text>
+                            const me = data.me
+                            return(
+                                <Query query={GET_KEFU}>
+                                {
+                                    ({loading,error,data})=>{
+                                        if(loading) return <Spinner/>
+                                        if(error) return <Text>{errorMessage(error)}</Text>
+                                        const kefu = data.kefu
+                                        return(
+                                            <ListItem
+                                                onPress={()=>this.props.navigation.navigate('Chat',{user:kefu,me})}
+                                            >
+                                                <Text>在线客服</Text>
+                                            </ListItem>
+                                        )
+                                    }
+                                }
+                                    </Query>
+                            )
+                        }
+                    }
+                    </Query>
                 </List>
                 </Content>
                 </Container>
