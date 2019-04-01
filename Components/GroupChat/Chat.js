@@ -51,9 +51,6 @@ export default class Chat extends Component {
         this._isMounted = false;
     }
 
-   
-
-
     renderSend(props) {
         return (
             <Send
@@ -205,6 +202,17 @@ export default class Chat extends Component {
                     data.me.regStatus.messages.push({ ...newMessage })
                     // Write our data back to the cache.
                     cache.writeQuery({ query: GET_ME, data });
+                } else if (type === "Activity") {
+                    data.me.activities.map(g => {
+                        if (g.id === group.id) {
+                            g.messages.push({ ...newMessage })
+                            return g
+                        }
+                        return g
+                    })
+                    // Write our data back to the cache.
+                    cache.writeQuery({ query: GET_ME, data });
+                    storeMessage(`${data.me.id}Activity${newMessage.to}`, newMessage)
                 }
             }
         })
@@ -266,6 +274,19 @@ export default class Chat extends Component {
             client.writeQuery({ query: GET_ME, data });
         }else if(type==="FellowTownsman"){
             data.me.locationGroups.map(g => {
+                if (g.id === group.id) {
+                    if(g.messages.length<=messagesLenth){
+                        return g
+                    }
+                    const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
+                    return newGroup
+                }
+                return g
+            })
+            // Write our data back to the cache.
+            client.writeQuery({ query: GET_ME, data });
+        }else if(type==="Activity"){
+            data.me.activities.map(g => {
                 if (g.id === group.id) {
                     if(g.messages.length<=messagesLenth){
                         return g

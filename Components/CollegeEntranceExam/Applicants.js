@@ -60,7 +60,7 @@ class Applicants extends Component {
                 onPress={()=>this.props.navigation.navigate('UserProfile',{id:applicant.id})}
                 >
                   <Left  style={styles.left}>
-                    <Text>{`${index+1}、${applicant.name}`}</Text>
+                    <Text>{`${index+1}.${applicant.name}`}</Text>
                   </Left>
                   
                     {

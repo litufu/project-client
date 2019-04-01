@@ -83,6 +83,15 @@ export default class Home extends React.Component {
         this.props.navigation.navigate('FoundTeam', { data })
     }
 
+    _activity=(data)=>{
+        if (!(data.me.families && data.me.families.length !== 0 && data.me.families.filter(family => family.status === '3').length !== 0)) {
+            Alert.alert('提示', '请先在“设置-家庭成员”的界面添加家庭成员，并至少与一人连接.')
+            return
+        }
+
+        this.props.navigation.navigate('Activity', { data })
+    }
+
     _renderContent=()=>(
         <Content>
             <List>
@@ -114,6 +123,13 @@ export default class Home extends React.Component {
                                             color="#3385ff"
                                             handlePress={() => this._FoundTeam(data)}
                                             name="创业组团"
+                                        />
+                                        <MyIcon
+                                            iconName={loading ? 'spinner' : 'delicious'}
+                                            iconType='font-awesome'
+                                            color="#3385ff"
+                                            handlePress={() => this._activity(data)}
+                                            name="同城活动"
                                         />
                                     </ListItem>)
                             }

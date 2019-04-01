@@ -13,7 +13,7 @@ export default class QueryMessages extends Component {
     }
 
     async componentDidMount(){
-        const storageMessages = await retrieveMessages(`${this.props.me.id}${this.props.group.type}${this.props.group.id}`)
+        const storageMessages = await retrieveMessages(`${this.props.me.id}${this.props.type}${this.props.group.id}`)
         if(storageMessages){
             this.setState({storageMessages:JSON.parse(storageMessages)})
         }
@@ -21,9 +21,9 @@ export default class QueryMessages extends Component {
 
     _getNewMessages = (group) => {
         let newMessages
-        newMessages = group.messages.sort(
+        newMessages = group ? group.messages.sort(
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
-        )
+        ) :[]
         const storageMessages = this.state.storageMessages
         if(newMessages.length===0) {
             newMessages=storageMessages

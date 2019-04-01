@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Alert} from 'react-native'
 import  {Query} from 'react-apollo'
 import { 
     Container,
@@ -61,7 +62,13 @@ export default class Help extends Component {
                                         const kefu = data.kefu
                                         return(
                                             <ListItem
-                                                onPress={()=>this.props.navigation.navigate('Chat',{user:kefu,me})}
+                                                onPress={()=>{
+                                                    if(kefu){
+                                                        this.props.navigation.navigate('Chat',{user:kefu,me})
+                                                    }else{
+                                                        Alert.alert('客服不在线')
+                                                    }
+                                                }}
                                             >
                                                 <Text>在线客服</Text>
                                             </ListItem>

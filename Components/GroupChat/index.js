@@ -17,6 +17,9 @@ export default class Chat extends Component {
             <Query query={GET_ME}>
                 {
                     ({ loading, error, data }) => {
+                        if (loading) return <Spinner />
+                        if (error) return <Text>{errorMessage(error)}</Text>
+
                         let newGroup
                         if (type === 'Family') {
                             newGroup = data.me.relativefamilyGroups.filter(g => g.id === group.id)[0]
@@ -28,9 +31,10 @@ export default class Chat extends Component {
                             newGroup = data.me.locationGroups.filter(g => g.id === group.id)[0]
                         } else if (type === "RegStatus") {
                             newGroup = data.me.regStatus
+                        } else if (type === "Activity") {
+                            newGroup = data.me.activities.filter(g=>g.id === group.id)[0]
                         }
-                        if (loading) return <Spinner />
-                        if (error) return <Text>{errorMessage(error)}</Text>
+                   
                         return (
                             <UnReadMessage
                                 me={data.me}

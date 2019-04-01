@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Alert } from 'react-native'
+import { StyleSheet, Alert,TouchableHighlight } from 'react-native'
 import { Mutation } from 'react-apollo'
 import { Content, Left, Right, Card, CardItem, Text, Body, Button, Spinner } from "native-base";
 
@@ -81,18 +81,18 @@ export default class ApplicationCard extends Component {
                                 }}
                             >
                                 <Left style={styles.left}>
-                                    <Button
+                                    <TouchableHighlight
                                         onPress={this.props.handleToApplicants}
                                     >
-                                        <Text  >本省报考者</Text>
-                                    </Button>
+                                        <Text  style={{color:"blue"}}>本省报考者</Text>
+                                    </TouchableHighlight>
                                 </Left>
                                 <Body style={styles.body}>
-                                    <Button
+                                    <TouchableHighlight
                                         onPress={this.props.handleToChat}
                                     >
-                                        <Text>全国群聊</Text>
-                                    </Button>
+                                        <Text style={{color:"blue"}}>全国群聊</Text>
+                                    </TouchableHighlight>
                                 </Body>
                                 <Right style={styles.right}>
                                     <Mutation 
@@ -109,11 +109,11 @@ export default class ApplicationCard extends Component {
                                         {
                                             (cancelRegStatus, { loading, error }) => {
                                                 return (
-                                                    <Button
+                                                    <TouchableHighlight
                                                         onPress={() => this.handleCancel(cancelRegStatus)}
                                                     >
-                                                        <Text>{`取消报名${loading ? "...":""}`} </Text>
-                                                    </Button>
+                                                        <Text style={{color:"blue"}}>{`取消报名${loading ? "...":""}`} </Text>
+                                                    </TouchableHighlight>
 
                                                 )
                                             }

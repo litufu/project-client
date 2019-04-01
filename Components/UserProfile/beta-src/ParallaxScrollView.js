@@ -78,15 +78,15 @@ export default class ParallaxScrollView extends Component {
                   if (data) {
                     const xhr = new XMLHttpRequest()
                     xhr.open('PUT', data.postPhoto.url)
-                    xhr.onreadystatechange = function () {
-                      if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                          console.log('Image successfully uploaded to oss')
-                        } else {
-                          console.log('Error while sending the image to oss')
-                        }
-                      }
-                    }
+                    // xhr.onreadystatechange = function () {
+                    //   if (xhr.readyState === 4) {
+                    //     if (xhr.status === 200) {
+                    //       console.log('Image successfully uploaded to oss')
+                    //     } else {
+                    //       console.log('Error while sending the image to oss')
+                    //     }
+                    //   }
+                    // }
                     xhr.setRequestHeader('Content-Type', 'image/jpeg')
                     xhr.send({ uri: this.state.image, type: 'image/jpeg', name: data.postPhoto.name })
                   }

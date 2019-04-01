@@ -130,8 +130,6 @@ export default class FallInLove extends Component {
         } else {
             signUp = true
         }
-        console.log(now)
-        console.log(DateStartTime)
         const phase = parseInt(`${(now.getTime() - DateStartTime.getTime()) / 1000 / 60 / 60 / 24 / 7}`) + 1
         const hour = now.getHours()
         return (

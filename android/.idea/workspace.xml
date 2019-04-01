@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="605bedf2-46cd-4864-a10b-c51039045598" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/Applicants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/Applicants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ApplicationCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ApplicationCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/FallInLove/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/FallInLove/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/GroupChat/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/GroupChat/Chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/GroupChat/QueryMessages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/GroupChat/QueryMessages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/GroupChat/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/GroupChat/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Components/Help/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Help/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/MyDatetime/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/MyDatetime/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Navigation/AppNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Navigation/AppNavigator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../assets/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apollo/resolvers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../apollo/resolvers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graphql/user.fragment.js" beforeDir="false" afterPath="$PROJECT_DIR$/../graphql/user.fragment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/MyHome/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/MyHome/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../utils/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/settings.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,44 +43,58 @@
     <session id="-1836258901">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="26" />
           <entry key="project.open.time.106" value="2" />
           <entry key="project.open.time.121" value="1" />
           <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.140" value="1" />
           <entry key="project.open.time.148" value="1" />
+          <entry key="project.open.time.203" value="1" />
+          <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.39" value="2" />
+          <entry key="project.open.time.41" value="1" />
+          <entry key="project.open.time.42" value="1" />
+          <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.46" value="2" />
-          <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.47" value="2" />
+          <entry key="project.open.time.48" value="2" />
           <entry key="project.open.time.53" value="1" />
-          <entry key="project.open.time.54" value="1" />
+          <entry key="project.open.time.54" value="3" />
           <entry key="project.open.time.55" value="1" />
           <entry key="project.open.time.56" value="1" />
           <entry key="project.open.time.62" value="1" />
           <entry key="project.open.time.65" value="1" />
           <entry key="project.open.time.70" value="1" />
+          <entry key="project.open.time.72" value="1" />
           <entry key="project.open.time.81" value="1" />
           <entry key="project.open.time.90" value="1" />
+          <entry key="project.open.time.93" value="1" />
           <entry key="project.open.time.98" value="1" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="6" />
+          <entry key="java" value="9" />
+          <entry key="png" value="1" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="6" />
+          <entry key="Image" value="1" />
+          <entry key="JAVA" value="9" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2" />
+          <entry key="java" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2" />
+          <entry key="JAVA" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -113,6 +141,7 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -143,7 +172,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -243,11 +271,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.058981232" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.101876676" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -261,13 +289,14 @@
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.22978723" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.2141844" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.3297587" />
     </layout>
     <layout-to-restore>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
@@ -302,6 +331,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="24" column="54" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/host/exp/exponent/MainApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>

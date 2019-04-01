@@ -53,7 +53,6 @@ export const resolvers = {
       addNewUnReadMessages:(_, { type,id,lastMessageId }, { cache }) => {
 
         const previous = cache.readQuery({ query: GET_NEWUNREADMESSAGES });
-        console.log(previous)
         // 检查是否存在，存在更新，不存在新增
         const isExist = previous.newUnreadMessages.filter(unReadMessage=>{
           if(unReadMessage.type===type && unReadMessage.typeId===id){
@@ -102,7 +101,6 @@ export const resolvers = {
             grade:grade,
             className:className
           };
-        console.log(newGradeAndClass)
         const data = {
           newGradeAndClasses: previous.newGradeAndClasses.concat([newGradeAndClass]),
         };

@@ -22,7 +22,7 @@ export default class MyDatetime extends Component {
   render () {
     const {chosenDate} = this.state
     const {showtime} = this.props
-    const formatDate = showtime ? dateFormat(chosenDate, "yyyy年mm月dd日h时") : dateFormat(chosenDate, "yyyy年mm月dd日")
+    const formatDate = showtime ? dateFormat(chosenDate, "yyyy年mm月dd日HH时MM分") : dateFormat(chosenDate, "yyyy年mm月dd日")
     let date
     if(chosenDate===''){
       date = '请选择'

@@ -15,6 +15,15 @@ export const checkNum = (str)=>{
     }
   return true
 }
+export const checkCnEnNum=(name)=>{
+  // 检查中文英文和数字
+  const rxName =/^[a-zA-Z0-9\u4E00-\u9FA5\uf900-\ufa2d·s]+$/
+  if(!rxName.test(name)){
+    return false
+  }
+  return true
+}
+
 export const grades = { 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六', 7: '七', 8: '八', 9: '九', 10: '十' }  
 export const educations = {
   "PrimarySchool":"初等教育-小学",

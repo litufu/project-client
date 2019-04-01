@@ -47,6 +47,14 @@ import FoundTeam from '../Components/FoundTeam'
 import SkillSetting  from '../Components/FoundTeam/SkillSetting'
 import AddPartner from '../Components/FoundTeam/AddPartner'
 import ProjectIntroduce from '../Components/FoundTeam/ProjectIntroduce'
+// 5、一起玩耍
+import Activity from '../Components/Activity'
+import ActivityDetail from '../Components/Activity/ActivityDetail'
+import ActivityList from '../Components/Activity/ActivityList'
+import CreateActivity from '../Components/Activity/CreateActivity'
+import MyActivities from '../Components/Activity/MyActivities'
+import ActivityRules from '../Components/Activity/ActivityRules'
+import Members from '../Components/Activity/Members'
 
 // 引入group
 import FamilyGroup from '../Components/Groups/FamilyGroup'
@@ -152,8 +160,28 @@ const HomeNavigation = createStackNavigator(
         },
         ProjectIntroduce:{
             screen: ProjectIntroduce,
+        },
+        Activity:{
+            screen:Activity,
+        },
+        ActivityDetail:{
+            screen:ActivityDetail,
+        },
+        ActivityList:{
+            screen:ActivityList,
+        },
+        CreateActivity:{
+            screen:CreateActivity,
+        },
+        MyActivities:{
+            screen:MyActivities,
+        },
+        ActivityRules:{
+            screen:ActivityRules,
+        },
+        Members:{
+            screen:Members,
         }
-
     },
     {
         initialRouteName: "Home",
@@ -718,6 +746,22 @@ class AppWithNavigationState extends Component {
                             }
 
                             return prev
+                        }else if (newMessage.type === 'Activity') {
+                            const index = prev.me.activities.map(group => group.id).indexOf(newMessage.to)
+                            const result = update(prev, {
+                                me: {
+                                    activities: activities =>
+                                        update(activities || [], {
+                                            [index]: group =>
+                                                update(group || {}, {
+                                                    messages: messages => update(messages || [], { $push: [newMessage] })
+                                                })
+                                        })
+                                }
+
+                            });
+                            storeMessage(`Activity${newMessage.to}`, newMessage)
+                            return result
                         }
                     },
                 });
