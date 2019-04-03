@@ -54,7 +54,7 @@ export default class ApplicationCard extends Component {
                     </Left>
                     <Right style={styles.right}>
                         <Text>已报考人数:
-                                <Text style={{ color: 'blue', fontWeight: 'bold' }}>{personNum}</Text>
+                                <Text style={{fontWeight: 'bold' }}>{personNum}</Text>
                         </Text>
                     </Right>
                 </CardItem>
@@ -62,12 +62,12 @@ export default class ApplicationCard extends Component {
                 <CardItem bordered>
                     <Left style={styles.left} >
                         <Text>文化最低分:
-                                <Text style={{ color: 'blue', fontWeight: 'bold' }}>{lowwestScore}</Text>
+                                <Text style={{  fontWeight: 'bold' }}>{lowwestScore}</Text>
                         </Text>
                     </Left>
                     <Right style={styles.right}>
                         <Text>专业最低分:
-                                <Text style={{ color: 'blue', fontWeight: 'bold' }}>{proLowwestScore}</Text>
+                                <Text style={{ fontWeight: 'bold' }}>{proLowwestScore}</Text>
                         </Text>
                     </Right>
                 </CardItem>

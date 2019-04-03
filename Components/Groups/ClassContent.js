@@ -36,7 +36,9 @@ class ClassContent extends Component {
     const me = this.props.navigation.getParam('me', '')
     const classGroups = this.props.navigation.getParam('classGroups', '')
     // 我在该班级的所有组（包括已经加入的和正准备加入的组)
+    console.log('classGroups',classGroups)
     const newClassGroups = classGroups.filter(classGroup => classGroup.study.id === schoolEdu.id)
+    console.log('newClassGroups',newClassGroups)
     // 我已经确定加入的组
     const myClassGroups = this._getMyGroups(newClassGroups,me.id)
     const myClassGroup = myClassGroups.length>0 ?myClassGroups[0] :[]

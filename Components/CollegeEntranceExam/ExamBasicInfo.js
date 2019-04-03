@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View,  TextInput, Alert } from 'react-native'
+import { StyleSheet, View, TextInput, Alert } from 'react-native'
 import {
     Container,
     Header,
@@ -28,10 +28,10 @@ import { withNavigation } from 'react-navigation'
 import ADD_EXAMBASICINFO from '../../graphql/add_examBasicInfo.mutation'
 import UPDATE_EXAMBASICINFO from '../../graphql/update_examBasicInfo.mutation'
 import { errorMessage } from '../../utils/tools'
-import {sections,noSectionProvinces} from './settings'
+import { sections, noSectionProvinces } from './settings'
 import GET_EXAMBASICINFO from '../../graphql/get_exam_basicInfo.query'
 import GET_ME from '../../graphql/get_me.query'
-import {headerBackgroundColor,headerFontColor,statusBarHeight,headerButtonColor,provinces} from '../../utils/settings'
+import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor, provinces } from '../../utils/settings'
 
 class ExamBasicInfo extends React.Component {
 
@@ -44,10 +44,10 @@ class ExamBasicInfo extends React.Component {
         examineeCardNumber: this.props.examineeCardNumber || '',
         updateInfo: this.props.updateInfo || false,
         editable: this.props.updateInfo ? false : true,
-        times:this.props.times || 0
+        times: this.props.times || 0
     }
 
-    _checkExamineeCardNumber=(examineeCardNumber)=>{
+    _checkExamineeCardNumber = (examineeCardNumber) => {
         /**
          * 　　考生除了在省内有10位准考证号外，还有全国统一的14位考生号，有时在某些高校网站查询录取信息时，要求输入14位考号，其构成是：
             　　1、第·1、2位为年度代码：如2010年填写“10”;
@@ -58,43 +58,43 @@ class ExamBasicInfo extends React.Component {
             　　6、第·11、12、13、14位为考生顺序号。
          */
         const regex = /^\d{14}$/
-        if(!regex.test(examineeCardNumber)){
+        if (!regex.test(examineeCardNumber)) {
             return false
         }
         // 检查前2位
         const year = new Date().getFullYear().toString()
-        const firstTwo = year.slice(2,4)
-        const actualFirstTwo = examineeCardNumber.slice(0,2)
-       
-        if(firstTwo!==actualFirstTwo){
+        const firstTwo = year.slice(2, 4)
+        const actualFirstTwo = examineeCardNumber.slice(0, 2)
+
+        if (firstTwo !== actualFirstTwo) {
             return false
         }
         // 检查3-4位
 
         const secondTwo = this.state.province.toString()
-        const actualSecondTwo = examineeCardNumber.slice(2,4)
-  
-        if(secondTwo!==actualSecondTwo){
-           return false     
+        const actualSecondTwo = examineeCardNumber.slice(2, 4)
+
+        if (secondTwo !== actualSecondTwo) {
+            return false
         }
         // 检查5-8位
-        const data=this.props.data
-        if(data) {
-            const highschoolAreaCode = data.me.studies.filter(study=>study.school.kind==="HighSchool").sort((a,b)=>new Date(b.startTime) - new Date(a.startTime))[0].school.location.area.code
-            if(actualSecondTwo===highschoolAreaCode.slice(0,2)){
-                if(examineeCardNumber.slice(4,8) !== highschoolAreaCode.slice(2,6)){
+        const data = this.props.data
+        if (data) {
+            const highschoolAreaCode = data.me.studies.filter(study => study.school.kind === "HighSchool").sort((a, b) => new Date(b.startTime) - new Date(a.startTime))[0].school.location.area.code
+            if (actualSecondTwo === highschoolAreaCode.slice(0, 2)) {
+                if (examineeCardNumber.slice(4, 8) !== highschoolAreaCode.slice(2, 6)) {
                     return false
                 }
             }
             return true
         }
-        
+
 
     }
 
-    _checkScore=(score)=>{
+    _checkScore = (score) => {
         const pattern = /^[0-9]+(.[0-9]{1,2})?$/
-        if(pattern.test(score.toString())){
+        if (pattern.test(score.toString())) {
             return true
         }
         return false
@@ -103,22 +103,22 @@ class ExamBasicInfo extends React.Component {
     _confirm = (addExamBasicInfo) => {
         const { province, section, score, specialScore, examineeCardNumber } = this.state
 
-        if (~noSectionProvinces.indexOf(province) && section!=="none") {
+        if (~noSectionProvinces.indexOf(province) && section !== "none") {
             Alert.alert('请检查你的文理科是否选择正确')
             return
         }
 
-        if(!this._checkExamineeCardNumber(examineeCardNumber)){
+        if (!this._checkExamineeCardNumber(examineeCardNumber)) {
             Alert.alert('请检查你输入的准考证号是否正确,是否与填写的高中信息相符')
             return
         }
 
-        if(!this._checkScore(score)){
+        if (!this._checkScore(score)) {
             Alert.alert('请检查你输入的文化课分数是否正确')
             return
         }
 
-        if(!this._checkScore(specialScore)){
+        if (!this._checkScore(specialScore)) {
             Alert.alert('请检查你输入的专业课分数是否正确')
             return
         }
@@ -126,7 +126,7 @@ class ExamBasicInfo extends React.Component {
 
 
 
-        
+
         addExamBasicInfo({
             variables: { province: province.toString(), section, score, specialScore, examineeCardNumber },
             update: (cache, { data }) => {
@@ -134,36 +134,36 @@ class ExamBasicInfo extends React.Component {
                     query: GET_EXAMBASICINFO,
                     data: { getExamBasicInfo: data.addExamBasicInfo }
                 });
-                const {me} = cache.readQuery({ query:GET_ME });
+                const { me } = cache.readQuery({ query: GET_ME });
                 cache.writeQuery({
                     query: GET_ME,
-                    data: { me: {...me,exam:data.addExamBasicInfo} }
+                    data: { me: { ...me, exam: data.addExamBasicInfo } }
                 });
             }
         })
 
-        this.setState({updateInfo:true,editable:false})
+        this.setState({ updateInfo: true, editable: false })
     }
 
-    _update = (updateExamBasicInfo)=>{
+    _update = (updateExamBasicInfo) => {
         const { province, section, score, specialScore, examineeCardNumber } = this.state
         // 杭州和上海不分文理科
-        if (~noSectionProvinces.indexOf(province) && section!=="none") {
+        if (~noSectionProvinces.indexOf(province) && section !== "none") {
             Alert.alert('请检查你的文理科是否选择正确')
             return
         }
 
-        if(!this._checkExamineeCardNumber(examineeCardNumber)){
+        if (!this._checkExamineeCardNumber(examineeCardNumber)) {
             Alert.alert('请检查你输入的准考证号是否正确')
             return
         }
 
-        if(!this._checkScore(score)){
+        if (!this._checkScore(score)) {
             Alert.alert('请检查你输入的文化课分数是否正确')
             return
         }
 
-        if(!this._checkScore(specialScore)){
+        if (!this._checkScore(specialScore)) {
             Alert.alert('请检查你输入的专业课分数是否正确')
             return
         }
@@ -175,23 +175,23 @@ class ExamBasicInfo extends React.Component {
                     query: GET_EXAMBASICINFO,
                     data: { getExamBasicInfo: data.updateExamBasicInfo }
                 });
-                const {me} = cache.readQuery({ query:GET_ME });
+                const { me } = cache.readQuery({ query: GET_ME });
                 cache.writeQuery({
                     query: GET_ME,
-                    data: { me: {...me,exam:data.updateExamBasicInfo} }
+                    data: { me: { ...me, exam: data.updateExamBasicInfo } }
                 });
             }
         })
 
-        this.setState({editable:false})
+        this.setState({ editable: false })
     }
 
 
     render() {
-        const { province, section, score, specialScore, examineeCardNumber, hasSpecial, updateInfo, editable,times } = this.state
+        const { province, section, score, specialScore, examineeCardNumber, hasSpecial, updateInfo, editable, times } = this.state
         return (
             <Container >
-                <Header style={{marginTop:statusBarHeight}}>
+                <Header style={{ marginTop: statusBarHeight }}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon name='arrow-back' />
@@ -256,7 +256,7 @@ class ExamBasicInfo extends React.Component {
 
                             </Right>
                         </Item>
-                        
+
                         <Item
                             style={styles.item}
                         >
@@ -274,7 +274,7 @@ class ExamBasicInfo extends React.Component {
                                                 selectedValue={section}
                                                 onValueChange={(value) => this.setState({ section: value })}
                                             >
-                                            {sections.map(section => <Picker.Item key={section.key} label={section.value} value={section.key} />)}
+                                                {sections.map(section => <Picker.Item key={section.key} label={section.value} value={section.key} />)}
                                             </Picker>
                                         )
                                         : (
@@ -284,7 +284,7 @@ class ExamBasicInfo extends React.Component {
 
                             </Right>
                         </Item>
-                        
+
 
 
                         <Item
@@ -356,24 +356,24 @@ class ExamBasicInfo extends React.Component {
                         {
                             updateInfo
                                 ? (
-                                    times<3 && (<View style={styles.btnContainer}>
+                                    times < 3 && (<View style={styles.btnContainer}>
 
-                                       {!editable && <Button
+                                        {!editable && <Button
                                             block
-                                            style={{flex:1}}
-                                            onPress={()=>this.setState({editable:true})}
+                                            style={{ flex: 1 }}
+                                            onPress={() => this.setState({ editable: true })}
                                         >
-                                        <Text style={styles.bigText}>修改</Text>
+                                            <Text style={styles.bigText}>修改</Text>
                                         </Button>}
 
-                                        {editable && <Mutation 
-                                        mutation={UPDATE_EXAMBASICINFO}
-                                        onError={()=>Alert.alert(errorMessage(error))}
-                                        onCompleted={()=>Alert.alert('修改完成')}
+                                        {editable && <Mutation
+                                            mutation={UPDATE_EXAMBASICINFO}
+                                            onError={() => Alert.alert(errorMessage(error))}
+                                            onCompleted={() => Alert.alert('修改完成')}
                                         >
                                             {(updateExamBasicInfo, { data, loading, error }) => (
                                                 <Button
-                                                style={{flex:1}}
+                                                    style={{ flex: 1 }}
                                                     onPress={() => { this._update(updateExamBasicInfo) }}
                                                     block
                                                 >
@@ -385,20 +385,20 @@ class ExamBasicInfo extends React.Component {
                                     </View>)
                                 )
                                 : (
-                                    <Mutation 
-                                    mutation={ADD_EXAMBASICINFO}
-                                    onCompleted={()=>Alert.alert('保存完成')}
-                                    onError={()=>Alert.alert(errorMessage(error))}
+                                    <Mutation
+                                        mutation={ADD_EXAMBASICINFO}
+                                        onCompleted={() => Alert.alert('保存完成')}
+                                        onError={() => Alert.alert(errorMessage(error))}
                                     >
                                         {(addExamBasicInfo, { data, loading, error }) => (
-                                            <View style={{flex:1,marginHorizontal:30,padding:10}}>
-                                            <Button
-                                                onPress={() => { this._confirm(addExamBasicInfo) }}
-                                                block
-                                            >
-                                                <Text style={styles.bigText}>确定</Text>
-                                                {loading && <Spinner />}
-                                            </Button>
+                                            <View style={{ flex: 1, marginHorizontal: 30, padding: 10 }}>
+                                                <Button
+                                                    onPress={() => { this._confirm(addExamBasicInfo) }}
+                                                    block
+                                                >
+                                                    <Text style={styles.bigText}>确定</Text>
+                                                    {loading && <Spinner />}
+                                                </Button>
                                             </View>
                                         )}
                                     </Mutation>
@@ -406,13 +406,18 @@ class ExamBasicInfo extends React.Component {
                         }
                     </Form>
                 </Content>
-                <Footer style={{alignItems:"flex-start",backgroundColor:"white",height:100}}>
-                    <Text style={styles.bigText}>提示:高考基本信息有二次修改机会。
-                    建议首次填写平常考试分，
-                    第一次修改可以在高考完成后填写估算分，
-                    第二次修改可以在高考分数出来后填写准确分。
+                {
+                    !editable && (
+                        <Footer style={{ alignItems: "flex-start", backgroundColor: "white", height: 100 }}>
+                            <Text style={styles.bigText}>提示:高考基本信息有二次修改机会。
+                            建议首次填写平常考试分，
+                            第一次修改可以在高考完成后填写估算分，
+                            第二次修改可以在高考分数出来后填写准确分。
                     </Text>
-                </Footer>
+                        </Footer>
+                    )
+                }
+
             </Container>
         );
     }
@@ -429,18 +434,18 @@ const styles = StyleSheet.create({
     },
     input: {
         textAlign: 'right',
-        fontSize:17
+        fontSize: 17
     },
-    btnContainer:{
-        flex:1,
-        flexDirection:'row',
-        alignItems:'center',
-        padding:10,
-        paddingHorizontal:30,
+    btnContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        paddingHorizontal: 30,
 
     },
-    bigText:{
-        fontSize:17
+    bigText: {
+        fontSize: 17
     }
 
 })

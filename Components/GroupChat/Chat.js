@@ -14,7 +14,7 @@ import GET_ME from '../../graphql/get_me.query'
 import { storeMessage, retrieveMessages } from '../../utils/tools'
 import {messagesLenth} from '../../utils/settings'
 
-const skip = 2
+const skip = 20
 
 const styles = StyleSheet.create({
     container: { flex: 1 },

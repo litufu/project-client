@@ -177,7 +177,7 @@ export default class ClassList extends Component {
     const schoolEdu = this.props.navigation.getParam('schoolEdu')
     const schoolEduName = this.props.navigation.getParam('schoolEduName', '')
     const me = this.props.navigation.getParam('me', '')
-    const newClassGroups = this.props.navigation.getParam('classGroups', '')
+    const newClassGroups = this.props.navigation.getParam('newClassGroups', '')
     return (
       <Container>
         <Header style={{ marginTop: statusBarHeight, backgroundColor: headerBackgroundColor }}>

@@ -7,12 +7,12 @@ export const statusBarHeight = 0 // Constants.statusBarHeight
 export const defaultAvatar = 'http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg'
 export const defaultBackgroundImage = "http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/drops-of-water-578897__340.jpg"
 export const messagesLenth = 8   //  缓存中信息的长度
-const huawei = true
+const huawei = false
 export const DEV_HOST = "http://192.168.56.1:4000/graphql";
 export const PRO_HOST = huawei ? "http://119.3.232.209:4000/graphql": "http://118.31.21.228:4000/graphql"
 export const DEV_WSS = "ws://192.168.56.1:4000/graphql";
 export const PRO_WSS = huawei ? "ws://119.3.232.209:4000/graphql" :"ws://118.31.21.228:4000/graphql"
-export const Production = false
+export const Production = true
 export const DateStartTime =  new Date(2019,3,25)
 export const defaultAdvertisements=[
     {

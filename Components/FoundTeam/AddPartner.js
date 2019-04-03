@@ -53,7 +53,7 @@ export default class StackedLabelExample extends Component {
             {client => (
                 <Content>
                     <Item style={{ marginVertical: 10, flex: 1 }}>
-                        <Left style={{ flex: 0.8 }}>
+                        <Left style={{ flex: 0.7 }}>
                             <SearchInput
                                 style={{ width: 300, height: 40 }}
                                 placeholder="输入技能名称..."
@@ -61,7 +61,7 @@ export default class StackedLabelExample extends Component {
                                 value={this.state.search}
                             />
                         </Left>
-                        <Right style={{ flex: 0.2 }}>
+                        <Right style={{ flex: 0.3 }}>
                             <Button
                                 style={{ flex: 1, marginHorizontal: 10 }}
                                 onPress={
@@ -86,7 +86,7 @@ export default class StackedLabelExample extends Component {
                     {this.state.searchSkills.map((skill, index) => (
                         <ListItem key={index}>
                             <CheckBox
-                                onPress={() => this.setState({ skillName: skill.name, display: "addPartner" })}
+                                onPress={() => this.setState({ skillName: skill.name,search:"", display: "addPartner" })}
                             />
                             <Body>
                                 <Text>{skill.name}</Text>

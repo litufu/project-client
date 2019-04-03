@@ -9,7 +9,7 @@ import { errorMessage } from '../../utils/tools'
 
 
 const messageLength = 17
-export default class QueryMessages extends Component {
+export default class QueryGroupMessages extends Component {
 
     getGroupLastUnReadMessageId = (unReadeMessages, group, type) => {
         for (const unReadMessage of unReadeMessages) {
@@ -21,9 +21,11 @@ export default class QueryMessages extends Component {
     }
 
     getUnreadMessageNum = (lastUnreadMessageId, group) => {
-
+        const sortedMessages = group.messages.sort(
+            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+        )
         let count = 0
-        for (const message of group.messages) {
+        for (const message of sortedMessages) {
             if (message.id === lastUnreadMessageId) {
                 break
             }

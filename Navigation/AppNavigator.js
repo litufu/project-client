@@ -495,7 +495,6 @@ class AppWithNavigationState extends Component {
     componentWillReceiveProps(nextProps) {
         if (!nextProps.me) {
             //   如果新的props当中没有me，则取消订阅
-            console.log('取消订阅')
             if (this.messagesSubscription) {
                 this.messagesSubscription();
             }
@@ -523,12 +522,10 @@ class AppWithNavigationState extends Component {
             // clear the event subscription
             // 关闭连接
             if (this.reconnected) {
-                console.log('关闭连接')
                 this.reconnected();
             }
         } else if (!this.reconnected) {
             //   重新连接，检查数据完整性。
-            console.log('重新连接')
             this.reconnected = wsClient.onReconnected(() => {
                 this.props.refetch(); // check for any data lost during disconnect
             }, this);
@@ -541,17 +538,20 @@ class AppWithNavigationState extends Component {
                 this.familyGroupSubscription = subscribeToMore({
                     document: FAMILYGROUP_CHANGED_SUBSCRIPTION,
                     updateQuery: (prev) => {
-                        client.query({
-                            query: GET_FAMILYGROUPS,
-                            fetchPolicy: "network-only"
-                        }).then(({ data }) => {
-                            const newMe = {
-                                ...prev.me,
-                                relativefamilyGroups: data.getFamilyGroups
-                            }
-                            const result = { ...prev, me: newMe }
-                            return result
-                        });
+                        // client.query({
+                        //     query: GET_FAMILYGROUPS,
+                        //     fetchPolicy: "network-only"
+                        // }).then(({ data }) => {
+                        //     const newMe = {
+                        //         ...prev.me,
+                        //         relativefamilyGroups: data.getFamilyGroups
+                        //     }
+                        //     console.log('relativefamilyGroup-newMe',newMe)
+                        //     const result = { ...prev, me: newMe }
+                        //     return result
+                        // });
+                        this.props.refetch()
+                        return prev
                     },
                 });
             }
@@ -560,17 +560,19 @@ class AppWithNavigationState extends Component {
                 this.classGroupSubscription = subscribeToMore({
                     document: CLASSGROUP_CHANGED_SUBSCRIPTION,
                     updateQuery: (prev) => {
-                        client.query({
-                            query: GET_CLASSGROUPS,
-                            fetchPolicy: "network-only"
-                        }).then(({ data }) => {
-                            const newMe = {
-                                ...prev.me,
-                                classGroups: data.classGroups
-                            }
-                            const result = { ...prev, me: newMe }
-                            return result
-                        });
+                        // client.query({
+                        //     query: GET_CLASSGROUPS,
+                        //     fetchPolicy: "network-only"
+                        // }).then(({ data }) => {
+                        //     const newMe = {
+                        //         ...prev.me,
+                        //         classGroups: data.classGroups
+                        //     }
+                        //     const result = { ...prev, me: newMe }
+                        //     return result
+                        // });
+                        this.props.refetch()
+                        return prev
                     },
                 });
             }
@@ -579,17 +581,20 @@ class AppWithNavigationState extends Component {
                 this.workGroupSubscription = subscribeToMore({
                     document: WORKGROUP_CHANGED_SUBSCRIPTION,
                     updateQuery: (prev) => {
-                        client.query({
-                            query: GET_WORKGROUPS,
-                            fetchPolicy: "network-only"
-                        }).then(({ data }) => {
-                            const newMe = {
-                                ...prev.me,
-                                workGroups: data.workGroups
-                            }
-                            const result = { ...prev, me: newMe }
-                            return result
-                        });
+                        // client.query({
+                        //     query: GET_WORKGROUPS,
+                        //     fetchPolicy: "network-only"
+                        // }).then(({ data }) => {
+                        //     const newMe = {
+                        //         ...prev.me,
+                        //         workGroups: data.workGroups
+                        //     }
+                            
+                        //     const result = { ...prev, me: newMe }
+                        //     return result
+                        // });
+                        this.props.refetch()
+                        return prev
                     },
                 });
             }
@@ -598,17 +603,19 @@ class AppWithNavigationState extends Component {
                 this.locationGroupSubscription = subscribeToMore({
                     document: LOCATIONGROUP_CHANGED_SUBSCRIPTION,
                     updateQuery: (prev) => {
-                        client.query({
-                            query: GET_LOCATIONGROUPS,
-                            fetchPolicy: "network-only"
-                        }).then(({ data }) => {
-                            const newMe = {
-                                ...prev.me,
-                                locationGroups: data.locationGroups
-                            }
-                            const result = { ...prev, me: newMe }
-                            return result
-                        });
+                        // client.query({
+                        //     query: GET_LOCATIONGROUPS,
+                        //     fetchPolicy: "network-only"
+                        // }).then(({ data }) => {
+                        //     const newMe = {
+                        //         ...prev.me,
+                        //         locationGroups: data.locationGroups
+                        //     }
+                        //     const result = { ...prev, me: newMe }
+                        //     return result
+                        // });
+                        this.props.refetch()
+                        return prev
                     },
                 });
             }
@@ -617,18 +624,19 @@ class AppWithNavigationState extends Component {
                 this.familyChangeSubscription = subscribeToMore({
                     document: FAMILY_CHANGED_SUBSCRIPTION,
                     updateQuery: (prev) => {
-                        client.query({
-                            query: GET_FAMILIES,
-                            fetchPolicy: "network-only"
-                        }).then(({ data }) => {
-                            const newMe = {
-                                ...prev.me,
-                                families: data.families
-                            }
-                            console.log('newMe', newMe)
-                            const result = { ...prev, me: newMe }
-                            return result
-                        });
+                        // client.query({
+                        //     query: GET_FAMILIES,
+                        //     fetchPolicy: "network-only"
+                        // }).then(({ data }) => {
+                        //     const newMe = {
+                        //         ...prev.me,
+                        //         families: data.families
+                        //     }
+                        //     console.log('newMe', newMe)
+                        //     const result = { ...prev, me: newMe }
+                            this.props.refetch()
+                            return prev
+                        // });
                     },
                 });
             }
@@ -639,7 +647,6 @@ class AppWithNavigationState extends Component {
                 variables: { userId: nextProps.me.id },
                 updateQuery: (prev, { subscriptionData }) => {
                     const newMessage = subscriptionData.data.messageAdded;
-                    console.log('newMessage',newMessage)
                     prev.me.messages.push(newMessage)
                     storeMessage(`User${newMessage.from.id}`, newMessage)
                     return prev

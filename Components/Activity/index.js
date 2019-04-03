@@ -82,7 +82,9 @@ export default class Activity extends Component {
                                                     flexWrap:"wrap"
                                                     }}>
                                             {
-                                              activityTypes.filter(activeType=>activeType.first===type).map((activeType,index)=>(
+                                              activityTypes.filter(activeType=>activeType.first===type).sort(
+                                                  (a,b)=>a.second.length-b.second.length
+                                                  ).map((activeType,index)=>(
                                                   <TouchableHighlight
                                                   key={index}
                                                   style={{marginHorizontal:10,marginVertical:10}}
