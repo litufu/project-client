@@ -7,21 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="605bedf2-46cd-4864-a10b-c51039045598" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Components/Activity/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Activity/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/Applicants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/Applicants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ApplicationCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ApplicationCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ExamBasicInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/CollegeEntranceExam/ExamBasicInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/FoundTeam/AddPartner.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/FoundTeam/AddPartner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/GroupChat/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/GroupChat/Chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Groups/ClassContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Groups/ClassContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Groups/ClassList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Groups/ClassList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Messages/QueryGroupMessages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Messages/QueryGroupMessages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/Login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Components/Settings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Settings/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Navigation/AppNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Navigation/AppNavigator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/MyHome/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/MyHome/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/Profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/Profile/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../utils/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/settings.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,17 +36,21 @@
     <session id="-1836258901">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="31" />
+          <entry key="project.closed" value="35" />
+          <entry key="project.open.time.101" value="1" />
           <entry key="project.open.time.106" value="2" />
           <entry key="project.open.time.119" value="1" />
           <entry key="project.open.time.121" value="1" />
+          <entry key="project.open.time.128" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.140" value="1" />
           <entry key="project.open.time.148" value="1" />
+          <entry key="project.open.time.191" value="1" />
           <entry key="project.open.time.203" value="1" />
+          <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.30" value="1" />
           <entry key="project.open.time.39" value="3" />
-          <entry key="project.open.time.41" value="1" />
+          <entry key="project.open.time.41" value="2" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.46" value="2" />
@@ -66,13 +65,15 @@
           <entry key="project.open.time.62" value="1" />
           <entry key="project.open.time.64" value="1" />
           <entry key="project.open.time.65" value="1" />
+          <entry key="project.open.time.67" value="1" />
           <entry key="project.open.time.70" value="1" />
           <entry key="project.open.time.72" value="1" />
+          <entry key="project.open.time.78" value="1" />
           <entry key="project.open.time.81" value="1" />
           <entry key="project.open.time.90" value="1" />
           <entry key="project.open.time.93" value="1" />
           <entry key="project.open.time.98" value="1" />
-          <entry key="project.opened" value="38" />
+          <entry key="project.opened" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -106,8 +107,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="50">
+              <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -130,7 +131,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="230" />
     <option name="y" value="80" />
     <option name="width" value="1400" />
@@ -142,6 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
       <pane id="Scope" />
       <pane id="AndroidView">
@@ -173,7 +175,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -273,10 +274,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.101876676" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.07171582" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -288,10 +290,10 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5013405" side_tool="true" weight="0.2141844" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5020107" side_tool="true" weight="0.2" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Build" order="7" sideWeight="0.49865952" visible="true" weight="0.2141844" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49798927" visible="true" weight="0.2" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -350,8 +352,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="50">
+          <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
         </state>
       </provider>
     </entry>

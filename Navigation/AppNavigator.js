@@ -531,7 +531,7 @@ class AppWithNavigationState extends Component {
             }, this);
         }
 
-        if (!this.messagesSubscription && nextProps.me) {
+        if (!this.familyGroupSubscription && nextProps.me) {
 
             const { subscribeToMore, client } = nextProps;
             if (!this.familyGroupSubscription) {
@@ -647,8 +647,9 @@ class AppWithNavigationState extends Component {
                 variables: { userId: nextProps.me.id },
                 updateQuery: (prev, { subscriptionData }) => {
                     const newMessage = subscriptionData.data.messageAdded;
+                    // console.log('newMessage',newMessage)
                     prev.me.messages.push(newMessage)
-                    storeMessage(`User${newMessage.from.id}`, newMessage)
+                    storeMessage(`${prev.me.id}User${newMessage.from.id}`, newMessage)
                     return prev
                 },
             });
@@ -689,7 +690,7 @@ class AppWithNavigationState extends Component {
                                 }
 
                             });
-                            storeMessage(`Family${newMessage.to}`, newMessage)
+                            storeMessage(`${prev.me.id}Family${newMessage.to}`, newMessage)
                             return result
                         } else if (newMessage.type === 'ClassMate') {
                             const index = prev.me.classGroups.map(group => group.id).indexOf(newMessage.to)
@@ -705,7 +706,7 @@ class AppWithNavigationState extends Component {
                                 }
 
                             });
-                            storeMessage(`ClassMate${newMessage.to}`, newMessage)
+                            storeMessage(`${prev.me.id}ClassMate${newMessage.to}`, newMessage)
                             return result
 
                         } else if (newMessage.type === 'Colleague') {
@@ -722,7 +723,7 @@ class AppWithNavigationState extends Component {
                                 }
 
                             });
-                            storeMessage(`Colleague${newMessage.to}`, newMessage)
+                            storeMessage(`${prev.me.id}Colleague${newMessage.to}`, newMessage)
                             return result
                         } else if (newMessage.type === 'FellowTownsman') {
                             const index = prev.me.locationGroups.map(group => group.id).indexOf(newMessage.to)
@@ -738,7 +739,7 @@ class AppWithNavigationState extends Component {
                                 }
 
                             });
-                            storeMessage(`FellowTownsman${newMessage.to}`, newMessage)
+                            storeMessage(`${prev.me.id}FellowTownsman${newMessage.to}`, newMessage)
                             return result
                         } else if (newMessage.type === 'RegStatus') {
                             if (prev.me.regStatus.id === newMessage.to) {
@@ -767,7 +768,7 @@ class AppWithNavigationState extends Component {
                                 }
 
                             });
-                            storeMessage(`Activity${newMessage.to}`, newMessage)
+                            storeMessage(`${prev.me.id}Activity${newMessage.to}`, newMessage)
                             return result
                         }
                     },

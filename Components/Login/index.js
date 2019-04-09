@@ -151,7 +151,7 @@ export default class Login extends React.Component{
                 </View>
                 <View style={styles.forgetPassword}>
                   <TouchableNativeFeedback
-                      onPress={() => Alert.alert('密码找回规则',"自己的两名家庭成员在其设置页面-设置-找回密码中帮你找回密码。")}
+                      onPress={() => Alert.alert('密码找回规则',"自己的两名家庭成员在其设置页面-其他-找回密码中帮你找回密码。")}
                   >
                       <Text style={styles.blueText}>忘记密码</Text>
                   </TouchableNativeFeedback>

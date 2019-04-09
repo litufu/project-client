@@ -233,7 +233,7 @@ export default class ProfileScreen extends Component {
                     </Button>
                 </Left>
                 <Body>
-                    <Text>设置</Text>
+                    <Text>其他</Text>
                 </Body>
                 <Right>
                     <Icon active name="arrow-forward" />

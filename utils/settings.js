@@ -12,7 +12,7 @@ export const DEV_HOST = "http://192.168.56.1:4000/graphql";
 export const PRO_HOST = huawei ? "http://119.3.232.209:4000/graphql": "http://118.31.21.228:4000/graphql"
 export const DEV_WSS = "ws://192.168.56.1:4000/graphql";
 export const PRO_WSS = huawei ? "ws://119.3.232.209:4000/graphql" :"ws://118.31.21.228:4000/graphql"
-export const Production = true
+export const Production = false
 export const DateStartTime =  new Date(2019,3,25)
 export const defaultAdvertisements=[
     {

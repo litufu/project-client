@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Text, Left, Right, Icon ,Button,Body,Title} from 'native-base';
 import { SecureStore } from 'expo'
-import { withApollo } from 'react-apollo';
+import { withApollo,Mutation } from 'react-apollo';
+
 import {wsClient} from '../../apollo'
+import LOGOUT from '../../graphql/logout.mutation'
+import {errorMessage} from '../../utils/tools'
 
 class Settings extends Component {
 
-    _logout=()=>{
+    _logout=(logout)=>{
+        logout()
         this.props.navigation.navigate('Login')
         wsClient.unsubscribeAll(); // unsubscribe from all subscriptions
         SecureStore.deleteItemAsync('token')
@@ -28,7 +32,7 @@ class Settings extends Component {
                         </Button>
                     </Left>
                     <Body>
-                        <Title>设置</Title>
+                        <Title>其他设置</Title>
                     </Body>
                     <Right />
                 </Header>
@@ -64,16 +68,24 @@ class Settings extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
-                        <ListItem
-                        onPress={()=>this._logout()}
-                        >
-                            <Left>
-                                <Text>退出账号</Text>
-                            </Left>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
+                        <Mutation mutation={LOGOUT}>
+                        {
+                            (logout,{loading,error})=>(
+                                <ListItem
+                                onPress={()=>this._logout(logout)}
+                                >
+                                    <Left>
+                                        <Text>{loading ? "正在退出" :"退出账号"}</Text>
+                                    </Left>
+                                    <Right>
+                                        <Icon name="arrow-forward" />
+                                    </Right>
+                                    {error && Alert.alert(errorMessage(error))}
+                                </ListItem>
+                            )
+                        }
+                        </Mutation>
+                       
                     </List>
                 </Content>
             </Container>
