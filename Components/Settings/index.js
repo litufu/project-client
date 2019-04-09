@@ -9,8 +9,8 @@ import {errorMessage} from '../../utils/tools'
 
 class Settings extends Component {
 
-    _logout=(logout)=>{
-        logout()
+    _logout=async (logout)=>{
+        await logout()
         this.props.navigation.navigate('Login')
         wsClient.unsubscribeAll(); // unsubscribe from all subscriptions
         SecureStore.deleteItemAsync('token')
@@ -70,19 +70,26 @@ class Settings extends Component {
                         </ListItem>
                         <Mutation mutation={LOGOUT}>
                         {
-                            (logout,{loading,error})=>(
-                                <ListItem
-                                onPress={()=>this._logout(logout)}
-                                >
-                                    <Left>
-                                        <Text>{loading ? "正在退出" :"退出账号"}</Text>
-                                    </Left>
-                                    <Right>
-                                        <Icon name="arrow-forward" />
-                                    </Right>
-                                    {error && Alert.alert(errorMessage(error))}
-                                </ListItem>
-                            )
+                            (logout,{loading,error})=>{
+                                if(loading) return (
+                                    <ListItem>
+                                        <Text>正在退出</Text>
+                                    </ListItem>
+                                )
+                                return(
+                                    <ListItem
+                                    onPress={async ()=> await this._logout(logout)}
+                                    >
+                                        <Left>
+                                            <Text>退出账号</Text>
+                                        </Left>
+                                        <Right>
+                                            <Icon name="arrow-forward" />
+                                        </Right>
+                                        {error && Alert.alert(errorMessage(error))}
+                                    </ListItem>
+                                )
+                            }
                         }
                         </Mutation>
                        
