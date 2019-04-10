@@ -24,6 +24,8 @@ export default class QueryGroupMessages extends Component {
         const sortedMessages = group.messages.sort(
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         )
+        console.log('lastUnreadMessageId',lastUnreadMessageId)
+        console.log('sortedMessages',sortedMessages)
         let count = 0
         for (const message of sortedMessages) {
             if (message.id === lastUnreadMessageId) {

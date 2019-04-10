@@ -71,7 +71,9 @@ import OldWorkList from '../Components/Groups/OldWorkList'
 import LocationContent from '../Components/Groups/LocationContent'
 import LocationList from '../Components/Groups/LocationList'
 import Chat from '../Components/Chat'
+import ChatSettings from '../Components/Chat/Settings'
 import GroupChat from '../Components/GroupChat'
+import GroupChatSettings from '../Components/GroupChat/Settings'
 
 // 引入profile
 import UserProfile from '../Components/UserProfile'
@@ -136,6 +138,12 @@ const HomeNavigation = createStackNavigator(
         },
         GroupChat: {
             screen: GroupChat,
+        },
+        ChatSettings:{
+            screen: ChatSettings,
+        },
+        GroupChatSettings:{
+            screen: GroupChatSettings,
         },
         UserProfile: {
             screen: UserProfile,
@@ -242,6 +250,12 @@ const GroupNavigation = createStackNavigator(
         GroupChat: {
             screen: GroupChat,
         },
+        ChatSettings:{
+            screen: ChatSettings,
+        },
+        GroupChatSettings:{
+            screen: GroupChatSettings,
+        },
         UserProfile: {
             screen: UserProfile,
         },
@@ -316,6 +330,9 @@ const ProfileNavigation = createStackNavigator(
         },
         Chat: {
             screen: Chat,
+        },
+        ChatSettings:{
+            screen: ChatSettings,
         },
         Settings: {
             screen: Settings,

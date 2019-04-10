@@ -197,7 +197,7 @@ export default class Chat extends Component {
     )
 
     render() {
-        const { userInfo, me } = this.props
+        const { userInfo, me,messages } = this.props
 
         return (
             <View style={styles.container} accessible accessibilityLabel="main" testID="main">
@@ -216,7 +216,14 @@ export default class Chat extends Component {
                                 <Body>
                                     <Title>{userInfo.name}</Title>
                                 </Body>
-                                <Right />
+                                <Right>
+                                    <Button
+                                            onPress={()=>this.props.navigation.navigate('ChatSettings',{userInfo,client,messages})}
+                                            transparent
+                                        >
+                                            <Icon name='ellipsis-v' type='FontAwesome' />
+                                        </Button>
+                                </Right>
                             </Header>
                         )
                     }
