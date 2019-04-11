@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Query} from 'react-apollo'
 import {Alert,AsyncStorage} from 'react-native'
+import _ from 'lodash'
 
 import { Container, Header, Content, List, ListItem, Text,Left,Right,Body,Title,Icon,Button } from 'native-base';
 import update from 'immutability-helper'
@@ -16,7 +17,11 @@ export default class Settings extends Component {
             if(type==='Family'){
                 const newGroups = data.me.relativefamilyGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
+                        const newG = _.cloneDeep(g)
+                        const newMessages =newG.messages.sort(
+                            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+                        ).slice(0,10)
+                        const newGroup = {...g,messages:newMessages}
                         return newGroup
                     }
                     return g
@@ -29,7 +34,11 @@ export default class Settings extends Component {
             }else if(type==='ClassMate'){
                 const newGroups = data.me.classGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
+                        const newG = _.cloneDeep(g)
+                        const newMessages =newG.messages.sort(
+                            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+                        ).slice(0,10)
+                        const newGroup = {...g,messages:newMessages}
                         return newGroup
                     }
                     return g
@@ -43,7 +52,11 @@ export default class Settings extends Component {
             }else if(type==="Colleague"){
                 const newGroups = data.me.workGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
+                        const newG = _.cloneDeep(g)
+                        const newMessages =newG.messages.sort(
+                            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+                        ).slice(0,10)
+                        const newGroup = {...g,messages:newMessages}
                         return newGroup
                     }
                     return g
@@ -56,7 +69,11 @@ export default class Settings extends Component {
             }else if(type==="FellowTownsman"){
                 const newGroups = data.me.locationGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
+                        const newG = _.cloneDeep(g)
+                        const newMessages =newG.messages.sort(
+                            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+                        ).slice(0,10)
+                        const newGroup = {...g,messages:newMessages}
                         return newGroup
                     }
                     return g
@@ -69,7 +86,11 @@ export default class Settings extends Component {
             }else if(type==="Activity"){
                 const newGroups = data.me.activities.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
+                        const newG = _.cloneDeep(g)
+                        const newMessages =newG.messages.sort(
+                            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+                        ).slice(0,10)
+                        const newGroup = {...g,messages:newMessages}
                         return newGroup
                     }
                     return g

@@ -34,7 +34,7 @@ export default class Chat extends Component {
                         } else if (type === "Activity") {
                             newGroup = data.me.activities.filter(g=>g.id === group.id)[0]
                         }
-                   
+
                         return (
                             <UnReadMessage
                                 me={data.me}

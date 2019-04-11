@@ -14,9 +14,8 @@ export default class Settings extends Component {
             
             const data = await client.readQuery({query:GET_ME})
             const me = data.me
-            const deleteMessageIds = messages.map(message => message._id)
             const newMessages = data.me.messages.filter(message => {
-                if (~deleteMessageIds.indexOf(message.id)) {
+                if (message.to.id === userInfo.id || message.from.id === userInfo.id) {
                     return false
                 }
                 return true

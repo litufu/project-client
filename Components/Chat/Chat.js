@@ -33,6 +33,8 @@ export default class Chat extends Component {
         this.onLoadEarlier = this.onLoadEarlier.bind(this);
     }
 
+    _isMounted = false;
+
     componentWillReceiveProps(nextProps) {
         
         this.setState({ messages: nextProps.messages.slice(0, this.state.messages.length + 1) })
@@ -176,18 +178,18 @@ export default class Chat extends Component {
 
 
         
-        if (this.props.messages.length > messagesLenth) {
-            const data = client.readQuery({ query: GET_ME })
-            const deleteMessageIds = this.props.messages.slice(-1, -messagesLenth).map(message => message.id)
-            data.me.messages.filter(message => {
-                if (~deleteMessageIds.indexOf(message.id)) {
-                    return false
-                }
-                return true
-            })
-            // Write our data back to the cache.
-            client.writeQuery({ query: GET_ME, data });
-        }
+        // if (this.props.messages.length > messagesLenth) {
+        //     const data = client.readQuery({ query: GET_ME })
+        //     const deleteMessageIds = this.props.messages.slice(-1, -messagesLenth).map(message => message.id)
+        //     data.me.messages.filter(message => {
+        //         if (~deleteMessageIds.indexOf(message.id)) {
+        //             return false
+        //         }
+        //         return true
+        //     })
+        //     // Write our data back to the cache.
+        //     client.writeQuery({ query: GET_ME, data });
+        // }
         
         this.props.navigation.goBack()
     }

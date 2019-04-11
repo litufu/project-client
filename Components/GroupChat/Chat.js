@@ -177,6 +177,7 @@ export default class Chat extends Component {
                         return g
                     })
                     const newData = {me:{...me,classGroups:newGroups}}
+                    console.log('newData.me.classGroups',newData.me.classGroups)
                     // Write our data back to the cache.
                     cache.writeQuery({ query: GET_ME, data:newData });
                     storeMessage(`${data.me.id}ClassMate${newMessage.to}`, newMessage)
@@ -238,7 +239,7 @@ export default class Chat extends Component {
                 }
             })
         }
-        
+
         // 删除缓存中多的信息
         // const data = client.readQuery({query:GET_ME})
         // if(type==='Family'){

@@ -1,6 +1,7 @@
 import { Query } from 'react-apollo';
 import React, { Component } from 'react';
 import { defaultAvatar } from '../../utils/settings'
+import _ from 'lodash'
 
 import Chat from './Chat'
 import {storeMessage,retrieveMessages} from '../../utils/tools'
@@ -20,8 +21,9 @@ export default class QueryMessages extends Component {
     }
 
     _getNewMessages = (group) => {
+        const newGroup = _.cloneDeep(group)
         let newMessages
-        newMessages = group ? group.messages.sort(
+        newMessages = newGroup ? newGroup.messages.sort(
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         ) :[]
         const storageMessages = this.state.storageMessages

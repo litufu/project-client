@@ -36,8 +36,6 @@ import SearchMajor from '../Components/CollegeEntranceExam/SearchMajor'
 import SelectUniversity from '../Components/CollegeEntranceExam/SelectUniversity'
 import QueryResult from '../Components/CollegeEntranceExam/QueryResult'
 import Applicants from '../Components/CollegeEntranceExam/Applicants'
-//  2、 找工作
-import FindJob from '../Components/FindJob'
 // 3、同城热恋
 import FallInLove from '../Components/FallInLove'
 import FallInLoveSettings from '../Components/FallInLove/Settings'
@@ -129,9 +127,6 @@ const HomeNavigation = createStackNavigator(
         },
         Applicants: {
             screen: Applicants
-        },
-        FindJob: {
-            screen: FindJob
         },
         Chat: {
             screen: Chat,
@@ -710,6 +705,7 @@ class AppWithNavigationState extends Component {
                             storeMessage(`${prev.me.id}Family${newMessage.to}`, newMessage)
                             return result
                         } else if (newMessage.type === 'ClassMate') {
+                            console.log('classMate dingyue')
                             const index = prev.me.classGroups.map(group => group.id).indexOf(newMessage.to)
                             const result = update(prev, {
                                 me: {
