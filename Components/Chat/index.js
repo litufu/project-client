@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { Text,  Spinner } from 'native-base';
 
-import { errorMessage } from '../../utils/tools'
+import { errorMessage,retrieveMessages } from '../../utils/tools'
 import UnReadMessage from './UnReadMessage'
 import GET_ME from '../../graphql/get_me.query'
 
 export default class Chat extends Component{
+
+    state={
+        storageMessages:[]
+    }
+
+    async componentDidMount(){
+        const storageMessages = await retrieveMessages(`${this.props.me.id}User${this.props.userInfo.id}`)
+        if(storageMessages){
+            this.setState({storageMessages:JSON.parse(storageMessages)})
+        }
+    }
 
     render(){
         const userInfo = this.props.navigation.getParam('user')
@@ -21,6 +32,7 @@ export default class Chat extends Component{
                             me = {data.me}
                             userInfo={userInfo}
                             navigation={this.props.navigation}
+                            storageMessages={this.state.storageMessages}
                         />)  
                 }
             }

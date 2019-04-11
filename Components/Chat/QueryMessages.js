@@ -10,14 +10,7 @@ import {storeMessage,retrieveMessages} from '../../utils/tools'
 export default class QueryMessages extends Component {
 
     state={
-        storageMessages:[]
-    }
-
-    async componentDidMount(){
-        const storageMessages = await retrieveMessages(`${this.props.me.id}User${this.props.userInfo.id}`)
-        if(storageMessages){
-            this.setState({storageMessages:JSON.parse(storageMessages)})
-        }
+        storageMessages:this.props.storageMessages
     }
 
     _getNewMessages = (messages,userInfo) => {
@@ -61,7 +54,6 @@ export default class QueryMessages extends Component {
 
     render() {
         const {userInfo,me,navigation} = this.props
-        
      
         return (
             < Chat

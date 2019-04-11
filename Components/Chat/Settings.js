@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {Alert,AsyncStorage} from 'react-native'
 import {Query} from 'react-apollo'
 import { Container, Header, Content, List, ListItem, Text ,Left,Right,Body,Title,Icon,Button} from 'native-base';
-import update from 'immutability-helper'
-
-import { storeMessage, retrieveMessages } from '../../utils/tools'
 import GET_ME from '../../graphql/get_me.query'
 
 
@@ -72,7 +69,7 @@ export default class Settings extends Component {
                                 {cancelable: false},
                               )}
                         >
-                        <Text>清空聊天记录</Text>
+                        <Text>清除历史聊天记录</Text>
                         </ListItem>
                                 )
                             }

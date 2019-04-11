@@ -4,9 +4,21 @@ import { Spinner, Text } from 'native-base'
 
 import UnReadMessage from './UnReadMessage'
 import GET_ME from '../../graphql/get_me.query'
-import { errorMessage } from '../../utils/tools';
+import { errorMessage ,retrieveMessages} from '../../utils/tools';
+
 
 export default class Chat extends Component {
+
+    state={
+        storageMessages:[]
+    }
+
+     async componentWillMount(){
+        const storageMessages = await retrieveMessages(`${this.props.me.id}${this.props.type}${this.props.group.id}`)
+        if(storageMessages){
+            this.setState({storageMessages:JSON.parse(storageMessages)})
+        }
+    }
 
     render() {
         const group = this.props.navigation.getParam('group', "")
@@ -42,6 +54,7 @@ export default class Chat extends Component {
                                 type={type}
                                 group={newGroup}
                                 navigation={this.props.navigation}
+                                storageMessages={this.state.storageMessages}
                             />
                         )
                     }

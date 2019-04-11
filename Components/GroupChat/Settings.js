@@ -149,7 +149,7 @@ export default class Settings extends Component {
                             {cancelable: false},
                           )}
                         >
-                        <Text>清空聊天记录</Text>
+                        <Text>清除历史聊天记录</Text>
                         </ListItem>
                                 )
                             }

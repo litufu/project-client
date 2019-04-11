@@ -9,7 +9,7 @@ import { Spinner } from 'native-base';
 export default class UnReadMessage extends React.Component{
 
   render(){
-    const {group,type,navigation,me,groupName} = this.props
+    const {group,type,navigation,me,groupName,storageMessages} = this.props
     return(
       <Mutation mutation={ADD_NEWUNREADMESSAGE} >
         {(addNewUnReadMessages,{loading,error}) => {
@@ -21,6 +21,7 @@ export default class UnReadMessage extends React.Component{
             type={type}
             navigation={navigation}
             addNewUnReadMessages={addNewUnReadMessages}
+            storageMessages={storageMessages}
           />)
         }
          

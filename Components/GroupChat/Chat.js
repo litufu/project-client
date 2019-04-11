@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { ImagePicker } from 'expo';
 import { Mutation, ApolloConsumer } from 'react-apollo'
-import update from 'immutability-helper'
 import { Ionicons } from '@expo/vector-icons';
 import { View, StyleSheet, Linking, Platform } from 'react-native';
 import { GiftedChat, Actions, Bubble, Send ,LoadEarlier } from 'react-native-gifted-chat';
 import 'moment/locale/zh-cn'
 
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import { Header, Title, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import SEND_GROUP_MESSAGE from '../../graphql/send_groupMessage.mutation'
 import GET_ME from '../../graphql/get_me.query'
-import { storeMessage, retrieveMessages } from '../../utils/tools'
-import {messagesLenth} from '../../utils/settings'
+import { storeMessage } from '../../utils/tools'
 
 const skip = 20
 

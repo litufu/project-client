@@ -1,26 +1,19 @@
-import { Query } from 'react-apollo';
 import React, { Component } from 'react';
 import { defaultAvatar } from '../../utils/settings'
 import _ from 'lodash'
 
 import Chat from './Chat'
-import {storeMessage,retrieveMessages} from '../../utils/tools'
 
 
 export default class QueryMessages extends Component {
 
     state={
-        storageMessages:[]
+        storageMessages:this.props.storageMessages,
     }
 
-    async componentDidMount(){
-        const storageMessages = await retrieveMessages(`${this.props.me.id}${this.props.type}${this.props.group.id}`)
-        if(storageMessages){
-            this.setState({storageMessages:JSON.parse(storageMessages)})
-        }
-    }
 
     _getNewMessages = (group) => {
+        
         const newGroup = _.cloneDeep(group)
         let newMessages
         newMessages = newGroup ? newGroup.messages.sort(

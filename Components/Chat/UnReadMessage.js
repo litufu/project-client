@@ -8,7 +8,7 @@ import ADD_NEWUNREADMESSAGE from '../../graphql/add_newUnReadMessage.mutation'
 export default class UnReadMessage extends React.Component{
 
   render(){
-    const {userInfo,navigation,me} = this.props
+    const {userInfo,navigation,me,storageMessages} = this.props
     return(
       <Mutation mutation={ADD_NEWUNREADMESSAGE} >
         {addNewUnReadMessages => (
@@ -17,6 +17,7 @@ export default class UnReadMessage extends React.Component{
             userInfo={userInfo}
             navigation={navigation}
             addNewUnReadMessages={addNewUnReadMessages}
+            storageMessages={storageMessages}
           />
         )}
       </Mutation>
