@@ -7,10 +7,6 @@ import Chat from './Chat'
 
 export default class QueryMessages extends Component {
 
-    state={
-        storageMessages:this.props.storageMessages,
-    }
-
 
     _getNewMessages = (group) => {
         
@@ -19,7 +15,7 @@ export default class QueryMessages extends Component {
         newMessages = newGroup ? newGroup.messages.sort(
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         ) :[]
-        const storageMessages = this.state.storageMessages
+        const storageMessages = this.props.storageMessages
         if(newMessages.length===0) {
             newMessages=storageMessages
         }else{

@@ -5,12 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { View, StyleSheet, Linking, Platform } from 'react-native';
 import { GiftedChat, Actions, Bubble, Send ,LoadEarlier } from 'react-native-gifted-chat';
 import 'moment/locale/zh-cn'
+import update from 'immutability-helper';
 
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Header, Title, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import SEND_GROUP_MESSAGE from '../../graphql/send_groupMessage.mutation'
 import GET_ME from '../../graphql/get_me.query'
 import { storeMessage } from '../../utils/tools'
+import {messagesLenth}  from '../../utils/settings'
+
 
 const skip = 20
 
@@ -175,7 +178,6 @@ export default class Chat extends Component {
                         return g
                     })
                     const newData = {me:{...me,classGroups:newGroups}}
-                    console.log('newData.me.classGroups',newData.me.classGroups)
                     // Write our data back to the cache.
                     cache.writeQuery({ query: GET_ME, data:newData });
                     storeMessage(`${data.me.id}ClassMate${newMessage.to}`, newMessage)
@@ -205,10 +207,10 @@ export default class Chat extends Component {
                     storeMessage(`${data.me.id}FellowTownsman${newMessage.to}`, newMessage)
                 } else if (type === "RegStatus") {
                     // regstatus在me中查找
-                    const messages = data.me.regStatus.messages.push({ ...newMessage })
+                    data.me.regStatus.messages.push({ ...newMessage })
                     // Write our data back to the cache.
-                    const newData = {me:{...me,regStatus:{...me.regStatus,messages}}}
-                    cache.writeQuery({ query: GET_ME, data:newData });
+                    
+                    cache.writeQuery({ query: GET_ME, data });
                 } else if (type === "Activity") {
                     const newGroups =  data.me.activities.map(g => {
                         if (g.id === group.id) {
@@ -239,74 +241,78 @@ export default class Chat extends Component {
         }
 
         // 删除缓存中多的信息
-        // const data = client.readQuery({query:GET_ME})
-        // if(type==='Family'){
-        //     data.me.relativefamilyGroups.map(g => {
-        //         if (g.id === group.id) {
-        //             if(g.messages.length<=messagesLenth){
-        //                 return g
-        //             }
-        //             const newGroup = update(g,{messages:{$set:g.messages.slice(-1,-messagesLenth)}})
-        //             return newGroup
-        //         }
-        //         return g
-        //     })
-        //     // Write our data back to the cache.
-        //     client.writeQuery({ query: GET_ME, data });
-        // }else if(type==='ClassMate'){
-        //     data.me.classGroups.map(g => {
-        //         if (g.id === group.id) {
-        //             if(g.messages.length<=messagesLenth){
-        //                 return g
-        //             }
-        //             const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
-        //             return newGroup
-        //         }
-        //         return g
-        //     })
-        //     // Write our data back to the cache.
-        //     client.writeQuery({ query: GET_ME, data });
+        const data = client.readQuery({query:GET_ME})
+        const me = data.me
+        if(type==='Family'){
+            const newGroups = data.me.relativefamilyGroups.map(g => {
+                if (g.id === group.id) {
+                    if(g.messages.length<=messagesLenth){
+                        return g
+                    }
+                    const newGroup = update(g,{messages:{$set:g.messages.slice(0,messagesLenth)}})
+                    return newGroup
+                }
+                return g
+            })
+            const newData = {me:{...me,relativefamilyGroups:newGroups}}
+            // Write our data back to the cache.
+            client.writeQuery({ query: GET_ME, data:newData });
+        }else if(type==='ClassMate'){
+            const newGroups = data.me.classGroups.map(g => {
+                if (g.id === group.id) {
+                    if(g.messages.length<=messagesLenth){
+                        return g
+                    }
+                    const newGroup = update(g,{messages:{$set: g.messages.slice(0,messagesLenth)}})
+                    return newGroup
+                }
+                return g
+            })
+            const newData = {me:{...me,classGroups:newGroups}}
+            // Write our data back to the cache.
+            client.writeQuery({ query: GET_ME, data:newData });
 
-        // }else if(type==="Colleague"){
-        //     data.me.workGroups.map(g => {
-        //         if (g.id === group.id) {
-        //             if(g.messages.length<=messagesLenth){
-        //                 return g
-        //             }
-        //             const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
-        //             return newGroup
-        //         }
-        //         return g
-        //     })
-        //     // Write our data back to the cache.
-        //     client.writeQuery({ query: GET_ME, data });
-        // }else if(type==="FellowTownsman"){
-        //     data.me.locationGroups.map(g => {
-        //         if (g.id === group.id) {
-        //             if(g.messages.length<=messagesLenth){
-        //                 return g
-        //             }
-        //             const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
-        //             return newGroup
-        //         }
-        //         return g
-        //     })
-        //     // Write our data back to the cache.
-        //     client.writeQuery({ query: GET_ME, data });
-        // }else if(type==="Activity"){
-        //     data.me.activities.map(g => {
-        //         if (g.id === group.id) {
-        //             if(g.messages.length<=messagesLenth){
-        //                 return g
-        //             }
-        //             const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
-        //             return newGroup
-        //         }
-        //         return g
-        //     })
-        //     // Write our data back to the cache.
-        //     client.writeQuery({ query: GET_ME, data });
-        // }
+        }else if(type==="Colleague"){
+            const newGroups = data.me.workGroups.map(g => {
+                if (g.id === group.id) {
+                    if(g.messages.length<=messagesLenth){
+                        return g
+                    }
+                    const newGroup = update(g,{messages:{$set: g.messages.slice(0,messagesLenth)}})
+                    return newGroup
+                }
+                return g
+            })
+            const newData = {me:{...me,workGroups:newGroups}}
+            // Write our data back to the cache.
+            client.writeQuery({ query: GET_ME, data:newData });
+        }else if(type==="FellowTownsman"){
+            data.me.locationGroups.map(g => {
+                if (g.id === group.id) {
+                    if(g.messages.length<=messagesLenth){
+                        return g
+                    }
+                    const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
+                    return newGroup
+                }
+                return g
+            })
+            // Write our data back to the cache.
+            client.writeQuery({ query: GET_ME, data });
+        }else if(type==="Activity"){
+            data.me.activities.map(g => {
+                if (g.id === group.id) {
+                    if(g.messages.length<=messagesLenth){
+                        return g
+                    }
+                    const newGroup = update(g,{messages:{$set: g.messages.slice(-1,-messagesLenth)}})
+                    return newGroup
+                }
+                return g
+            })
+            // Write our data back to the cache.
+            client.writeQuery({ query: GET_ME, data });
+        }
 
         this.props.navigation.goBack()
     }

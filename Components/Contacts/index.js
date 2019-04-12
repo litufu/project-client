@@ -29,6 +29,12 @@ class Contacts extends Component {
         }
       }
     }
+    for(const family of me.families){
+      if(family.to.user && !~userIds.indexOf(family.to.user.id) && family.to.user.id!==me.id){
+        users.push(family.to.user)
+        userIds.push(family.to.user.id)
+      }
+    }
     return users
   }
 

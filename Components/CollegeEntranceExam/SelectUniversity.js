@@ -80,7 +80,7 @@ export default  class SearchMajor extends Component {
             </Button>
           </Left>
           <Body >
-            <Title >选择专业</Title>
+            <Title >选择学校</Title>
           </Body>
           <Right>
             {

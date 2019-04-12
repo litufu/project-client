@@ -705,7 +705,6 @@ class AppWithNavigationState extends Component {
                             storeMessage(`${prev.me.id}Family${newMessage.to}`, newMessage)
                             return result
                         } else if (newMessage.type === 'ClassMate') {
-                            console.log('classMate dingyue')
                             const index = prev.me.classGroups.map(group => group.id).indexOf(newMessage.to)
                             const result = update(prev, {
                                 me: {

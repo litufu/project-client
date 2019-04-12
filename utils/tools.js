@@ -54,6 +54,8 @@ export const timeTodate = (startTime,endTime) =>{
 
 export const storeMessage = async (key,message) => {
   // 检查id是否为乐观更新的id
+  console.log('store')
+  console.log('key',key)
   if(message.id.length<10) return 
   try {
     let prev

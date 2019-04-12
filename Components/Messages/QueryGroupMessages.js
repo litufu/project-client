@@ -100,7 +100,7 @@ export default class QueryGroupMessages extends Component {
                                                     <ListItem
                                                         thumbnail
                                                         key={group.id}
-                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "Family", groupName: group.name })}
+                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "Family", groupName: group.name,me })}
                                                     >
                                                         <Left>
 
@@ -131,7 +131,7 @@ export default class QueryGroupMessages extends Component {
                                                     return (<ListItem
                                                         thumbnail
                                                         key={group.id}
-                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "ClassMate", groupName })}
+                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "ClassMate", groupName ,me})}
                                                     >
                                                         <Left>
 
@@ -161,7 +161,7 @@ export default class QueryGroupMessages extends Component {
                                                     <ListItem
                                                         thumbnail
                                                         key={group.id}
-                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "Colleague", groupName: group.company.name })}
+                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "Colleague", groupName: group.company.name ,me})}
                                                     >
                                                         <Left>
 
@@ -190,7 +190,7 @@ export default class QueryGroupMessages extends Component {
                                                     <ListItem
                                                         thumbnail
                                                         key={group.id}
-                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "FellowTownsman", groupName: group.name })}
+                                                        onPress={() => navigation.navigate('GroupChat', { group, type: "FellowTownsman", groupName: group.name ,me})}
                                                     >
                                                         <Left>
 

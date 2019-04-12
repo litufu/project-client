@@ -13,7 +13,9 @@ export default class Chat extends Component{
     }
 
     async componentDidMount(){
-        const storageMessages = await retrieveMessages(`${this.props.me.id}User${this.props.userInfo.id}`)
+        const userInfo = this.props.navigation.getParam('user')
+        const me = this.props.navigation.getParam('me')
+        const storageMessages = await retrieveMessages(`${me.id}User${userInfo.id}`)
         if(storageMessages){
             this.setState({storageMessages:JSON.parse(storageMessages)})
         }
