@@ -9,10 +9,6 @@ import {storeMessage,retrieveMessages} from '../../utils/tools'
 
 export default class QueryMessages extends Component {
 
-    state={
-        storageMessages:this.props.storageMessages
-    }
-
     _getNewMessages = (messages,userInfo) => {
         let newMessages
         newMessages = messages.filter(
@@ -21,7 +17,7 @@ export default class QueryMessages extends Component {
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         )
         
-        const storageMessages = this.state.storageMessages
+        const storageMessages = this.props.storageMessages
         
         if(newMessages.length===0) {
             newMessages=storageMessages

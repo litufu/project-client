@@ -35,17 +35,21 @@ import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonCo
 
 class ExamBasicInfo extends React.Component {
 
-    state = {
-        province: this.props.province || 11,
-        section: this.props.section || "arts",
-        hasSpecial: this.props.hasSpecial || false,
-        score: this.props.score || '0',
-        specialScore: this.props.specialScore || '0',
-        examineeCardNumber: this.props.examineeCardNumber || '',
-        updateInfo: this.props.updateInfo || false,
-        editable: this.props.updateInfo ? false : true,
-        times: this.props.times || 0
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            province: props.province || 11,
+            section: props.section || "arts",
+            hasSpecial: props.hasSpecial || false,
+            score: props.score || '0',
+            specialScore: props.specialScore || '0',
+            examineeCardNumber: props.examineeCardNumber || '',
+            updateInfo: props.updateInfo || false,
+            editable: props.updateInfo ? false : true,
+            times: props.times || 0
+        };
+      }
+
 
     _checkExamineeCardNumber = (examineeCardNumber) => {
         /**

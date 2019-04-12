@@ -22,6 +22,7 @@ export default class Chat extends Component {
         if(storageMessages){
             this.setState({storageMessages:JSON.parse(storageMessages)})
         }
+    }
 
 
     render() {

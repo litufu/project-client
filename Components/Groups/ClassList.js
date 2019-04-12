@@ -80,10 +80,10 @@ export default class ClassList extends Component {
     </Mutation>
   )
 
-  _getMyGroups = (classGroups, myId) => {
+  _getMyGroups = (classGroups, myId,schoolEduId) => {
     const myGroups = classGroups.filter(classGroup => {
       for (const member of classGroup.members) {
-        if (member.student.id === myId && member.status === '1') {
+        if (member.student.id === myId && member.status === '1' && classGroup.study.id===schoolEduId ) {
           return true
         }
       }
@@ -95,10 +95,10 @@ export default class ClassList extends Component {
     return []
   }
 
-  _getMyWillGroups = (classGroups, myId) => {
+  _getMyWillGroups = (classGroups, myId,schoolEduId) => {
     const myGroups = classGroups.filter(classGroup => {
       for (const member of classGroup.members) {
-        if (member.student.id === myId && member.status === '0') {
+        if (member.student.id === myId && member.status === '0'&&classGroup.study.id===schoolEduId) {
           return true
         }
       }
@@ -110,20 +110,20 @@ export default class ClassList extends Component {
     return []
   }
 
-  _checkStudentInGroup = (myGroup, studentId) => {
-
+  _checkStudentInGroup = (myGroup, studentId,schoolEduId) => {
+  
     for (const member of myGroup.members) {
-      if (member.student.id === studentId) {
+      if (member.student.id === studentId && schoolEduId === myGroup.study.id) {
         return member.status
       }
     }
     return '-1'
   }
 
-  _checkStudentInWillGroup = (myWillGroups, studentId) => {
+  _checkStudentInWillGroup = (myWillGroups, studentId,schoolEduId) => {
     for (const myWillGroup of myWillGroups) {
       for (const member of myWillGroup.members) {
-        if (member.student.id === studentId && member.status === '1') {
+        if (member.student.id === studentId && member.status === '1' && myWillGroup.study.id===schoolEduId) {
           return '2'
         }
       }
@@ -140,14 +140,14 @@ export default class ClassList extends Component {
         if(error) return <Text>{errorMessage(error)}</Text>
         const classGroups = data.me.classGroups
         
-        const myGroups = this._getMyGroups(classGroups, myId)
-        const myWillGroups = this._getMyWillGroups(classGroups, myId)
+        const myGroups = this._getMyGroups(classGroups, myId,schoolEduId)
+        const myWillGroups = this._getMyWillGroups(classGroups, myId,schoolEduId)
         let studentStatus
         if (myGroups.length > 0) {
-          studentStatus = this._checkStudentInGroup(myGroups[0], studentId)
+          studentStatus = this._checkStudentInGroup(myGroups[0], studentId,schoolEduId)
         }
         if (!(studentStatus === '1' || studentStatus === '0')) {
-          studentStatus = this._checkStudentInWillGroup(myWillGroups, studentId)
+          studentStatus = this._checkStudentInWillGroup(myWillGroups, studentId,schoolEduId)
         }
 
         if (studentStatus === '0') {

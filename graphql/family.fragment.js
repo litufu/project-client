@@ -8,6 +8,8 @@ const FAMILY_FRAGMENT = gql`
       name
       user{
         id
+        name
+        username
         avatar{
           id
           url

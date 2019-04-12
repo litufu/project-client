@@ -30,19 +30,23 @@ const sexNumMap = { 0: 'male', 1: 'female' }
 
 export default class Info extends Component {
 
-  state = {
-    name: this.props.name || '',
-    gender: this.props.gender || 'male',
-    birthday: this.props.birthday.calendar ? this.props.birthday : { calendar: "gregorian", date: '' },
-    place: this.props.birthplace.province ? this.props.birthplace : { province: '', city: '', area: '', street: '', village: '' },
-    residence: this.props.residence.province ? this.props.residence : { province: '', city: '', area: '', street: '', village: '' },
-    editable: this.props.editable || false,
-    checked: false,
-    displayName: false,
-    selectedIndex: 0,
-    openProvinceCityArea: false,
-    openProvinceCityArea2: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: props.name || '',
+      gender: props.gender || 'male',
+      birthday: props.birthday.calendar ? props.birthday : { calendar: "gregorian", date: '' },
+      place: props.birthplace.province ? props.birthplace : { province: '', city: '', area: '', street: '', village: '' },
+      residence: props.residence.province ? props.residence : { province: '', city: '', area: '', street: '', village: '' },
+      editable: props.editable || false,
+      checked: false,
+      displayName: false,
+      selectedIndex: 0,
+      openProvinceCityArea: false,
+      openProvinceCityArea2: false,
+    };
   }
+
 
   handlePlace = (place) => {
     this.setState({ place: place })

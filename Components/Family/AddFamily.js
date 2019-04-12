@@ -25,11 +25,15 @@ import GET_ME from '../../graphql/get_me.query'
 import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor } from '../../utils/settings'
 
 export default class AddFamily extends Component {
-  state = {
-    name: this.props.navigation.getParam('name', ''),
-    relationship: this.props.navigation.getParam('relationship', 'father'),
-    spouseId:this.props.navigation.getParam('spouseId', ''),
-    disabled:false,
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: props.navigation.getParam('name', ''),
+      relationship: props.navigation.getParam('relationship', 'father'),
+      spouseId:props.navigation.getParam('spouseId', ''),
+      disabled:false,
+    };
   }
 
   validate = (relationship, name, client,me) => {
