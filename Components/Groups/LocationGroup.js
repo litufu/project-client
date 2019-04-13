@@ -27,7 +27,7 @@ export default class LocationGroup extends Component {
         <Content>
         <List>
                 {
-                    locationGroups.map(locationGroup => (
+                    locationGroups.filter(locationGroup=>locationGroup.users.length>1).map(locationGroup => (
                         <ListItem key={locationGroup.id} onPress={() => this.props.navigation.navigate('LocationContent', { locationGroup, me })}>
                             <Text>{locationGroup.name}</Text>
                         </ListItem>
