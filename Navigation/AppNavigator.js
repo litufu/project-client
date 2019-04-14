@@ -42,7 +42,7 @@ import FallInLoveSettings from '../Components/FallInLove/Settings'
 import FallInLoveRules from '../Components/FallInLove/Rules'
 // 4、创业组团
 import FoundTeam from '../Components/FoundTeam'
-import SkillSetting  from '../Components/FoundTeam/SkillSetting'
+import SkillSetting from '../Components/FoundTeam/SkillSetting'
 import AddPartner from '../Components/FoundTeam/AddPartner'
 import ProjectIntroduce from '../Components/FoundTeam/ProjectIntroduce'
 // 5、一起玩耍
@@ -134,56 +134,56 @@ const HomeNavigation = createStackNavigator(
         GroupChat: {
             screen: GroupChat,
         },
-        ChatSettings:{
+        ChatSettings: {
             screen: ChatSettings,
         },
-        GroupChatSettings:{
+        GroupChatSettings: {
             screen: GroupChatSettings,
         },
         UserProfile: {
             screen: UserProfile,
         },
-        FallInLove:{
+        FallInLove: {
             screen: FallInLove,
         },
-        FallInLoveSettings:{
+        FallInLoveSettings: {
             screen: FallInLoveSettings,
         },
-        FallInLoveRules:{
+        FallInLoveRules: {
             screen: FallInLoveRules,
         },
-        FoundTeam:{
+        FoundTeam: {
             screen: FoundTeam,
         },
-        SkillSetting:{
+        SkillSetting: {
             screen: SkillSetting,
         },
-        AddPartner:{
+        AddPartner: {
             screen: AddPartner,
         },
-        ProjectIntroduce:{
+        ProjectIntroduce: {
             screen: ProjectIntroduce,
         },
-        Activity:{
-            screen:Activity,
+        Activity: {
+            screen: Activity,
         },
-        ActivityDetail:{
-            screen:ActivityDetail,
+        ActivityDetail: {
+            screen: ActivityDetail,
         },
-        ActivityList:{
-            screen:ActivityList,
+        ActivityList: {
+            screen: ActivityList,
         },
-        CreateActivity:{
-            screen:CreateActivity,
+        CreateActivity: {
+            screen: CreateActivity,
         },
-        MyActivities:{
-            screen:MyActivities,
+        MyActivities: {
+            screen: MyActivities,
         },
-        ActivityRules:{
-            screen:ActivityRules,
+        ActivityRules: {
+            screen: ActivityRules,
         },
-        Members:{
-            screen:Members,
+        Members: {
+            screen: Members,
         }
     },
     {
@@ -245,10 +245,10 @@ const GroupNavigation = createStackNavigator(
         GroupChat: {
             screen: GroupChat,
         },
-        ChatSettings:{
+        ChatSettings: {
             screen: ChatSettings,
         },
-        GroupChatSettings:{
+        GroupChatSettings: {
             screen: GroupChatSettings,
         },
         UserProfile: {
@@ -326,7 +326,7 @@ const ProfileNavigation = createStackNavigator(
         Chat: {
             screen: Chat,
         },
-        ChatSettings:{
+        ChatSettings: {
             screen: ChatSettings,
         },
         Settings: {
@@ -335,16 +335,16 @@ const ProfileNavigation = createStackNavigator(
         FindPassword: {
             screen: FindPassword,
         },
-        Product:{
+        Product: {
             screen: Product,
         },
-        Trade:{
+        Trade: {
             screen: Trade,
         },
-        Pay:{
+        Pay: {
             screen: Pay,
         },
-        Help:{
+        Help: {
             screen: Help,
         }
     },
@@ -505,6 +505,7 @@ class AppWithNavigationState extends Component {
     // }
 
     componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps')
         if (!nextProps.me) {
             //   如果新的props当中没有me，则取消订阅
             if (this.messagesSubscription) {
@@ -543,130 +544,132 @@ class AppWithNavigationState extends Component {
             }, this);
         }
 
-        if (!this.familyGroupSubscription && nextProps.me) {
+        const { subscribeToMore, client } = nextProps;
+        if (!this.familyGroupSubscription) {
+            this.familyGroupSubscription = subscribeToMore({
+                document: FAMILYGROUP_CHANGED_SUBSCRIPTION,
+                updateQuery: (prev) => {
+                    // client.query({
+                    //     query: GET_FAMILYGROUPS,
+                    //     fetchPolicy: "network-only"
+                    // }).then(({ data }) => {
+                    //     const newMe = {
+                    //         ...prev.me,
+                    //         relativefamilyGroups: data.getFamilyGroups
+                    //     }
+                    //     console.log('relativefamilyGroup-newMe',newMe)
+                    //     const result = { ...prev, me: newMe }
+                    //     return result
+                    // });
+                    this.props.refetch()
+                    return prev
+                },
+            });
+        }
 
-            const { subscribeToMore, client } = nextProps;
-            if (!this.familyGroupSubscription) {
-                this.familyGroupSubscription = subscribeToMore({
-                    document: FAMILYGROUP_CHANGED_SUBSCRIPTION,
-                    updateQuery: (prev) => {
-                        // client.query({
-                        //     query: GET_FAMILYGROUPS,
-                        //     fetchPolicy: "network-only"
-                        // }).then(({ data }) => {
-                        //     const newMe = {
-                        //         ...prev.me,
-                        //         relativefamilyGroups: data.getFamilyGroups
-                        //     }
-                        //     console.log('relativefamilyGroup-newMe',newMe)
-                        //     const result = { ...prev, me: newMe }
-                        //     return result
-                        // });
-                        this.props.refetch()
-                        return prev
-                    },
-                });
-            }
+        if (!this.classGroupSubscription) {
+            this.classGroupSubscription = subscribeToMore({
+                document: CLASSGROUP_CHANGED_SUBSCRIPTION,
+                updateQuery: (prev) => {
+                    // client.query({
+                    //     query: GET_CLASSGROUPS,
+                    //     fetchPolicy: "network-only"
+                    // }).then(({ data }) => {
+                    //     const newMe = {
+                    //         ...prev.me,
+                    //         classGroups: data.classGroups
+                    //     }
+                    //     const result = { ...prev, me: newMe }
+                    //     return result
+                    // });
+                    this.props.refetch()
+                    return prev
+                },
+            });
+        }
 
-            if (!this.classGroupSubscription) {
-                this.classGroupSubscription = subscribeToMore({
-                    document: CLASSGROUP_CHANGED_SUBSCRIPTION,
-                    updateQuery: (prev) => {
-                        // client.query({
-                        //     query: GET_CLASSGROUPS,
-                        //     fetchPolicy: "network-only"
-                        // }).then(({ data }) => {
-                        //     const newMe = {
-                        //         ...prev.me,
-                        //         classGroups: data.classGroups
-                        //     }
-                        //     const result = { ...prev, me: newMe }
-                        //     return result
-                        // });
-                        this.props.refetch()
-                        return prev
-                    },
-                });
-            }
+        if (!this.workGroupSubscription) {
+            this.workGroupSubscription = subscribeToMore({
+                document: WORKGROUP_CHANGED_SUBSCRIPTION,
+                updateQuery: (prev) => {
+                    // client.query({
+                    //     query: GET_WORKGROUPS,
+                    //     fetchPolicy: "network-only"
+                    // }).then(({ data }) => {
+                    //     const newMe = {
+                    //         ...prev.me,
+                    //         workGroups: data.workGroups
+                    //     }
 
-            if (!this.workGroupSubscription) {
-                this.workGroupSubscription = subscribeToMore({
-                    document: WORKGROUP_CHANGED_SUBSCRIPTION,
-                    updateQuery: (prev) => {
-                        // client.query({
-                        //     query: GET_WORKGROUPS,
-                        //     fetchPolicy: "network-only"
-                        // }).then(({ data }) => {
-                        //     const newMe = {
-                        //         ...prev.me,
-                        //         workGroups: data.workGroups
-                        //     }
-                            
-                        //     const result = { ...prev, me: newMe }
-                        //     return result
-                        // });
-                        this.props.refetch()
-                        return prev
-                    },
-                });
-            }
+                    //     const result = { ...prev, me: newMe }
+                    //     return result
+                    // });
+                    this.props.refetch()
+                    return prev
+                },
+            });
+        }
 
-            if (!this.locationGroupSubscription) {
-                this.locationGroupSubscription = subscribeToMore({
-                    document: LOCATIONGROUP_CHANGED_SUBSCRIPTION,
-                    updateQuery: (prev) => {
-                        // client.query({
-                        //     query: GET_LOCATIONGROUPS,
-                        //     fetchPolicy: "network-only"
-                        // }).then(({ data }) => {
-                        //     const newMe = {
-                        //         ...prev.me,
-                        //         locationGroups: data.locationGroups
-                        //     }
-                        //     const result = { ...prev, me: newMe }
-                        //     return result
-                        // });
-                        this.props.refetch()
-                        return prev
-                    },
-                });
-            }
+        if (!this.locationGroupSubscription) {
+            this.locationGroupSubscription = subscribeToMore({
+                document: LOCATIONGROUP_CHANGED_SUBSCRIPTION,
+                updateQuery: (prev) => {
+                    // client.query({
+                    //     query: GET_LOCATIONGROUPS,
+                    //     fetchPolicy: "network-only"
+                    // }).then(({ data }) => {
+                    //     const newMe = {
+                    //         ...prev.me,
+                    //         locationGroups: data.locationGroups
+                    //     }
+                    //     const result = { ...prev, me: newMe }
+                    //     return result
+                    // });
+                    this.props.refetch()
+                    return prev
+                },
+            });
+        }
 
-            if (!this.familyChangeSubscription) {
-                this.familyChangeSubscription = subscribeToMore({
-                    document: FAMILY_CHANGED_SUBSCRIPTION,
-                    updateQuery: (prev) => {
-                        // client.query({
-                        //     query: GET_FAMILIES,
-                        //     fetchPolicy: "network-only"
-                        // }).then(({ data }) => {
-                        //     const newMe = {
-                        //         ...prev.me,
-                        //         families: data.families
-                        //     }
-                        //     console.log('newMe', newMe)
-                        //     const result = { ...prev, me: newMe }
-                            this.props.refetch()
-                            return prev
-                        // });
-                    },
-                });
-            }
+        if (!this.familyChangeSubscription) {
+            this.familyChangeSubscription = subscribeToMore({
+                document: FAMILY_CHANGED_SUBSCRIPTION,
+                updateQuery: (prev) => {
+                    // client.query({
+                    //     query: GET_FAMILIES,
+                    //     fetchPolicy: "network-only"
+                    // }).then(({ data }) => {
+                    //     const newMe = {
+                    //         ...prev.me,
+                    //         families: data.families
+                    //     }
+                    //     console.log('newMe', newMe)
+                    //     const result = { ...prev, me: newMe }
+                    this.props.refetch()
+                    return prev
+                    // });
+                },
+            });
+        }
 
-
+        if(!this.messagesSubscription){
             this.messagesSubscription = nextProps.subscribeToMore({
                 document: MESSAGE_ADDED_SUBSCRIPTION,
                 variables: { userId: nextProps.me.id },
                 updateQuery: (prev, { subscriptionData }) => {
                     const newMessage = subscriptionData.data.messageAdded;
-                    // console.log('newMessage',newMessage)
                     prev.me.messages.push(newMessage)
                     storeMessage(`${prev.me.id}User${newMessage.from.id}`, newMessage)
                     return prev
                 },
             });
-
-            const groupIds = map(nextProps.me.relativefamilyGroups, 'id'
+        }
+      
+        let groupIds
+        let thisGroupIds
+        let equal
+        if(nextProps.me){
+            groupIds = map(nextProps.me.relativefamilyGroups, 'id'
             ).concat(
                 map(nextProps.me.classGroups, 'id')
             ).concat(
@@ -678,114 +681,135 @@ class AppWithNavigationState extends Component {
             if (nextProps.me.regStatus) {
                 groupIds.push(nextProps.me.regStatus.id)
             }
+        }
+        
+       
+        if(this.props.me){
+            thisGroupIds = map(this.props.me.relativefamilyGroups, 'id'
+            ).concat(
+                map(this.props.me.classGroups, 'id')
+            ).concat(
+                map(this.props.me.locationGroups, 'id')
+            ).concat(
+                map(this.props.me.workGroups, 'id')
+            )
+            if (this.props.me.regStatus) {
+                thisGroupIds.push(this.props.me.regStatus.id)
+            }
+        }
 
-            if (!this.groupMessagesSubscription && nextProps.me) {
-                this.groupMessagesSubscription = nextProps.subscribeToMore({
-                    document: GROUPMESSAGE_ADDED_SUBSCRIPTION,
-                    variables: {
-                        userId: nextProps.me.id,
-                        groupIds,
-                    },
-                    updateQuery: (prev, { subscriptionData }) => {
-                        const newMessage = subscriptionData.data.gMessageAdded;
-                        if (newMessage.type === 'Family') {
-                            const index = prev.me.relativefamilyGroups.map(group => group.id).indexOf(newMessage.to)
-                            const result = update(prev, {
-                                me: {
-                                    relativefamilyGroups: relativefamilyGroups =>
-                                        update(relativefamilyGroups || [], {
-                                            [index]: group =>
-                                                update(group || {}, {
-                                                    messages: messages => update(messages || [], { $push: [newMessage] })
-                                                })
-                                        })
-                                }
+        if(groupIds instanceof Array && thisGroupIds instanceof Array){
+            if(groupIds.sort().toString()== thisGroupIds.sort().toString()){
+                equal = true
+            }
+        }
 
-                            });
-                            storeMessage(`${prev.me.id}Family${newMessage.to}`, newMessage)
-                            return result
-                        } else if (newMessage.type === 'ClassMate') {
-                            const index = prev.me.classGroups.map(group => group.id).indexOf(newMessage.to)
-                            const result = update(prev, {
-                                me: {
-                                    classGroups: classGroups =>
-                                        update(classGroups || [], {
-                                            [index]: group =>
-                                                update(group || {}, {
-                                                    messages: messages => update(messages || [], { $push: [newMessage] })
-                                                })
-                                        })
-                                }
-
-                            });
-                            storeMessage(`${prev.me.id}ClassMate${newMessage.to}`, newMessage)
-                            return result
-
-                        } else if (newMessage.type === 'Colleague') {
-                            const index = prev.me.workGroups.map(group => group.id).indexOf(newMessage.to)
-                            const result = update(prev, {
-                                me: {
-                                    workGroups: workGroups =>
-                                        update(workGroups || [], {
-                                            [index]: group =>
-                                                update(group || {}, {
-                                                    messages: messages => update(messages || [], { $push: [newMessage] })
-                                                })
-                                        })
-                                }
-
-                            });
-                            storeMessage(`${prev.me.id}Colleague${newMessage.to}`, newMessage)
-                            return result
-                        } else if (newMessage.type === 'FellowTownsman') {
-                            const index = prev.me.locationGroups.map(group => group.id).indexOf(newMessage.to)
-                            const result = update(prev, {
-                                me: {
-                                    locationGroups: locationGroups =>
-                                        update(locationGroups || [], {
-                                            [index]: group =>
-                                                update(group || {}, {
-                                                    messages: messages => update(messages || [], { $push: [newMessage] })
-                                                })
-                                        })
-                                }
-
-                            });
-                            storeMessage(`${prev.me.id}FellowTownsman${newMessage.to}`, newMessage)
-                            return result
-                        } else if (newMessage.type === 'RegStatus') {
-                            if (prev.me.regStatus.id === newMessage.to) {
-                                const result = update(prev, {
-                                    me: {
-                                        regStatus: {
-                                            messages: { $push: [newMessage] }
-                                        }
-                                    }
-                                })
-                                return result
+        if (!this.groupMessagesSubscription || !equal ) {
+            this.groupMessagesSubscription = nextProps.subscribeToMore({
+                document: GROUPMESSAGE_ADDED_SUBSCRIPTION,
+                variables: {
+                    userId: nextProps.me.id,
+                    groupIds,
+                },
+                updateQuery: (prev, { subscriptionData }) => {
+                    const newMessage = subscriptionData.data.gMessageAdded;
+                    if (newMessage.type === 'Family') {
+                        const index = prev.me.relativefamilyGroups.map(group => group.id).indexOf(newMessage.to)
+                        const result = update(prev, {
+                            me: {
+                                relativefamilyGroups: relativefamilyGroups =>
+                                    update(relativefamilyGroups || [], {
+                                        [index]: group =>
+                                            update(group || {}, {
+                                                messages: messages => update(messages || [], { $push: [newMessage] })
+                                            })
+                                    })
                             }
 
-                            return prev
-                        }else if (newMessage.type === 'Activity') {
-                            const index = prev.me.activities.map(group => group.id).indexOf(newMessage.to)
+                        });
+                        storeMessage(`${prev.me.id}Family${newMessage.to}`, newMessage)
+                        return result
+                    } else if (newMessage.type === 'ClassMate') {
+                        const index = prev.me.classGroups.map(group => group.id).indexOf(newMessage.to)
+                        const result = update(prev, {
+                            me: {
+                                classGroups: classGroups =>
+                                    update(classGroups || [], {
+                                        [index]: group =>
+                                            update(group || {}, {
+                                                messages: messages => update(messages || [], { $push: [newMessage] })
+                                            })
+                                    })
+                            }
+
+                        });
+                        storeMessage(`${prev.me.id}ClassMate${newMessage.to}`, newMessage)
+                        return result
+
+                    } else if (newMessage.type === 'Colleague') {
+                        const index = prev.me.workGroups.map(group => group.id).indexOf(newMessage.to)
+                        const result = update(prev, {
+                            me: {
+                                workGroups: workGroups =>
+                                    update(workGroups || [], {
+                                        [index]: group =>
+                                            update(group || {}, {
+                                                messages: messages => update(messages || [], { $push: [newMessage] })
+                                            })
+                                    })
+                            }
+
+                        });
+                        storeMessage(`${prev.me.id}Colleague${newMessage.to}`, newMessage)
+                        return result
+                    } else if (newMessage.type === 'FellowTownsman') {
+                        const index = prev.me.locationGroups.map(group => group.id).indexOf(newMessage.to)
+                        const result = update(prev, {
+                            me: {
+                                locationGroups: locationGroups =>
+                                    update(locationGroups || [], {
+                                        [index]: group =>
+                                            update(group || {}, {
+                                                messages: messages => update(messages || [], { $push: [newMessage] })
+                                            })
+                                    })
+                            }
+
+                        });
+                        storeMessage(`${prev.me.id}FellowTownsman${newMessage.to}`, newMessage)
+                        return result
+                    } else if (newMessage.type === 'RegStatus') {
+                        if (prev.me.regStatus.id === newMessage.to) {
                             const result = update(prev, {
                                 me: {
-                                    activities: activities =>
-                                        update(activities || [], {
-                                            [index]: group =>
-                                                update(group || {}, {
-                                                    messages: messages => update(messages || [], { $push: [newMessage] })
-                                                })
-                                        })
+                                    regStatus: {
+                                        messages: { $push: [newMessage] }
+                                    }
                                 }
-
-                            });
-                            storeMessage(`${prev.me.id}Activity${newMessage.to}`, newMessage)
+                            })
                             return result
                         }
-                    },
-                });
-            }
+
+                        return prev
+                    } else if (newMessage.type === 'Activity') {
+                        const index = prev.me.activities.map(group => group.id).indexOf(newMessage.to)
+                        const result = update(prev, {
+                            me: {
+                                activities: activities =>
+                                    update(activities || [], {
+                                        [index]: group =>
+                                            update(group || {}, {
+                                                messages: messages => update(messages || [], { $push: [newMessage] })
+                                            })
+                                    })
+                            }
+
+                        });
+                        storeMessage(`${prev.me.id}Activity${newMessage.to}`, newMessage)
+                        return result
+                    }
+                },
+            });
         }
     }
 

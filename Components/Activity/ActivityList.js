@@ -54,33 +54,44 @@ export default class ActivityList extends Component {
                             if(loading) return <Spinner />
                             if(error) return <Text>{errorMessage(error)}</Text>
                            
-                            return(
-                                <List>
-                                    {
-                                        data.activities.sort((a,b)=>new Date(a.startTime)-new Date(b.startTime)).map((activity,index)=>(
-                                            <ListItem 
-                                            key={index}
-                                            thumbnail>
-                                            <Left>
-                                              <Thumbnail square source={{ uri: activity.image.url }} />
-                                            </Left>
-                                            <Body>
-                                              <Text>{activity.title}</Text>
-                                              <Text>{`${new Date(activity.startTime).toLocaleDateString()} ${new Date(activity.startTime).toLocaleTimeString()}` }</Text>
-                                              <Text note numberOfLines={1}>{activity.location}</Text>
-                                            </Body>
-                                            <Right>
-                                              <Button 
-                                              onPress={()=>this.props.navigation.navigate('ActivityDetail',{activity})}
-                                              transparent>
-                                                <Text>查看</Text>
-                                              </Button>
-                                            </Right>
-                                          </ListItem>
-                                       ))
-                                    }
-                                </List>
-                            )
+                            if(data.activities.length>0){
+                                return(
+                                    <List>
+                                        {
+                                            data.activities.sort((a,b)=>new Date(a.startTime)-new Date(b.startTime)).map((activity,index)=>(
+                                                <ListItem 
+                                                key={index}
+                                                thumbnail>
+                                                <Left>
+                                                  <Thumbnail square source={{ uri: activity.image.url }} />
+                                                </Left>
+                                                <Body>
+                                                  <Text>{activity.title}</Text>
+                                                  <Text>{`${new Date(activity.startTime).toLocaleDateString()} ${new Date(activity.startTime).toLocaleTimeString()}` }</Text>
+                                                  <Text note numberOfLines={1}>{activity.location}</Text>
+                                                </Body>
+                                                <Right>
+                                                  <Button 
+                                                  onPress={()=>this.props.navigation.navigate('ActivityDetail',{activity})}
+                                                  transparent>
+                                                    <Text>查看</Text>
+                                                  </Button>
+                                                </Right>
+                                              </ListItem>
+                                           ))
+                                        }
+                                    </List>
+                                )
+                            }else{
+                                return(
+                                    <List>
+                                        <ListItem>
+                                            <Text>本市还没有相关活动，去创建一个吧！</Text>
+                                        </ListItem>
+                                    </List>
+                                )
+                            }
+                            
                         }
                     }
                     </Query>

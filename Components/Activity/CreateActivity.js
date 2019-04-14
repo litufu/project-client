@@ -43,14 +43,15 @@ export default class CreateActivity extends Component {
         type: {},
         image: null,
         selectedType: "",
-        imageId: ""
+        imageId: "",
+        imageName:"",
     }
 
 
     _uploadImage = () => (
         <Mutation
             mutation={POST_ACTIVITYPHOTO}
-            onCompleted={(data) => this.setState({ imageId: data.postActivityPhoto.id })}
+            onCompleted={(data) => this.setState({ imageId: data.postActivityPhoto.id ,imageName:data.postActivityPhoto.name})}
         >
             {
                 (postActivityPhoto, { loading, error, data }) => {
@@ -60,15 +61,15 @@ export default class CreateActivity extends Component {
                     if (data) {
                         const xhr = new XMLHttpRequest()
                         xhr.open('PUT', data.postActivityPhoto.url)
-                        // xhr.onreadystatechange = function () {
-                        //     if (xhr.readyState === 4) {
-                        //         if (xhr.status === 200) {
-                        //             console.log('Image successfully uploaded to oss')
-                        //         } else {
-                        //             console.log('Error while sending the image to oss')
-                        //         }
-                        //     }
-                        // }
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    console.log('Image successfully uploaded to oss')
+                                } else {
+                                    console.log('Error while sending the image to oss')
+                                }
+                            }
+                        }
                         xhr.setRequestHeader('Content-Type', 'image/jpeg')
                         xhr.send({ uri: this.state.image, type: 'image/jpeg', name: data.postActivityPhoto.name })
 
@@ -190,13 +191,18 @@ export default class CreateActivity extends Component {
                     </Right>
                 </ListItem>
                 <ListItem
-                    onPress={() => this.setState({ display: "type" })}
+                    // onPress={() => this.setState({ display: "type" })}
                 >
                     <Left >
                         <Text>活动海报</Text>
                     </Left>
                     <Right>
-                        {this._uploadImage()}
+                        {this.state.imageName 
+                        ? (
+                            <Image source={{ uri: `https://gewu-avatar.oss-cn-hangzhou.aliyuncs.com/activity/${this.state.imageName}` }} style={{ height: 60, width: 60 }} />
+                        )
+                        : this._uploadImage()
+                        }
                     </Right>
                 </ListItem>
                 <ListItem
