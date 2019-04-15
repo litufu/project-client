@@ -257,6 +257,7 @@ export default class Chat extends Component {
                                     renderSend={this.renderSend}
                                     onSend={(messages) => this.onSend(messages, sendMessage, userInfo, me)}
                                     keyboardShouldPersistTaps="never"
+                                    renderUsernameOnMessage={true}
                                     user={{
                                         _id: me.id,
                                     }}

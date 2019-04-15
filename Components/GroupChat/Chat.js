@@ -17,10 +17,6 @@ import {messagesLenth}  from '../../utils/settings'
 
 const skip = 20
 
-const styles = StyleSheet.create({
-    container: { flex: 1 },
-});
-
 export default class Chat extends Component {
 
     constructor(props) {
@@ -53,6 +49,30 @@ export default class Chat extends Component {
     componentWillUnmount() {
         this._isMounted = false;
     }
+
+    renderName = (props) => {
+        const { user = {} } = props.currentMessage
+        const isSelf = user._id === this.props.me.id
+
+        return isSelf ? (
+            <View />
+          ) : (
+            <Text
+              style={[ styles.standardFont, styles.headerItem ]}>
+              {user.name}
+            </Text>
+          )
+    }
+            
+    renderBubble = (props) => {
+    return (
+        <View>
+            {this.renderName(props)}
+            <Bubble {...props} />
+        </View>
+        )
+    }
+      
 
     renderSend(props) {
         return (
@@ -381,6 +401,7 @@ export default class Chat extends Component {
                                     renderSend={this.renderSend}
                                     onSend={(messages) => this.onSend(messages, sendGroupMessage, type, group, me)}
                                     keyboardShouldPersistTaps="never"
+                                    renderUsernameOnMessage={true}
                                     user={{
                                         _id: me.id,
                                     }}
@@ -388,6 +409,7 @@ export default class Chat extends Component {
                                     locale="zh-cn"
                                     placeholder="输入信息..."
                                     renderTime={null}
+                                    renderBubble={this.renderBubble}
                                     showAvatarForEveryMessage={true}
                                     renderUsernameOnMessage={true}
                                     loadEarlier={this.state.loadEarlier}
@@ -411,3 +433,17 @@ export default class Chat extends Component {
     }
 
 }
+
+
+const styles = StyleSheet.create({
+    container: { flex: 1 },
+    standardFont: {
+      fontSize: 15,
+    },
+    username: {
+      fontWeight: 'bold',
+    },
+    headerItem: {
+      marginRight: 10,
+    },
+  });

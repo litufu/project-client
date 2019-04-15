@@ -505,7 +505,6 @@ class AppWithNavigationState extends Component {
     // }
 
     componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps')
         if (!nextProps.me) {
             //   如果新的props当中没有me，则取消订阅
             if (this.messagesSubscription) {
