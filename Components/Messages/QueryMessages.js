@@ -129,7 +129,6 @@ export default class QueryMessages extends Component {
     render() {
         const { navigation, messages, me } = this.props
         const concatMessages = this.concatMessages(me, messages)
-
         return (
             <Query query={GET_ME}>
                 {

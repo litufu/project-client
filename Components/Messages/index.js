@@ -15,15 +15,14 @@ class Messages extends Component {
 
   async componentDidMount() {
     const keys = await AsyncStorage.getAllKeys()
-    const messages = []
+    let messages = []
     const groupsMessages = []
     const groupsIds = []
     for (const key of keys) {
       if (~key.indexOf('User')) {
         const pmessages = await AsyncStorage.getItem(key)
-
         if (pmessages !== null) {
-          messages.concat(JSON.parse(pmessages))
+          messages = messages.concat(JSON.parse(pmessages))
         }
       }
       let groupId
@@ -36,7 +35,6 @@ class Messages extends Component {
         groupId = key.replace(/.*Colleague/g, "")
       } else if (~key.indexOf('FellowTownsman')) {
         groupId = key.replace(/.*FellowTownsman/g, "")
-        
       }
       if(groupId){
         gMessages = await AsyncStorage.getItem(key)

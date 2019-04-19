@@ -7,7 +7,7 @@ import GET_ME from '../../graphql/get_me.query'
 
 export default class Settings extends Component {
 
-    clearMessages=async (userInfo,client,messages)=>{
+    clearMessages=async (userInfo,client)=>{
             
             const data = await client.readQuery({query:GET_ME})
             const me = data.me
@@ -27,7 +27,6 @@ export default class Settings extends Component {
   render() {
     const userInfo = this.props.navigation.getParam('userInfo', "")
     const client = this.props.navigation.getParam('client', "")
-    const messages = this.props.navigation.getParam('messages', "")
     return (
       <Container>
         <Header>
@@ -64,7 +63,7 @@ export default class Settings extends Component {
                                     onPress: () => console.log('Cancel Pressed'),
                                     style: 'cancel',
                                   },
-                                  {text: '确认', onPress: async () => await this.clearMessages(userInfo,client,messages)},
+                                  {text: '确认', onPress: async () => await this.clearMessages(userInfo,client)},
                                 ],
                                 {cancelable: false},
                               )}

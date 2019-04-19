@@ -31,15 +31,12 @@ export default class Chat extends Component {
     _isMounted = false;
 
     async componentWillMount() {
-        console.log('componentWillMount')
         this._isMounted = true;
         const me = this.props.navigation.getParam('me', "")
         const group = this.props.navigation.getParam('group', "")
         const type = this.props.navigation.getParam('type', "")
         const key = `${me.id}${type}${group.id}`
-        console.log('key',key)
         const getMessages = await retrieveMessages(key)
-        console.log('getMessages',getMessages)
         const storageMessages = JSON.parse(getMessages).sort(
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         )
@@ -168,6 +165,7 @@ export default class Chat extends Component {
         }
     }
 
+
     onSend = (messages = [], sendGroupMessage, type, group, me) => {
         if (!messages[0].text && !this.state.image) {
             return null
@@ -269,6 +267,7 @@ export default class Chat extends Component {
                     // Write our data back to the cache.
 
                     cache.writeQuery({ query: GET_ME, data });
+                    storeMessage(`${data.me.id}RegStatus${newMessage.to}`, newMessage)
                 } else if (type === "Activity") {
                     const newGroups = data.me.activities.map(g => {
                         if (g.id === group.id) {
@@ -351,7 +350,7 @@ export default class Chat extends Component {
                     if (g.messages.length <= messagesLenth) {
                         return g
                     }
-                    const newGroup = update(g, { messages: { $set: g.messages.slice(-1, -messagesLenth) } })
+                    const newGroup = update(g, { messages: { $set: g.messages.slice(0, messagesLenth) } })
                     return newGroup
                 }
                 return g
@@ -364,7 +363,7 @@ export default class Chat extends Component {
                     if (g.messages.length <= messagesLenth) {
                         return g
                     }
-                    const newGroup = update(g, { messages: { $set: g.messages.slice(-1, -messagesLenth) } })
+                    const newGroup = update(g, { messages: { $set: g.messages.slice(0, messagesLenth) } })
                     return newGroup
                 }
                 return g

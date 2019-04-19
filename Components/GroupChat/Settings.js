@@ -11,14 +11,22 @@ import GET_ME from '../../graphql/get_me.query'
 
 export default class Settings extends Component {
 
+    getNewGroup=(g)=>{
+        const newG = _.cloneDeep(g)
+        const newMessages =newG.messages.sort(
+            (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
+        ).slice(0,10)
+        const newGroup = {...g,messages:newMessages}
+        return newGroup
+    }
+
     clearMessages = async (type,group,client)=>{
             const data = await client.readQuery({query:GET_ME})
             const me = data.me
             if(type==='Family'){
                 const newGroups = data.me.relativefamilyGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
-                        return newGroup
+                        return this.getNewGroup(g)
                     }
                     return g
                 })
@@ -31,8 +39,7 @@ export default class Settings extends Component {
             }else if(type==='ClassMate'){
                 const newGroups = data.me.classGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
-                        return newGroup
+                        return this.getNewGroup(g)
                     }
                     return g
                 })
@@ -45,8 +52,7 @@ export default class Settings extends Component {
             }else if(type==="Colleague"){
                 const newGroups = data.me.workGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
-                        return newGroup
+                        return this.getNewGroup(g)
                     }
                     return g
                 })
@@ -58,8 +64,7 @@ export default class Settings extends Component {
             }else if(type==="FellowTownsman"){
                 const newGroups = data.me.locationGroups.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
-                        return newGroup
+                        return this.getNewGroup(g)
                     }
                     return g
                 })
@@ -71,8 +76,7 @@ export default class Settings extends Component {
             }else if(type==="Activity"){
                 const newGroups = data.me.activities.map(g => {
                     if (g.id === group.id) {
-                        const newGroup = {...g,messages:[]}
-                        return newGroup
+                        return this.getNewGroup(g)
                     }
                     return g
                 })
