@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 import Chat from './Chat'
 
-
 export default class QueryMessages extends Component {
 
 
@@ -28,6 +27,7 @@ export default class QueryMessages extends Component {
             }
             newMessages = storageMessages.concat(newMessages).sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)))
         }
+       
         const displaymessages = newMessages.map(message => ({
             _id: message.id,
             text: message.text,
@@ -41,16 +41,20 @@ export default class QueryMessages extends Component {
             received: true,
             image: message.image ? message.image.url : null
         }))
+        
         return displaymessages
+        
     }
 
     render() {
         const {group,type,navigation,me,addNewUnReadMessages,groupName} = this.props
+        const messages = this._getNewMessages(group) 
+        console.log('messages',messages)
         return (
             < Chat
             me={me}
             groupName={groupName}
-            messages = {this._getNewMessages(group) }
+            messages = {messages}
             type = { type }
             group={group}
             navigation = { navigation }

@@ -788,7 +788,7 @@ class AppWithNavigationState extends Component {
                             })
                             return result
                         }
-
+                        storeMessage(`${prev.me.id}RegStatus${newMessage.to}`, newMessage)
                         return prev
                     } else if (newMessage.type === 'Activity') {
                         const index = prev.me.activities.map(group => group.id).indexOf(newMessage.to)

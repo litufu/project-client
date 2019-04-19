@@ -21,8 +21,9 @@ export default class Chat extends Component {
 
     constructor(props) {
         super(props);
+        console.log('this.props.messages',props.messages)
         this.state = {
-            messages: [],
+            messages: props.messages.slice(0, skip),
             image: null,
             loadEarlier: props.messages.length>skip,
             isLoadingEarlier: false,
@@ -34,10 +35,17 @@ export default class Chat extends Component {
     _isMounted = false;
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ messages: nextProps.messages.slice(0, this.state.messages.length + 1) })
+        
+        console.log('this.state.messages',this.state.messages)
+        console.log('componentWillReceiveProps')
+        console.log('nextProps.messages.slice(0, this.state.messages.length + 1)',nextProps.messages.slice(0, this.state.messages.length + 1))
+        // this.setState({ messages: nextProps.messages.slice(0, this.state.messages.length + 1) })
+        this.setState({messages: nextProps.messages})
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        console.log('componentWillMount')
+        console.log('this.props.messages.slice(0, skip)',this.props.messages.slice(0, skip))
         this._isMounted = true;
         this.setState(() => {
             return {
