@@ -3,9 +3,7 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body
 import {Query,compose,graphql} from 'react-apollo'
 import {withNavigation} from 'react-navigation'
 import GET_ME from '../../graphql/get_me.query'
-import GET_CLASSGROUPS from '../../graphql/get_classGroups.query'
 import GET_MYOLDCOLLEAGUES from '../../graphql/get_myOldColleagues.query'
-import GET_WORKGROUPS from '../../graphql/get_workGroups.query'
 
 import {defaultAvatar} from '../../utils/settings'
 import {errorMessage} from '../../utils/tools'
@@ -159,38 +157,29 @@ class Contacts extends Component {
 
   render() {
     const {me} = this.props.getMedata
-    const {classGroups} = this.props.getClassGroupsdata
     const {myOldColleagues} = this.props.getMyoldColleaguesdata
-    const {workGroups} = this.props.getWorkGroupsdata
     
     if(
       this.props.getMedata.loading 
-      || this.props.getClassGroupsdata.loading
       || this.props.getMyoldColleaguesdata.loading
-      || this.props.getWorkGroupsdata.loading
       ){
         return <Spinner />
       }
  
     return (
           <List>
-            {this._renderFamilyList(this.props.getMedata.me.relativefamilyGroups,me,)}
-            {this._renderClassMates(this.props.getClassGroupsdata.classGroups,me)}
-            {this._renderOldColleages(this.props.getMyoldColleaguesdata.myOldColleagues,me)}
-            {this._renderNowColleages(this.props.getWorkGroupsdata.workGroups,me)}
+            {this._renderFamilyList(me.relativefamilyGroups,me,)}
+            {this._renderClassMates(me.classGroups,me)}
+            {this._renderOldColleages(myOldColleagues,me)}
+            {this._renderNowColleages(me.workGroups,me)}
           </List>
 
     );
   }
 }
 
-// export default withNavigation(Contacts)
-
 export default compose(
   withNavigation,
-  
-  graphql(GET_CLASSGROUPS, { name: 'getClassGroupsdata' }),
   graphql(GET_MYOLDCOLLEAGUES, { name: 'getMyoldColleaguesdata' }),
-  graphql(GET_WORKGROUPS, { name: 'getWorkGroupsdata' }),
   graphql(GET_ME, { name: 'getMedata' }),
 )(Contacts);
