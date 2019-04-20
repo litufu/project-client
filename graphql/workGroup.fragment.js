@@ -12,6 +12,11 @@ const WORKGROUP_FRAGMENT = gql`
         id
         worker{
             id
+            name
+            avatar{
+              id
+              url
+            }
         }
         status
     }

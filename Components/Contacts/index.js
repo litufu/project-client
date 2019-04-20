@@ -136,7 +136,7 @@ class Contacts extends Component {
     return users
   }
 
-  _renderNowColleages=(workGroups,me)=>{
+  _renderNowColleages=(workGroups,me)=>(
         <List>
               {this._getNowColleages(workGroups,me).length>0 && 
             (<ListItem itemDivider>
@@ -153,7 +153,7 @@ class Contacts extends Component {
           </ListItem>
         ))}
         </List>
-  }
+  )
 
   render() {
     const {me} = this.props.getMedata
@@ -180,6 +180,16 @@ class Contacts extends Component {
 
 export default compose(
   withNavigation,
-  graphql(GET_MYOLDCOLLEAGUES, { name: 'getMyoldColleaguesdata' }),
-  graphql(GET_ME, { name: 'getMedata' }),
+  graphql(GET_MYOLDCOLLEAGUES,
+   { name: 'getMyoldColleaguesdata',
+  options: (props) => ({
+    fetchPolicy: "cache-and-network",
+  }),
+}),
+  graphql(GET_ME,
+     { name: 'getMedata',
+     options: (props) => ({
+      fetchPolicy: "cache-and-network",
+    }),
+     }),
 )(Contacts);
