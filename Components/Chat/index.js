@@ -42,7 +42,6 @@ export default class Chat extends Component {
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         )
         const messageNum = storageMessages.length > skip ? skip : storageMessages.length
-        console.log('this.state.storageMessages.slice(0, this.state.messageNum)',storageMessages.slice(0, messageNum))
         
         this.setState({
             storageMessages: storageMessages,
@@ -58,15 +57,12 @@ export default class Chat extends Component {
     _getAllMessages = (msgs, userInfo, storeM) => {
         const storageMessages = _.cloneDeep(storeM)
         const messages = _.cloneDeep(msgs)
-        console.log('storageMessages',storageMessages)
-        console.log('messages',messages)
         let newMessages
         newMessages = messages.filter(
             message => (message.to.id === userInfo.id || message.from.id === userInfo.id)
         ).sort(
             (a, b) => (new Date(b.createdAt) - new Date(a.createdAt))
         )
-        console.log('newMessages',newMessages)
 
         if (newMessages.length === 0) {
             newMessages = storageMessages
@@ -80,7 +76,6 @@ export default class Chat extends Component {
             }
             newMessages = storageMessages.concat(newMessages).sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)))
         }
-        console.log('newMessages2',newMessages)
 
         const displaymessages = newMessages.map(message => ({
             _id: message.id,

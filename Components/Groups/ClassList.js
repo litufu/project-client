@@ -202,6 +202,7 @@ export default class ClassList extends Component {
           me={me}
           renderButton={this.renderButton}
           classGroups={newClassGroups}
+          navigation={this.props.navigation}
           />
         </Content>
       </Container>

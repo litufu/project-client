@@ -82,7 +82,6 @@ class QureyStudents extends Component {
         const myGroups = this._getMyGroups(classGroups, me.id)
         const myWillGroups = this._getMyWillGroups(classGroups,  me.id)
     
-
         if (loading) return <Spinner />
         if (error) return <Text>{errorMessage(error)}</Text>
 
