@@ -182,14 +182,11 @@ export default compose(
   withNavigation,
   graphql(GET_MYOLDCOLLEAGUES,
    { name: 'getMyoldColleaguesdata',
-  options: (props) => ({
-    fetchPolicy: "cache-and-network",
-  }),
+  // options: (props) => ({
+  //   fetchPolicy: "cache-and-network",
+  // }),
 }),
   graphql(GET_ME,
      { name: 'getMedata',
-     options: (props) => ({
-      fetchPolicy: "cache-and-network",
-    }),
      }),
 )(Contacts);

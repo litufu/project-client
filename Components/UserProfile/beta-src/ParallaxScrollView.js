@@ -56,17 +56,18 @@ export default class ParallaxScrollView extends Component {
               }
               update={(cache, { data: { postPhoto } }) => {
                 const { me } = cache.readQuery({ query: GET_ME });
+                const newData = { me: {
+                  ...me,
+                  avatar:{
+                    __typename:'Photo',
+                    id:postPhoto.id,
+                    name:postPhoto.name,
+                    url:`https://gewu-avatar.oss-cn-hangzhou.aliyuncs.com/avatars/${postPhoto.name}`
+                  }
+                } }
                 cache.writeQuery({
                   query: GET_ME,
-                  data: { me: {
-                    ...me,
-                    avatar:{
-                      __typename:'Photo',
-                      id:postPhoto.id,
-                      name:postPhoto.name,
-                      url:`https://gewu-avatar.oss-cn-hangzhou.aliyuncs.com/avatars/${postPhoto.name}`
-                    }
-                  } },
+                  data: newData,
                 });
               }}
             >
@@ -78,17 +79,26 @@ export default class ParallaxScrollView extends Component {
                   if (data) {
                     const xhr = new XMLHttpRequest()
                     xhr.open('PUT', data.postPhoto.url)
-                    // xhr.onreadystatechange = function () {
-                    //   if (xhr.readyState === 4) {
-                    //     if (xhr.status === 200) {
-                    //       console.log('Image successfully uploaded to oss')
-                    //     } else {
-                    //       console.log('Error while sending the image to oss')
-                    //     }
-                    //   }
-                    // }
+                    xhr.onreadystatechange = function () {
+                      if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                          console.log('Image successfully uploaded to oss')
+                        } else {
+                          console.log('Error while sending the image to oss')
+                        }
+                      }
+                    }
                     xhr.setRequestHeader('Content-Type', 'image/jpeg')
                     xhr.send({ uri: this.state.image, type: 'image/jpeg', name: data.postPhoto.name })
+                  }
+
+                  let imageUrl
+                  if(me.avatar){
+                    imageUrl = me.avatar.url.replace(/\?OSS.*/,"")
+                  }else if(this.state.image){
+                    imageUrl = this.state.image
+                  }else{
+                    imageUrl = defaultAvatar
                   }
 
                   return (
@@ -96,7 +106,7 @@ export default class ParallaxScrollView extends Component {
                       style={styles.avatarView}
                       onPress={() => this.onPressAvatar(postPhoto,me.avatar)}
                     >
-                      <Image source={{ uri: (me.avatar ? me.avatar.url : defaultAvatar) }} style={{ height: 120, width: 120, borderRadius: 60 }} />
+                      <Image source={{ uri: imageUrl }} style={{ height: 120, width: 120, borderRadius: 60 }} />
                     </TouchableNativeFeedback>
                   )
                 }

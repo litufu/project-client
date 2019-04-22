@@ -64,6 +64,12 @@ export default class ProfileScreen extends Component {
                         if (error) return <Text>{errorMessage(error)}</Text>
                         const me = data.me
                         if (!me) this.props.navigation.navigate('Login')
+                        let imageUrl
+                        if(me.avatar){
+                            imageUrl = me.avatar.url.replace(/\?OSS.*/,"")
+                        }else{
+                            imageUrl = defaultAvatar
+                        }
                         return (
                             <List>
                                 <ListItem
@@ -74,7 +80,7 @@ export default class ProfileScreen extends Component {
                                             large
                                             square
                                             style={{ marginVertical: 10 }}
-                                            source={{ uri: (me.avatar && me.avatar.url) ? me.avatar.url : defaultAvatar }}
+                                            source={{ uri: imageUrl}}
                                         />
                                     </Left>
                                     <Body>
