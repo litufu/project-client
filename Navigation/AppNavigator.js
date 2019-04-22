@@ -675,6 +675,8 @@ class AppWithNavigationState extends Component {
                 map(nextProps.me.locationGroups, 'id')
             ).concat(
                 map(nextProps.me.workGroups, 'id')
+            ).concat(
+                map(nextProps.me.activities, 'id')
             )
 
             if (nextProps.me.regStatus) {
@@ -691,6 +693,8 @@ class AppWithNavigationState extends Component {
                 map(this.props.me.locationGroups, 'id')
             ).concat(
                 map(this.props.me.workGroups, 'id')
+            ).concat(
+                map(this.props.me.activities, 'id')
             )
             if (this.props.me.regStatus) {
                 thisGroupIds.push(this.props.me.regStatus.id)
@@ -712,6 +716,7 @@ class AppWithNavigationState extends Component {
                 },
                 updateQuery: (prev, { subscriptionData }) => {
                     const newMessage = subscriptionData.data.gMessageAdded;
+                    console.log('newMessage',newMessage)
                     if (newMessage.type === 'Family') {
                         const index = prev.me.relativefamilyGroups.map(group => group.id).indexOf(newMessage.to)
                         const result = update(prev, {
@@ -791,6 +796,7 @@ class AppWithNavigationState extends Component {
                         }
                         return prev
                     } else if (newMessage.type === 'Activity') {
+                        console.log('newMessage-Activity',newMessage)
                         const index = prev.me.activities.map(group => group.id).indexOf(newMessage.to)
                         const result = update(prev, {
                             me: {
