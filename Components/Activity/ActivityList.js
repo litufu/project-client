@@ -53,7 +53,6 @@ export default class ActivityList extends Component {
                         ({loading,error,data})=>{
                             if(loading) return <Spinner />
                             if(error) return <Text>{errorMessage(error)}</Text>
-                           
                             if(data.activities.length>0){
                                 return(
                                     <List>

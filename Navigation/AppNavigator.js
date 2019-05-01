@@ -101,7 +101,6 @@ import Help from '../Components/Help'
 
 import { storeMessage, retrieveMessages } from '../utils/tools'
 
-
 const HomeNavigation = createStackNavigator(
     {
         Home: {
@@ -796,7 +795,6 @@ class AppWithNavigationState extends Component {
                         }
                         return prev
                     } else if (newMessage.type === 'Activity') {
-                        console.log('newMessage-Activity',newMessage)
                         const index = prev.me.activities.map(group => group.id).indexOf(newMessage.to)
                         const result = update(prev, {
                             me: {

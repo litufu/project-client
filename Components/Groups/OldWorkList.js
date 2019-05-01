@@ -47,6 +47,27 @@ export default class WorkList extends Component {
   _renderConfirmBtn = (companyId, workerId) => (
     <Mutation 
     mutation={CONFIRM_OLDCOLLEAGUE}
+    update={(cache, { data: { confirmOldColleague } }) => {
+      const { myOldColleagues } = cache.readQuery({ query: GET_MYOLDCOLLEAGUES,variables:{companyId} });
+      const myOldColleaguesIds = myOldColleagues.map(oldColleague=>oldColleague.id)
+      let newMyOldColleagues
+      if(~myOldColleaguesIds.indexOf(confirmOldColleague.id)){
+        newMyOldColleagues = myOldColleagues.map(oldColleague=>{
+          if(oldColleague.id===confirmOldColleague.id){
+            return confirmOldColleague
+          }
+          return oldColleague
+        })
+      }else{
+        newMyOldColleagues = myOldColleagues.concat([confirmOldColleague])
+      }
+       
+      cache.writeQuery({
+        query: GET_MYOLDCOLLEAGUES,
+        variables:{companyId},
+        data: { myOldColleagues: newMyOldColleagues }
+      });
+    }}
     >
       {
         (confirmOldColleague, { loading, error }) => {
