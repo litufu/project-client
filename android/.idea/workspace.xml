@@ -6,17 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b796cfda-7a1d-4a3c-b628-7d2106ceb228" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Components/Activity/ActivityList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Activity/ActivityList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Contacts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Contacts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Components/Groups/OldWorkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Components/Groups/OldWorkList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Navigation/AppNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Navigation/AppNavigator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/shell-app.bundle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/host/exp/exponent/generated/AppConstants.java" afterDir="false" />
-    </list>
+    <list default="true" id="b796cfda-7a1d-4a3c-b628-7d2106ceb228" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,10 +229,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.08378016" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.08378016" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -256,8 +245,8 @@
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.26524824" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.26524824" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />

@@ -42,14 +42,14 @@ class LocationContent extends Component {
               <Icon name="chat" type='Entypo'/>
               <Text>群聊</Text>
             </Button>
-            <Button transparent vertical>
+            {/* <Button transparent vertical>
               <Icon active name="settings" type='MaterialIcons'/>
               <Text>群设置</Text>
             </Button>
             <Button transparent vertical>
               <Icon name="man" type='Entypo'/>
               <Text>群主</Text>
-            </Button>
+            </Button> */}
           </Item>
           
         </Content>
