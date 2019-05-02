@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo'
-import { NetInfo ,Alert} from 'react-native'
+import { NetInfo ,Alert,Clipboard} from 'react-native'
 import {
     Container,
     Header,
@@ -14,9 +14,10 @@ import {
     Right,
     Thumbnail,
     Button,
-    Title
+    Title,
 } from 'native-base';
 import { Divider } from 'react-native-elements'
+import {Toast} from 'teaset'
 
 import { headerBackgroundColor, headerFontColor, statusBarHeight, headerButtonColor } from '../../utils/settings'
 import { defaultAvatar } from '../../utils/settings'
@@ -215,6 +216,25 @@ export default class ProfileScreen extends Component {
                     }
                 }
             </Query> */}
+            
+            <ListItem
+                onPress={() => {
+                    Clipboard.setString('http://gewushuidi.oss-cn-hangzhou.aliyuncs.com/sdapp.apk');
+                    Toast.message('水滴下载连接已复制！');
+                }}
+                icon>
+                <Left>
+                    <Button style={{ backgroundColor: "#FF8C69" }}>
+                        <Icon type="MaterialIcons" name="share" />
+                    </Button>
+                </Left>
+                <Body>
+                    <Text>分享「水滴」</Text>
+                </Body>
+                <Right>
+                    <Icon active name="arrow-forward" />
+                </Right>
+            </ListItem>
             <ListItem
                 onPress={() => this.props.navigation.navigate('Product')}
                 icon>
