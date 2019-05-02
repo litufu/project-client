@@ -103,6 +103,14 @@ export default class Trade extends Component {
                             <Text>{amount}</Text>
                         </Right>
                         </ListItem>
+                        <ListItem>
+                            <Left>
+                                <Text>产品说明</Text>
+                            </Left>
+                        </ListItem>
+                        <ListItem>
+                            <Text>{product.info}</Text>
+                        </ListItem>
                     </List>
                 </Content>
                 <Footer>
