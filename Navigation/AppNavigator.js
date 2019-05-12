@@ -36,6 +36,11 @@ import SearchMajor from '../Components/CollegeEntranceExam/SearchMajor'
 import SelectUniversity from '../Components/CollegeEntranceExam/SelectUniversity'
 import QueryResult from '../Components/CollegeEntranceExam/QueryResult'
 import Applicants from '../Components/CollegeEntranceExam/Applicants'
+import Guide from '../Components/CollegeEntranceExam/Guide'
+import FillForm from '../Components/CollegeEntranceExam/FillForm'
+import MajorPay from '../Components/CollegeEntranceExam/MajorPay'
+import MajorTest from '../Components/CollegeEntranceExam/MajorTest'
+
 // 3、同城热恋
 import FallInLove from '../Components/FallInLove'
 import FallInLoveSettings from '../Components/FallInLove/Settings'
@@ -126,6 +131,18 @@ const HomeNavigation = createStackNavigator(
         },
         Applicants: {
             screen: Applicants
+        },
+        Guide: {
+            screen: Guide
+        },
+        FillForm: {
+            screen: FillForm
+        },
+        MajorPay: {
+            screen: MajorPay
+        },
+        MajorTest: {
+            screen: MajorTest
         },
         Chat: {
             screen: Chat,

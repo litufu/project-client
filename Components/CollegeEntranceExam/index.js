@@ -29,6 +29,10 @@ export default class CollegeEntranceExam extends React.Component {
         this.props.navigation.navigate('QueryResult')
     }
 
+    _handleToGuide=()=>{
+        this.props.navigation.navigate('Guide')
+    }
+
     render() {
         return (
             <Container style={{flex:1}}>
@@ -48,6 +52,15 @@ export default class CollegeEntranceExam extends React.Component {
                 </Header>
                 <Content style={{flex:0.5}}>
                     <List>
+                        <ListItem
+                            onPress={this._handleToGuide}>
+                            <Left>
+                                <Text >高考志愿填报指引</Text>
+                            </Left>
+                            <Right>
+                                <Icon type="FontAwesome" name="arrow-right" />
+                            </Right>
+                        </ListItem>
                      
                         <ListItem
                             onPress={this._handleBasicInfo}>
