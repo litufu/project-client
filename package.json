@@ -48,7 +48,7 @@
     "sentry-expo": "^1.11.2",
     "subscriptions-transport-ws": "^0.9.15",
     "teaset": "^0.5.10",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx-source": "^7.0.0",
